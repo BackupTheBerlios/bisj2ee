@@ -31,10 +31,10 @@ extends Resources
 	 * Resourcen um eben diese Zahl erhöht. Anschließend werden alle ggf, vorhandenen Request der Reihe
 	 * nach geweckt, solange die von ihnen angeforderte Resourcenzahl noch lieferbar ist.
 	 * <p/>
-	 * Da bei jedem Aufweckvorgang aktuelle Thread blockiert und der aufgeweckte Thread den Monitor erhält,
-	 * wird der Geweckte die release-Methode an der Stelle fortsetzten, an der er zuvor in die
-	 * Warteschlange geschickt wurde. Dort wird available entsprechend dekrementiert bevor der jeweils
-	 * nächste Thread geweckt wird.
+	 * Da bei jedem Aufweckvorgang aktuelle Thread nicht blockiert und der aufgeweckte Thread den Monitor
+	 * erst erhält, wenn release völlig abgearbeitet ist, wird available entsprechend dekrementiert BEVOR
+	 * der jeweils nächste Thread geweckt wird. Nur so kann man feststellen, wieviele Thread noch bedient
+	 * werden können.
 	 *
 	 * @param num freizugebende Resourcen.
 	 */
@@ -51,7 +51,6 @@ extends Resources
 			{
 				available -= currentRequest.claim;
 				currentRequest.event.SIGNAL();
-				currentRequest = nextRequest();
 			}
 		}
 	}
