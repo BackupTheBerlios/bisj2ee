@@ -1,3 +1,4 @@
+package aufgabe2;
 
 class ColorSet
 {
