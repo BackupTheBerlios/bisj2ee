@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by kossi (NONE) -->
-<xs:schema targetNamespace="http://www.my-webbase.de/xml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.my-webbase.de/xml" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema targetNamespace="http://www.my-webbase.de/xml" xmlns="http://www.my-webbase.de/xml" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:element name="workgroup">
 		<xs:complexType>
 			<xs:sequence>
@@ -111,58 +111,61 @@
 													<xs:element name="brief-description" type="xs:string" minOccurs="0"/>
 													<xs:element name="description">
 														<xs:complexType>
-															<xs:choice>
-																<xs:element name="href" type="xs:anyURI"/>
-																<xs:sequence>
-																	<xs:element name="english-version" type="xs:anyURI" minOccurs="0"/>
-																	<xs:element name="abstract" type="xs:string"/>
-																	<xs:element name="initiators" minOccurs="0">
-																		<xs:complexType>
-																			<xs:choice minOccurs="0" maxOccurs="unbounded">
-																				<xs:element name="initiator" type="Person"/>
-																			</xs:choice>
-																		</xs:complexType>
-																	</xs:element>
-																	<xs:element name="contacts" minOccurs="0">
-																		<xs:complexType>
-																			<xs:sequence>
-																				<xs:element name="contact" type="Person" minOccurs="0" maxOccurs="unbounded"/>
-																			</xs:sequence>
-																		</xs:complexType>
-																	</xs:element>
-																	<xs:element name="workpackages" minOccurs="0">
-																		<xs:complexType>
-																			<xs:sequence>
-																				<xs:element name="package" minOccurs="0" maxOccurs="unbounded">
-																					<xs:complexType>
-																						<xs:simpleContent>
-																							<xs:extension base="xs:string">
-																								<xs:attribute name="id" type="xs:ID" use="required"/>
-																								<xs:attribute name="href" type="xs:anyURI" use="optional"/>
-																							</xs:extension>
-																						</xs:simpleContent>
-																					</xs:complexType>
-																				</xs:element>
-																			</xs:sequence>
-																		</xs:complexType>
-																	</xs:element>
-																	<xs:element name="publications" minOccurs="0">
-																		<xs:complexType>
-																			<xs:sequence>
-																				<xs:element name="publication" minOccurs="0" maxOccurs="unbounded">
-																					<xs:complexType>
-																						<xs:sequence>
-																							<xs:element name="title" type="xs:string"/>
-																							<xs:element ref="authors"/>
-																						</xs:sequence>
-																						<xs:attribute name="href" type="xs:anyURI" use="optional"/>
-																					</xs:complexType>
-																				</xs:element>
-																			</xs:sequence>
-																		</xs:complexType>
-																	</xs:element>
-																</xs:sequence>
-															</xs:choice>
+															<xs:sequence>
+																<xs:element name="english-version" type="xs:anyURI" minOccurs="0"/>
+																<xs:choice>
+																	<xs:element name="href" type="xs:anyURI"/>
+																	<xs:sequence>
+																		<xs:element name="abstract" type="xs:string"/>
+																		<xs:element name="initiators" minOccurs="0">
+																			<xs:complexType>
+																				<xs:choice minOccurs="0" maxOccurs="unbounded">
+																					<xs:element name="initiator" type="Person"/>
+																					<xs:element name="REF"/>
+																				</xs:choice>
+																			</xs:complexType>
+																		</xs:element>
+																		<xs:element name="contacts" minOccurs="0">
+																			<xs:complexType>
+																				<xs:sequence>
+																					<xs:element name="contact" type="Person" minOccurs="0" maxOccurs="unbounded"/>
+																				</xs:sequence>
+																			</xs:complexType>
+																		</xs:element>
+																		<xs:element name="workpackages" minOccurs="0">
+																			<xs:complexType>
+																				<xs:sequence>
+																					<xs:element name="package" minOccurs="0" maxOccurs="unbounded">
+																						<xs:complexType>
+																							<xs:simpleContent>
+																								<xs:extension base="xs:string">
+																									<xs:attribute name="id" type="xs:ID" use="required"/>
+																									<xs:attribute name="href" type="xs:anyURI" use="optional"/>
+																								</xs:extension>
+																							</xs:simpleContent>
+																						</xs:complexType>
+																					</xs:element>
+																				</xs:sequence>
+																			</xs:complexType>
+																		</xs:element>
+																		<xs:element name="publications" minOccurs="0">
+																			<xs:complexType>
+																				<xs:sequence>
+																					<xs:element name="publication" minOccurs="0" maxOccurs="unbounded">
+																						<xs:complexType>
+																							<xs:sequence>
+																								<xs:element name="title" type="xs:string"/>
+																								<xs:element ref="authors"/>
+																							</xs:sequence>
+																							<xs:attribute name="href" type="xs:anyURI" use="optional"/>
+																						</xs:complexType>
+																					</xs:element>
+																				</xs:sequence>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:choice>
+															</xs:sequence>
 														</xs:complexType>
 													</xs:element>
 													<xs:element name="partner" minOccurs="0" maxOccurs="unbounded">
@@ -219,7 +222,7 @@
 				<xs:element name="people">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="member" type="Person" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="member" type="Member" minOccurs="0" maxOccurs="unbounded"/>
 						</xs:sequence>
 						<xs:attribute name="fomerMembersURL" type="xs:anyURI" use="optional"/>
 					</xs:complexType>
@@ -268,8 +271,8 @@
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="address" type="Address"/>
-										<xs:element name="location-image" type="xs:anyURI" minOccurs="0"/>
 										<xs:element name="open" type="xs:string" maxOccurs="unbounded"/>
+										<xs:element name="location-image" type="xs:anyURI" minOccurs="0"/>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
@@ -301,21 +304,15 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:simpleType name="zipcode">
-		<xs:restriction base="xs:unsignedInt"/>
-	</xs:simpleType>
 	<xs:complexType name="Person">
-		<xs:choice>
-			<xs:element name="REF"/>
-			<xs:sequence>
-				<xs:element name="ID" type="xs:ID"/>
-				<xs:element name="name" type="Name"/>
-				<xs:element name="address" type="Address" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element name="email" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element name="homepage" type="xs:anyURI" minOccurs="0"/>
-				<xs:element name="phone" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-			</xs:sequence>
-		</xs:choice>
+		<xs:sequence>
+			<xs:element name="ID" type="xs:ID"/>
+			<xs:element name="name" type="Name"/>
+			<xs:element name="address" type="Address" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="phone" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="email" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="homepage" type="xs:anyURI" minOccurs="0"/>
+		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Initiator">
 		<xs:complexContent>
@@ -346,12 +343,12 @@
 		<xs:sequence>
 			<xs:choice>
 				<xs:sequence>
-					<xs:element name="name" type="xs:string" minOccurs="0"/>
+					<xs:element name="name" type="xs:string"/>
 					<xs:element name="street" type="xs:string"/>
 				</xs:sequence>
 				<xs:element name="postbox"/>
 			</xs:choice>
-			<xs:element name="zip" type="zipcode"/>
+			<xs:element name="zipcode" type="xs:string"/>
 			<xs:element name="city"/>
 			<xs:element name="country"/>
 		</xs:sequence>

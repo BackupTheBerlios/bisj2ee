@@ -93,12 +93,12 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 							<address>
 								<name>Uni-Klinik Charité Institut für Pathologie</name>
 								<street>Schumanstr. 20-21</street>
-								<zip>10117</zip>
+								<zipcode>10117</zipcode>
 								<city>Berlin</city>
 								<country>Deutschland</country>
 							</address>
-							<email>thomas.schrader@charite.de</email>
 							<phone>030450536113</phone>
+							<email>thomas.schrader@charite.de</email>
 							<role>UICC-TPCC Administrator, Pathologe</role>
 						</initiator>
 						<initiator xsi:type="Initiator">
@@ -112,17 +112,15 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 							<address>
 								<name>Universität Potsdam Institut für Linguistik</name>
 								<street>Postf. 601553</street>
-								<zip>14415</zip>
+								<zipcode>14415</zipcode>
 								<city>Potsdam</city>
 								<country>Deutschland</country>
 							</address>
-							<email>thomas.schrader@charite.de</email>
 							<phone>03319772691</phone>
+							<email>thomas.schrader@charite.de</email>
 							<role>Professor für Angewandte Computerlinguistik</role>
 						</initiator>
-						<initiator>
-							<REF>person_01</REF>
-						</initiator>
+						<REF>person_01</REF>
 					</initiators>
 				</description>
 				<partner>Humboldt-Universität zu Berlin</partner>
@@ -390,9 +388,9 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 		<department href="http://www.math.fu-berlin.de/">Fachbereich Mathematik und Informatik</department>
 		<institute href="http://www.inf.fu-berlin.de/">Institut f�ormatik</institute>
 		<address>
-			<name>Institut f�ormatik - AG Netzbasierte Informationssysteme</name>
+			<name>Institut für Informatik - AG Netzbasierte Informationssysteme</name>
 			<street>Takustrasse 9</street>
-			<zip>14195</zip>
+			<zipcode>14195</zipcode>
 			<city>Berlin</city>
 			<country>Deutschland</country>
 		</address>
@@ -403,13 +401,14 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 		</telephone>
 		<public-office>
 			<address>
+				<name>Institut für Informatik - AG Netzbasierte Informationssysteme</name>
 				<street>Fabeckstraße 15</street>
-				<zip>14195</zip>
+				<zipcode>14195</zipcode>
 				<city>Berlin</city>
 				<country>Germany</country>
 			</address>
-			<location-image>http://www.inf.fu-berlin.de/inst/ag-nbi/T9F15.gif</location-image>
 			<open>Mo-Do 10-12 Uhr</open>
+			<location-image>http://www.inf.fu-berlin.de/inst/ag-nbi/T9F15.gif</location-image>
 		</public-office>
 		<logo alt="FU Berlin">fulogo_92x60.gif</logo>
 		<accessroute href="http://reiseauskunft.bahn.de/bin/query.exe..."/>
