@@ -18,11 +18,11 @@ implements Set
 
 	public void add(Object value)
 	{
-		if ( value == null ) return;
+		if (value == null) return;
 
 		ListElement newNode = new ListElement(value);
 
-		synchronized ( this )
+		synchronized (this)
 		{
 			lastNode = lastNode.next = newNode;
 		}
@@ -30,20 +30,20 @@ implements Set
 
 	public void remove(Object value)
 	{
-		if ( value == null ) return;
+		if (value == null) return;
 
 		firstNode.OCCUPY();
 
 		ListElement index = firstNode;
 		ListElement nextNode = index.next;
 
-		while ( nextNode != null )
+		while (nextNode != null)
 		{
-			if ( value.equals(nextNode.value) )
+			if (value.equals(nextNode.value))
 			{
-				synchronized ( this )
+				synchronized (this)
 				{
-					if ( nextNode == lastNode )
+					if (nextNode == lastNode)
 					{
 						index.next = null;
 						lastNode = index;
@@ -61,7 +61,7 @@ implements Set
 
 			nextNode = nextNode.next;
 
-			if ( nextNode != null ) nextNode.OCCUPY();
+			if (nextNode != null) nextNode.OCCUPY();
 			index.RELEASE();
 
 			index = index.next;
@@ -112,7 +112,7 @@ implements Set
 		public Object next()
 		throws NoSuchElementException
 		{
-			if ( !hasNext() ) throw new NoSuchElementException();
+			if (!hasNext()) throw new NoSuchElementException();
 
 			Object value = index.value;
 
@@ -136,7 +136,7 @@ implements Set
 
 		final Thread[] threads = new Thread[100];
 
-		for ( int i = 0; i < threads.length; i++ )
+		for (int i = 0; i < threads.length; i++)
 		{
 			final int k = i;
 			threads[i] = new Thread(new Runnable()
@@ -152,19 +152,19 @@ implements Set
 
 		}
 
-		for ( int i = 0; i < threads.length; i++ )
+		for (int i = 0; i < threads.length; i++)
 		{
 			threads[i].start();
 
 		}
 
-		for ( int i = 0; i < threads.length; i++ )
+		for (int i = 0; i < threads.length; i++)
 		{
 			try
 			{
 				threads[i].join();
 			}
-			catch ( InterruptedException e )
+			catch (InterruptedException e)
 			{
 				e.printStackTrace();
 			}
@@ -174,7 +174,7 @@ implements Set
 		Iterator it = list.iterator();
 
 		int count = 0;
-		while ( it.hasNext() )
+		while (it.hasNext())
 		{
 			count++;
 			System.out.print("" + it.next() + ", ");
@@ -182,7 +182,7 @@ implements Set
 
 		System.out.println("\nLänge: " + count);
 
-		for ( int i = threads.length - 1; i >= 0; i-- )
+		for (int i = threads.length - 1; i >= 0; i--)
 		{
 			final int k = i;
 			threads[i] = new Thread(new Runnable()
@@ -197,18 +197,18 @@ implements Set
 
 		}
 
-		for ( int i = threads.length / 2; i >= 0; i-- )
+		for (int i = threads.length / 2; i >= 0; i--)
 		{
 			threads[i].start();
 		}
 
-		for ( int i = 0; i <= threads.length / 2; i++ )
+		for (int i = 0; i <= threads.length / 2; i++)
 		{
 			try
 			{
 				threads[i].join();
 			}
-			catch ( InterruptedException e )
+			catch (InterruptedException e)
 			{
 				e.printStackTrace();
 			}
@@ -218,7 +218,7 @@ implements Set
 		it = list.iterator();
 
 		count = 0;
-		while ( it.hasNext() )
+		while (it.hasNext())
 		{
 			count++;
 			System.out.print("" + it.next() + ", ");
@@ -264,7 +264,7 @@ implements Set
 			threads[1].join();
 			threads[2].join();
 		}
-		catch ( InterruptedException e )
+		catch (InterruptedException e)
 		{
 			e.printStackTrace();
 		}
@@ -272,7 +272,7 @@ implements Set
 		it = list.iterator();
 
 		count = 0;
-		while ( it.hasNext() )
+		while (it.hasNext())
 		{
 			count++;
 			System.out.print("" + it.next() + ", ");

@@ -12,7 +12,7 @@ implements Set
 
 		locks = new Integer[size];
 
-		for ( int i = 0; i < locks.length; i++ )
+		for (int i = 0; i < locks.length; i++)
 		{
 			locks[i] = new Integer(i);
 		}
@@ -30,11 +30,11 @@ implements Set
 	private void add(Object obj, int index, int iteration)
 	throws Overflow
 	{
-		if ( iteration == values.length ) throw new Overflow();
+		if (iteration == values.length) throw new Overflow();
 
-		synchronized ( locks[index] )
+		synchronized (locks[index])
 		{
-			if ( values[index] == null )
+			if (values[index] == null)
 				values[index] = obj;
 			else
 				add(obj, (index + 1) % values.length, iteration + 1);
@@ -48,8 +48,8 @@ implements Set
 
 	private boolean contains(Object obj, int index, int iteration)
 	{
-		if ( iteration == values.length ) return false;
-		if ( values[index] == null ) return false;
+		if (iteration == values.length) return false;
+		if (values[index] == null) return false;
 
 		return values[index].equals(obj) || contains(obj, (index + 1) % values.length, iteration + 1);
 	}
@@ -58,13 +58,13 @@ implements Set
 	{
 		ThreadSaveSet testSet = new ThreadSaveSet(10);
 
-		for ( int i = 1; i <= 11; i++ )
+		for (int i = 1; i <= 11; i++)
 		{
 			try
 			{
 				testSet.add(new Integer(i));
 			}
-			catch ( Overflow overflow )
+			catch (Overflow overflow)
 			{
 				System.out.println("Overflow beim Einfügen von " + i);
 			}
