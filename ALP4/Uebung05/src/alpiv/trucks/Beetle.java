@@ -36,9 +36,11 @@ implements Truck
 		Road nextR = myRoad.getExit(myDirection);
 		if (nextR != null)
 		{
+			nextR.setTraffic(this);
 			myRoad.setTraffic(null);
 			myRoad = nextR;
-			myRoad.setTraffic(this);
+
+			// todo comment this: oder changed to prevent disappearing trucks
 		}
 	}
 

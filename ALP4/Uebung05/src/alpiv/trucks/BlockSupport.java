@@ -9,6 +9,7 @@ package alpiv.trucks;
  * Es kann zu jeder Zeit nur ein Thread das Objekt belegen.
  */
 public class BlockSupport
+// todo comment this
 {
 
 	private volatile Thread current = null;
@@ -33,11 +34,17 @@ public class BlockSupport
 	 * @throws InterruptedException ein wartender Thread wurde unterbrochen
 	 */
 	public synchronized void block()
-	throws InterruptedException
 	{
 		if (--threadCapacity < 0)
 		{
-			wait();
+			try
+			{
+				wait();
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
 		}
 
 		current = Thread.currentThread();

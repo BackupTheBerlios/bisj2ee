@@ -227,22 +227,28 @@ extends BlockSupport
 	 * @param traffic the truck to place on this road, or null to clear it
 	 */
 	public void setTraffic(Truck traffic)
+	// todo comment this
 	{
-		try
+		if (this.traffic == null)
 		{
-			if (traffic != null) block(); // my
-			if (traffic != null && this.traffic != null)
-				throw new RuntimeException("TRUCK CRASH!");
-			this.traffic = traffic;
-			this.observer.roadChanged();
-			if (traffic == null) unblock(); // my
+			if (traffic != null) block();
 		}
-		catch (InterruptedException e)
+		else // this.traffic != null
 		{
-			e.printStackTrace();
+			if (traffic == null)
+			{
+				assert blocking() == Thread.currentThread();
+				unblock();
+			}
+			else
+			{
+				block();
+				assert this.traffic == null;
+			}
 		}
 
-
+		this.traffic = traffic;
+		observer.roadChanged();
 	}
 
 	/**

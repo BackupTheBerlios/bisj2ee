@@ -42,8 +42,15 @@ public class Main
 		// create and place truck
 		Road startR = roads.getStart(rnd.nextInt(roads.getStarts()));
 		final Beetle beetle = new Beetle(startR, Road.NORTH);
-		startR = roads.getStart(rnd.nextInt(roads.getStarts()));
-		final Beetle beetle2 = new Beetle(startR, Road.NORTH);
+
+		Road startR2;
+		do
+		{
+			startR2 = roads.getStart(rnd.nextInt(roads.getStarts()));
+		}
+		while (startR2 == startR);
+
+		final Beetle beetle2 = new Beetle(startR2, Road.NORTH);
 
 		// drive the beetle
 		final RoadMap roads1 = roads;
