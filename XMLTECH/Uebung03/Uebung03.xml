@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by kossi (NONE) -->
 <workgroup xmlns="http://www.my-webbase.de/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.my-webbase.de/xml
-Uebung02.xsd" name="Netzbasierte Informationssysteme / Networked Informationsystems">
+Uebung03.xsd" name="Netzbasierte Informationssysteme / Networked Informationsystems">
 	<authors>
 		<person href="http://moeter.net">
 			<ID>author_01</ID>
