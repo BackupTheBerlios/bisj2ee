@@ -187,7 +187,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 		</projects>
 		<projects topic="XML Technologies">
 			<project id="project_06">
-				<name>XML Sicherheitsdienste f�F-D</name>
+				<name>XML Sicherheitsdienste fuer GBIF-D</name>
 				<brief-description>Providing XML security services and access controls for the German node of the Global Biodiversity Information Facility.</brief-description>
 				<description>
 					<href>http://www.inf.fu-berlin.de/inst/ag-nbi/research/IBIS-D</href>
