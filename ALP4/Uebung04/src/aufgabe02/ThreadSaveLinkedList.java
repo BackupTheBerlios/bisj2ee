@@ -79,8 +79,8 @@ implements Set<$Value>
 	 * <p/>
 	 * Dies tut man solange, bis man den gesuchten Wert im zweiten geperrten Knoten gefunden hat. Dann wird
 	 * der "next"-Pointer des ersten Knotens auf dessen Nachnachfolgerknoten geändert. Dadurch wird der
-	 * Knoten, der den zu entfernenden Wert enthält, aus der Liste ausgekoppelt und früher oder später durch
-	 * den garbage collector entsorgt.
+	 * Knoten, der den zu entfernenden Wert enthält, aus der Liste ausgekoppelt und früher oder später
+	 * durch den garbage collector entsorgt.
 	 * <p/>
 	 * .      ┌─────────────┐
 	 * .      │             ▼
