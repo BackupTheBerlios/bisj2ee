@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by Free License (none) -->
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by kossi (NONE) -->
 <workgroup name="Netzbasierte Informationssysteme / Networked Informationsystems" xmlns="http://www.my-webbase.de/xml">
 	<authors>
 		<author>
@@ -85,7 +85,7 @@
 			<previous term="WS 03" href="http://www.inf.fu-berlin.de/inst/ag-nbi/lehre/AlteLehre.html">Seit WS 2002/2003 fanden Lehrveranstaltungen bei NBI statt.</previous>
 		</courses>
 		<assignments href="http://www.inf.fu-berlin.de/inst/ag-nbi/lehre/diploma.html">
-			<description>Fortlaufend werden Diplom- und andere Arbeiten betreut. Sie k�nnen sich anhand der Liste m�glicher Diplomarbeitsthemen orientieren.</description>
+			<description>Fortlaufend werden Diplom- und andere Arbeiten betreut. Sie k�n sich anhand der Liste m�cher Diplomarbeitsthemen orientieren.</description>
 			<advices>
 				<advice href="http://www.inf.fu-berlin.de/inst/ag-nbi/lehre/tipps/referatepapiere.pdf" id="advice_03">Referaten und Ausarbeitungen </advice>
 				<advice href="http://www.inf.fu-berlin.de/inst/ag-nbi/lehre/tipps/diplomarbeiten.pdf" id="advice_02">Diplomarbeiten </advice>
@@ -109,9 +109,61 @@
 			<project id="project_01">
 				<name>Semantic Web in der Pathologie</name>
 				<brief-description>An information retrieval system for images and text based on Semantic Web technologies for pathology focusing on lungdiseases.</brief-description>
-				<description href="http://www.inf.fu-berlin.de/inst/ag-nbi/research/swpatho/"/>
-				<partner>Humboldt-Universit�t zu Berlin</partner>
-				<partner>Universit�t Potsdam</partner>
+				<partner>Humboldt-Universit㲠zu Berlin</partner>
+				<partner>Universit㲠Potsdam</partner>
+				<description>
+					<english-version href="http://www.inf.fu-berlin.de/inst/ag-nbi/research/swpatho/swpathoEng.html"/>
+					<abstract>Entwicklung, Implementierung und Evaluierung eines auf Semantic Web Technologien basierenden Bild- und Informationsretrievalsystems für die Digitale Pathologie am Beispiel von Lungenkrankheiten</abstract>
+					<text>Das Projekt entwickelt ein prototypisches System für Verarbeitung und Retrieval von Bildbeschreibungen und Befundberichten in der Pathologie, speziell für Lungenerkrankungen. Im Gegensatz zu heutigen Datenbanken soll die Information durchgehend semantisch annotiert und mit Ontologien verknüpft sein, was eine Recherche nach Inhalten gestattet. Das in den Bild- und Textdaten enthaltene Expertenwissen lässt sich damit anderen Anwendungsszenarien zugänglich und wiederverwendbar machen. Es kann zur Qualitätssicherung, zur Unterstützung von Diagnostik und Differentialdiagnose, zur statistischen Auswertung, zu Präsentationen und in der Lehre genutzt werden.
+Bei der Erstellung von Befundberichten wird semantische Information durch computerlinguistische Analyse automatisch erfasst und in ein semantisches Netz eingefügt, das auf einem Pathologiespezifischen Modell basiert. Das System stellt diese Information dann für die unterschiedlichen Zwecke zur Verfügung. Eine Integrationskomponente versucht darüber hinaus, Informationen aus externen Wissensquellen einzubinden. Technologisch basiert das geplante System auf den Standards des Semantic Web wie XML, RDF und RuleML und anerkannten medizinischen Modellen und Standards (UMLS, HL7, SCORM).</text>
+					<initiators>
+						<person>
+							<first>Robert</first>
+							<last>Tolksdorf</last>
+							<title>Prof. Dr.-Ing.</title>
+							<phone>03083875223</phone>
+							<role>Professor für Praktische Informatik</role>
+							<address>
+								<name>Freie Universität Berlin Institut für Informatik - AG Netzbasierte Informationssysteme</name>
+								<street>Takustrasse 9</street>
+								<zip>14195</zip>
+								<city>Berlin</city>
+								<country>Deutschland</country>
+							</address>
+							<email>tolk@inf.fu-berlin.de</email>
+						</person>
+						<person>
+							<first>Thomas</first>
+							<last>Schrader</last>
+							<title>Dr. med. Dipl.med.Inf.(FH)</title>
+							<phone>030450536113</phone>
+							<role>UICC-TPCC Administrator, Pathologe</role>
+							<address>
+								<name>Uni-Klinik Charité Institut für Pathologie</name>
+								<street>Schumanstr. 20-21</street>
+								<zip>10117</zip>
+								<city>Berlin</city>
+								<country>Deutschland</country>
+							</address>
+							<email>thomas.schrader@charite.de</email>
+						</person>
+						<person>
+							<first>Manfred</first>
+							<last>Strede</last>
+							<title>Prof. Dr.</title>
+							<phone>03319772691</phone>
+							<role>Professor für Angewandte Computerlinguistik</role>
+							<address>
+								<name>Universität Potsdam Institut für Linguistik</name>
+								<street>Postf. 601553</street>
+								<zip>14415</zip>
+								<city>Potsdam</city>
+								<country>Deutschland</country>
+							</address>
+							<email>thomas.schrader@charite.de</email>
+						</person>
+					</initiators>
+				</description>
 			</project>
 			<project id="project_02">
 				<name>Wissensnetze</name>
@@ -140,7 +192,7 @@
 		</projects>
 		<projects topic="XML Technologies">
 			<project id="project_06">
-				<name>XML Sicherheitsdienste f�r GBIF-D</name>
+				<name>XML Sicherheitsdienste f�F-D</name>
 				<brief-description>Providing XML security services and access controls for the German node of the Global Biodiversity Information Facility.</brief-description>
 				<description href="http://www.inf.fu-berlin.de/inst/ag-nbi/research/IBIS-D"/>
 				<partner href="http://www.bgbm.org/">Botanischer Garten und Botanisches Museum Berlin</partner>
@@ -158,7 +210,7 @@
 				<name>XML Clearinghouse Berlin-Brandenburg</name>
 				<brief-description>Knowledge transfer on XML technology focused on the region Berlin-Brandenburg.</brief-description>
 				<description href="http://www.xml-clearinghouse.de/"/>
-				<partner>Humboldt Universit�t zu Berlin</partner>
+				<partner>Humboldt Universit㲠zu Berlin</partner>
 				<sponsor>BMBF</sponsor>
 			</project>
 			<project id="project_09">
@@ -296,11 +348,11 @@
 		<former>http://www.inf.fu-berlin.de/inst/ag-nbi/ExNBI.html</former>
 	</people>
 	<info>
-		<university href="http://www.fu-berlin.de">Freie Universit�t Berlin</university>
+		<university href="http://www.fu-berlin.de">Freie Universit㲠Berlin</university>
 		<department href="http://www.math.fu-berlin.de/">Fachbereich Mathematik und Informatik</department>
-		<institute href="http://www.inf.fu-berlin.de/">Institut f�r Informatik</institute>
+		<institute href="http://www.inf.fu-berlin.de/">Institut f�ormatik</institute>
 		<address>
-			<name>Institut f�r Informatik - AG Netzbasierte Informationssysteme</name>
+			<name>Institut f�ormatik - AG Netzbasierte Informationssysteme</name>
 			<street>Takustrasse 9</street>
 			<zip>14195</zip>
 			<city>Berlin</city>
