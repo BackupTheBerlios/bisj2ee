@@ -1,5 +1,6 @@
 package aufgabe02;
 
+
 public class Semaphore
 {
 	//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
