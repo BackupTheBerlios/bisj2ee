@@ -20,7 +20,8 @@ public class Main
 	 */
 	public static void main(String[] args)
 	{
-		Random rnd = new Random();
+		final Random rnd = new Random();
+		int trucks = 100;
 
 		// parse command line arguments
 		if (args.length < 1)
@@ -30,6 +31,7 @@ public class Main
 
 		// create the road map scenario to use
 		RoadMap roads = null;
+
 		try
 		{
 			roads = new RoadMap(args[0]);
@@ -39,79 +41,49 @@ public class Main
 			usage();
 		}
 
-		// create and place truck
-		Road startR = roads.getStart(rnd.nextInt(roads.getStarts()));
-		final Beetle beetle = new Beetle(startR, Road.NORTH);
+		Thread[] threads = new Thread[trucks];
 
-		Road startR2;
-		do
+		for (int i = 1; i <= trucks; i++)
 		{
-			startR2 = roads.getStart(rnd.nextInt(roads.getStarts()));
-		}
-		while (startR2 == startR);
+			// create and place truck
+			final Road startR = roads.getStart(new Random().nextInt(roads.getStarts()));
 
-		final Beetle beetle2 = new Beetle(startR2, Road.NORTH);
-
-		// drive the beetle
-		final RoadMap roads1 = roads;
-		Thread t1 = new Thread(new Runnable()
-		{
-			public void run()
+			// drive the beetle
+			final RoadMap roads1 = roads;
+			final int k = i;
+			Thread thread = new Thread(new Runnable()
 			{
-				for (;
-				     !beetle.arrived(); beetle.drive())
+				public void run()
 				{
-					// force an update
-					roads1.roadChanged();
+					MyCar myCar = new MyCar(startR, Road.NORTH);
 
-					try
+					for (; !myCar.arrived(); myCar.drive())
 					{
-						Thread.sleep(500);
+						try
+						{
+							Thread.sleep(rnd.nextInt(2000));
+						}
+						catch (InterruptedException ex)
+						{
+							ex.printStackTrace();
+						}
+
+						roads1.roadChanged();
 					}
-					catch (InterruptedException ex)
-					{
-						ex.printStackTrace();
-					}
+
+					System.out.println("The truck " + k + " has arrived! (moved to garage)");
 				}
-			}
-		});
+			});
 
-
-		Thread t2 = new Thread(new Runnable()
-		{
-			public void run()
-			{
-				for (;
-				     !beetle2.arrived(); beetle2.drive())
-				{
-					// force an update
-					roads1.roadChanged();
-
-					try
-					{
-						Thread.sleep(500);
-					}
-					catch (InterruptedException ex)
-					{
-						ex.printStackTrace();
-					}
-				}
-			}
-		});
-
-		t1.start();
-		t2.start();
-
-		try
-		{
-			t1.join();
-			t2.join();
+			threads[i - 1] = thread;
 		}
-		catch (InterruptedException e)
+
+		for (int i = 0; i < threads.length; i++)
 		{
-			e.printStackTrace();
+			threads[i].start();
 		}
-		System.out.println("The truck arrived!");
+
+
 	}
 }
 

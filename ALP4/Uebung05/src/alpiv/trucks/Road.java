@@ -226,7 +226,7 @@ extends BlockSupport
 	 *
 	 * @param traffic the truck to place on this road, or null to clear it
 	 */
-	public void setTraffic(Truck traffic)
+	public synchronized void setTraffic(Truck traffic)
 	// todo comment this
 	{
 		if (this.traffic == null)
@@ -248,6 +248,7 @@ extends BlockSupport
 		}
 
 		this.traffic = traffic;
+
 		observer.roadChanged();
 	}
 
@@ -278,4 +279,6 @@ extends BlockSupport
 			throw new IllegalArgumentException("direction out of bounds");
 		return this.exits[direction];
 	}
+
+
 }

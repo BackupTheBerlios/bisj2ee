@@ -53,10 +53,5 @@ extends Beetle
 			// todo comment this: oder changed to prevent disappearing trucks
 		}
 	}
-
-	boolean arrived()
-	{
-		return myRoad.getType() == Road.GOAL;
-	}
 }
 

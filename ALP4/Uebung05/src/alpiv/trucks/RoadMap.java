@@ -25,29 +25,27 @@ implements RoadObserver
 	 */
 	private static final int TILESIZE = 40;
 
-	private static final Toolkit tookit = Toolkit.getDefaultToolkit();
-
 	/**
 	 * Images for the different kinds of road (start, goal, regular).
 	 */
-	private final static Image[] roadi = new Image[]{
-		tookit.getImage(RoadMap.class.getResource("/alpiv/trucks/images/road.gif")),
-		tookit.getImage(RoadMap.class.getResource("/alpiv/trucks/images/start.gif")),
-		tookit.getImage(RoadMap.class.getResource("/alpiv/trucks/images/ziel.gif"))
+	private Image[] roadi = new Image[]{
+		getToolkit().getImage(RoadMap.class.getResource("/alpiv/trucks/images/road.gif")),
+		getToolkit().getImage(RoadMap.class.getResource("/alpiv/trucks/images/start.gif")),
+		getToolkit().getImage(RoadMap.class.getResource("/alpiv/trucks/images/ziel.gif"))
 	};
 
 	/**
 	 * Images for trucks heading in a specific direction.
 	 */
-	private final static Image[] brummi = new Image[]{
-		tookit.getImage(RoadMap.class.getResource("/alpiv/trucks/images/brummi-n.gif")),
-		tookit.getImage(RoadMap.class.getResource("/alpiv/trucks/images/brummi-ne.gif")),
-		tookit.getImage(RoadMap.class.getResource("/alpiv/trucks/images/brummi-e.gif")),
-		tookit.getImage(RoadMap.class.getResource("/alpiv/trucks/images/brummi-se.gif")),
-		tookit.getImage(RoadMap.class.getResource("/alpiv/trucks/images/brummi-s.gif")),
-		tookit.getImage(RoadMap.class.getResource("/alpiv/trucks/images/brummi-sw.gif")),
-		tookit.getImage(RoadMap.class.getResource("/alpiv/trucks/images/brummi-w.gif")),
-		tookit.getImage(RoadMap.class.getResource("/alpiv/trucks/images/brummi-nw.gif"))
+	private Image[] brummi = new Image[]{
+		getToolkit().getImage(RoadMap.class.getResource("/alpiv/trucks/images/brummi-n.gif")),
+		getToolkit().getImage(RoadMap.class.getResource("/alpiv/trucks/images/brummi-ne.gif")),
+		getToolkit().getImage(RoadMap.class.getResource("/alpiv/trucks/images/brummi-e.gif")),
+		getToolkit().getImage(RoadMap.class.getResource("/alpiv/trucks/images/brummi-se.gif")),
+		getToolkit().getImage(RoadMap.class.getResource("/alpiv/trucks/images/brummi-s.gif")),
+		getToolkit().getImage(RoadMap.class.getResource("/alpiv/trucks/images/brummi-sw.gif")),
+		getToolkit().getImage(RoadMap.class.getResource("/alpiv/trucks/images/brummi-w.gif")),
+		getToolkit().getImage(RoadMap.class.getResource("/alpiv/trucks/images/brummi-nw.gif"))
 	};
 
 	/**
@@ -227,7 +225,7 @@ implements RoadObserver
 	 * This is called by road objects when trucks are placed on them
 	 * or removed again. It schedules a repainting of the display.
 	 */
-	public synchronized void roadChanged()
+	public void roadChanged()
 	{
 		this.repaint();
 	}
