@@ -1,16 +1,25 @@
 package aufgabe03;
 
-
 public class ThreadSaveSet <$ValueType>
 implements Set<$ValueType>
 {
+	//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
+	//  |                 Instanzvariablen                  |   \\
+	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
+
 	private final $ValueType[] values;
 	private final Integer[] locks;
 
+	//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
+	//  |                   Konstruktoren                   |   \\
+	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
+
 	public ThreadSaveSet(int size)
 	{
-		values = ($ValueType[]) new Object[size];
+		if (size < 0)
+			throw new IllegalArgumentException("size must not be negative");
 
+		values = ($ValueType[]) new Object[size];
 		locks = new Integer[size];
 
 		for (int i = 0; i < locks.length; i++)
@@ -19,16 +28,34 @@ implements Set<$ValueType>
 		}
 	}
 
-	public void add($ValueType obj)
-	throws Overflow
+	//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
+	//  |                     Scanners                      |   \\
+	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
+
+	public boolean contains($ValueType value)
 	{
-		int index = obj.hashCode() % values.length;
-
-		add(obj, index, 0);
-
+		return value != null && contains(value, value.hashCode() % values.length, 0);
 	}
 
-	private void add($ValueType obj, int index, int iteration)
+	private boolean contains($ValueType value, int index, int iteration)
+	{
+		if (iteration == values.length) return false;
+
+		return values[index] != null && (values[index].equals(value) ||
+		                                 contains(value, (index + 1) % values.length, iteration + 1));
+	}
+
+	//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
+	//  |                     Modifiers                     |   \\
+	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
+
+	public void add($ValueType value)
+	throws Overflow
+	{
+		add(value, value.hashCode() % values.length, 0);
+	}
+
+	private void add($ValueType value, int index, int iteration)
 	throws Overflow
 	{
 		if (iteration == values.length) throw new Overflow();
@@ -36,44 +63,36 @@ implements Set<$ValueType>
 		synchronized (locks[index])
 		{
 			if (values[index] == null)
-				values[index] = obj;
-			else
-				add(obj, (index + 1) % values.length, iteration + 1);
+			{
+				values[index] = value;
+				return;
+			}
 		}
+
+		add(value, (index + 1) % values.length, iteration + 1);
 	}
 
-	public boolean contains($ValueType obj)
-	{
-		return contains(obj, obj.hashCode() % values.length, 0);
-	}
-
-	private boolean contains(Object obj, int index, int iteration)
-	{
-		if (iteration == values.length) return false;
-		if (values[index] == null) return false;
-
-		return values[index].equals(obj) || contains(obj, (index + 1) % values.length, iteration + 1);
-	}
+	//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
+	//  |                       Tests                       |   \\
+	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
 	public static void main(String[] args)
 	{
-		ThreadSaveSet testSet = new ThreadSaveSet(10);
+		ThreadSaveSet<Integer> testSet = new ThreadSaveSet<Integer>(10);
 
-		for (int i = 1; i <= 11; i++)
+		for (int i = 11; i >= 1; i--)
 		{
 			try
 			{
-				testSet.add(new Integer(i));
+				testSet.add(i);
 			}
 			catch (Overflow overflow)
 			{
 				System.out.println("Overflow beim Einfügen von " + i);
 			}
 
-			System.out.println("Contains " + i + " ? " + testSet.contains(new Integer(i)));
-			System.out.println("Contains " + (i * i) + " ? " + testSet.contains(new Integer(i * i)));
+			System.out.println("Contains " + i + " ? " + testSet.contains(i));
+			System.out.println("Contains " + (i * i) + " ? " + testSet.contains(i * i));
 		}
-
-
 	}
 }
