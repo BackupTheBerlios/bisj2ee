@@ -3,32 +3,32 @@
 <workgroup xmlns="http://www.my-webbase.de/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.my-webbase.de/xml
 Uebung02.xsd" name="Netzbasierte Informationssysteme / Networked Informationsystems">
 	<authors>
-		<author>
-			<ID>person_01</ID>
+		<person>
+			<ID>author_01</ID>
 			<name>
 				<first>Rafael</first>
 				<middle>Ben</middle>
 				<last>Grote</last>
 			</name>
 			<email>grote@inf.fu-berlin.de</email>
-		</author>
-		<author>
-			<ID>person_02</ID>
+		</person>
+		<person>
+			<ID>author_02</ID>
 			<name>
 				<first>Sebastian</first>
 				<last>Schaepe</last>
 			</name>
 			<email>schaepe@inf.fu-berlin.de</email>
-		</author>
-		<author>
-			<ID>person_03</ID>
+		</person>
+		<person>
+			<ID>author_03</ID>
 			<name>
 				<first>Sebastian</first>
 				<last>Koske</last>
 			</name>
 			<email>koske@inf.fu-berlin.de</email>
 			<homepage>http://www.secosic.net</homepage>
-		</author>
+		</person>
 	</authors>
 	<news>
 		<notice type="Projektstart" keyref="project_06">
@@ -82,7 +82,7 @@ Uebung02.xsd" name="Netzbasierte Informationssysteme / Networked Informationsyst
 Bei der Erstellung von Befundberichten wird semantische Information durch computerlinguistische Analyse automatisch erfasst und in ein semantisches Netz eingefügt, das auf einem Pathologiespezifischen Modell basiert. Das System stellt diese Information dann für die unterschiedlichen Zwecke zur Verfügung. Eine Integrationskomponente versucht darüber hinaus, Informationen aus externen Wissensquellen einzubinden. Technologisch basiert das geplante System auf den Standards des Semantic Web wie XML, RDF und RuleML und anerkannten medizinischen Modellen und Standards (UMLS, HL7, SCORM).
 					</abstract>
 					<initiators>
-						<initiator xsi:type="Initiator">
+						<person xsi:type="Initiator">
 							<ID>initiator_01</ID>
 							<name>
 								<title>Dr. med.</title>
@@ -100,8 +100,8 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 							<phone>030450536113</phone>
 							<email>thomas.schrader@charite.de</email>
 							<role>UICC-TPCC Administrator, Pathologe</role>
-						</initiator>
-						<initiator xsi:type="Initiator">
+						</person>
+						<person xsi:type="Initiator">
 							<ID>initiator_02</ID>
 							<name>
 								<title>Prof.</title>
@@ -119,9 +119,36 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 							<phone>03319772691</phone>
 							<email>thomas.schrader@charite.de</email>
 							<role>Professor für Angewandte Computerlinguistik</role>
-						</initiator>
-						<REF>person_01</REF>
+						</person>
+						<personREF>member_01</personREF>
 					</initiators>
+					<contacts>
+						<REF>member_05</REF>
+					</contacts>
+					<workpackages>
+						<package id="AP1" href="http://www.inf.fu-berlin.de/inst/ag-nbi/research/swpatho/ap1_150304.pdf">Entwurf und Entwicklung einer Beschreibungskomponente zur Erfassung und Repräsentation von Text- und Bildinformationen</package>
+						<package id="AP2">Entwurf, Implementierung und Evaluation der Fachwissenskomponente</package>
+						<package id="AP3">Entwurf und Implementierung einer Transformationskomponente zur Analyse und semantischen Repräsentation bestehender Befundberichte</package>
+						<package id="AP4">Entwurf, Implementierung und Evaluation von Anwendungskomponenten</package>
+						<package id="AP5">Entwurf und Implementierung von Integrationskomponenten</package>
+						<package id="AP6">Systemvalidierung in der Anwendung</package>
+						<package id="AP7">Projekt-, Qualitätsmanagement und Aussendarstellung</package>
+					</workpackages>
+					<publications>
+						<publication href="http://www.inf.fu-berlin.de/inst/ag-nbi/research/swpatho/icwe04.pdf">
+							<title>Engineering a Semantic Web for Pathology (ICWE'04 Conference)</title>
+							<authors>
+								<personREF>member_01</personREF>
+								<personREF>member_05</personREF>
+							</authors>
+						</publication>
+						<publication href="http://www.inf.fu-berlin.de/inst/ag-nbi/research/swpatho/TagungDeutscheGesellschaftPathologieRostock.doc">
+							<title>Tagung Deutsche Gesellschaft für Pathologie Rostock 2004</title>
+							<authors>
+								<personREF>member_01</personREF>
+							</authors>
+						</publication>
+					</publications>
 				</description>
 				<partner>Humboldt-Universität zu Berlin</partner>
 				<partner>Universität Potsdam</partner>

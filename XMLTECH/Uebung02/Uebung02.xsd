@@ -4,7 +4,7 @@
 	<xs:element name="workgroup">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="authors"/>
+				<xs:element name="authors" type="PersonList"/>
 				<xs:element name="news">
 					<xs:complexType>
 						<xs:sequence>
@@ -117,19 +117,13 @@
 																	<xs:element name="href" type="xs:anyURI"/>
 																	<xs:sequence>
 																		<xs:element name="abstract" type="xs:string"/>
-																		<xs:element name="initiators" minOccurs="0">
-																			<xs:complexType>
-																				<xs:choice minOccurs="0" maxOccurs="unbounded">
-																					<xs:element name="initiator" type="Person"/>
-																					<xs:element name="REF"/>
-																				</xs:choice>
-																			</xs:complexType>
-																		</xs:element>
+																		<xs:element name="initiators" type="PersonList" minOccurs="0"/>
 																		<xs:element name="contacts" minOccurs="0">
 																			<xs:complexType>
-																				<xs:sequence>
-																					<xs:element name="contact" type="Person" minOccurs="0" maxOccurs="unbounded"/>
-																				</xs:sequence>
+																				<xs:choice minOccurs="0" maxOccurs="unbounded">
+																					<xs:element name="contact" type="Person" minOccurs="0"/>
+																					<xs:element name="REF" type="xs:IDREF" minOccurs="0"/>
+																				</xs:choice>
 																			</xs:complexType>
 																		</xs:element>
 																		<xs:element name="workpackages" minOccurs="0">
@@ -155,7 +149,7 @@
 																						<xs:complexType>
 																							<xs:sequence>
 																								<xs:element name="title" type="xs:string"/>
-																								<xs:element ref="authors"/>
+																								<xs:element name="authors" type="PersonList"/>
 																							</xs:sequence>
 																							<xs:attribute name="href" type="xs:anyURI" use="optional"/>
 																						</xs:complexType>
@@ -297,13 +291,29 @@
 			<xs:attribute name="name" type="xs:string" use="required"/>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="authors">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="author" type="Person" minOccurs="0" maxOccurs="unbounded"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+	<xs:element name="personREF" type="xs:IDREF"/>
+	<xs:complexType name="Address">
+		<xs:sequence>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="name" type="xs:string"/>
+					<xs:element name="street" type="xs:string"/>
+				</xs:sequence>
+				<xs:element name="postbox"/>
+			</xs:choice>
+			<xs:element name="zipcode" type="xs:string"/>
+			<xs:element name="city"/>
+			<xs:element name="country"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Name">
+		<xs:sequence>
+			<xs:element name="title" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="first" type="xs:string"/>
+			<xs:element name="middle" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="last" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="Person">
 		<xs:sequence>
 			<xs:element name="ID" type="xs:ID"/>
@@ -339,26 +349,10 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="Address">
-		<xs:sequence>
-			<xs:choice>
-				<xs:sequence>
-					<xs:element name="name" type="xs:string"/>
-					<xs:element name="street" type="xs:string"/>
-				</xs:sequence>
-				<xs:element name="postbox"/>
-			</xs:choice>
-			<xs:element name="zipcode" type="xs:string"/>
-			<xs:element name="city"/>
-			<xs:element name="country"/>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="Name">
-		<xs:sequence>
-			<xs:element name="title" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="first" type="xs:string"/>
-			<xs:element name="middle" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="last" type="xs:string"/>
-		</xs:sequence>
+	<xs:complexType name="PersonList">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="person" type="Person"/>
+			<xs:element ref="personREF"/>
+		</xs:choice>
 	</xs:complexType>
 </xs:schema>
