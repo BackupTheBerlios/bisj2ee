@@ -1,10 +1,13 @@
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 public class MultiSemaphore
 {
 	private int permits;
-	private Vector<Integer> waiting = new Vector<Integer>();
+	private List<Integer> waiting = new LinkedList<Integer>();
 
 	public MultiSemaphore(int init)
 	{
@@ -37,10 +40,10 @@ public class MultiSemaphore
 	{
 		permits += releasedPermits;
 
-		while (waiting.size() > 0 && waiting.elementAt(0) <= permits)
+		while (waiting.size() > 0 && waiting.get(0) <= permits)
 		{
-			Integer request = waiting.elementAt(0);
-			waiting.removeElementAt(0);
+			Integer request = waiting.get(0);
+			waiting.remove(0);
 			permits -= request;
 			request.notify();
 		}
