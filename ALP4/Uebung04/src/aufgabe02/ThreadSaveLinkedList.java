@@ -59,14 +59,15 @@ implements Set<$Value>
 	/**
 	 * Prinzip Löschen:
 	 * <p/>
-	 * Um den wechselseitigen Ausschluß zu minimieren und den Grad an Parallelität zu maximieren wurde folgendes
+	 * Um den wechselseitigen Ausschluß zu minimieren und den Grad an Parallelität zu maximieren, wurde folgendes
 	 * Prinzip verwendet:
 	 * <p/>
-	 * Das Löschen beginnt immer am Anfang der Schlange. Dafür werden die ersten beiden Knoten zunächst gelockt.
-	 * Es wird immer im zweiten der gelockten Knoten gesucht, ob der zu finden Wert vorliegt.
+	 * Das Löschen beginnt immer am Anfang der Schlange. Dafür werden die ersten beiden Knoten zunächst für alle
+	 * anderen geperrt Threads gesperrt. Es wird immer im zweiten der geperrten Knoten gesucht, ob der zu finden Wert
+	 * vorliegt.
 	 * <p/>
-	 * Falls nicht, geht man so vor, um in der Schlange eine Position weiterzugehen (Rahmen symbolisieren die
-	 * erhaltenenen Locks):
+	 * Falls nicht, geht man so vor, um in der Schlange eine Position weiterzugehen (Doppelrahmen symbolisieren die
+	 * für andere Threads geperrten Knoten):
 	 * <p/>
 	 * <p/>
 	 * .                        ???                            ???
@@ -75,9 +76,10 @@ implements Set<$Value>
 	 * ?????    ?????    ?????  ???   ?????    ?????    ?????  ???  ?????    ?????    ?????
 	 * .                        ???                            ???
 	 * <p/>
-	 * Dies tut man solange, bis man den gesuchten Wert im zweiten gelockten Knoten gefunden hat. Dann wird der
-	 * next-Pointer des ersten Knotens auf dessen übernächsten Knoten geändert. Dadurch wird der Knoten, der den zu
-	 * entfernenden Wert enthält aus der Liste ausgekoppelt und durch den garbage collector entsorgt.
+	 * Dies tut man solange, bis man den gesuchten Wert im zweiten geperrten Knoten gefunden hat. Dann wird der
+	 * "next"-Pointer des ersten Knotens auf dessen Nachnachfolgerknoten geändert. Dadurch wird der Knoten, der den zu
+	 * entfernenden Wert enthält, aus der Liste ausgekoppelt und früher oder später durch den garbage collector
+	 * entsorgt.
 	 * <p/>
 	 * .      ???????????????
 	 * .      ?             ?
@@ -85,11 +87,11 @@ implements Set<$Value>
 	 * ? A ????  ? B ?????? C ?
 	 * ?????     ?????    ?????
 	 * <p/>
-	 * Anschließend werden die Sperren freigegeben.
+	 * Anschließend werden die evtl. noch vorhandenen Sperren wieder aufgehoben.
 	 * <p/>
-	 * Der Vorteil bei diesem Verfahren ist, das pro parallelem Remove-Aufruf immer nur zwei bis drei Knoten blockiert
-	 * werden und nicht die ganze Schlange. Das maximiert den Grad der Nebenläufigkeit. Theoretisch können so die Hälfte
-	 * aller Elemente gleichzeitig entfernt werden.
+	 * Der Vorteil bei diesem Verfahren ist, daß bei jedem parallelem Remove-Aufruf immer nur zwei bis drei Knoten
+	 * blockiert werden müssen und nicht die ganze Schlange. Das maximiert den Grad der Nebenläufigkeit.
+	 * Theoretisch können so die Hälfte aller Elemente gleichzeitig entfernt werden.
 	 */
 	public void remove($Value value)
 	{
@@ -151,8 +153,8 @@ implements Set<$Value>
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
 	/**
-	 * Implementation eines Knotens der Liste. Erbst Semaphorenfunktionalität aus {@link Semaphore}.
-	 * Enthält ein Feld für den zu übergebenen Wert und einen Zeiger auf den Nachfolgerknoten.
+	 * Implementation eines Knotens der Liste. Erbt Semaphorenfunktionalität aus {@link Semaphore}.
+	 * Enthält ein Feld für den zu speichernden Wert und einen Zeiger auf den Nachfolgerknoten.
 	 */
 	private class ListElement
 	extends Semaphore
