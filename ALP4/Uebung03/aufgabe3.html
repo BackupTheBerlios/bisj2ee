@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>ALP IV: Übungsblatt 3</title>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=ISO-8859-15">
+  <meta name="GENERATOR" content="Quanta Plus">
+</head>
+<body>
+<h1>Übungsblatt 3 (12 P)</h1>
+Abgabe: Donnerstag 13.05.2004 bis 10 Uhr in den Tutorenfächern<br>
+<h2>Aufgabe 1 (4 P)</h2>
+<p>
+Die Gabelungsanweisung ist besonders praktisch, wenn die Anzahl der zu
+erzeugenden Prozesse
+erst zur Laufzeit bekannt ist, da sie eine einfache dynamische
+Prozesserzeugung ermöglicht.
+Zum Beispiel wie folgt:
+</p>
+<pre>for(int i=0; i&lt;tasks.length; i++)<br>    procs[i] = FORK computeTask(tasks[i]);<br>for(int i=0; i&lt;procs.length; i++)<br>    JOIN procs[i];<br></pre>
+<h3>Teil A</h3>
+<p>
+Entwickeln Sie unter Einsatz der Nebenläufigkeitsanweisung eine
+Prozedur
+</p>
+<pre>  void processConcurrently(Task[] tasks, Procedure p);<br></pre>
+<p>
+deren Ausführung den folgenden Effekt hat:
+</p>
+<pre> <b>co</b> p.process(tasks[0]) <b>||</b> p.process(tasks[1]) <b>||</b> .. <b>oc</b>
+</pre>
+<h3>Teil B</h3>
+<p>
+Entwickeln Sie nun in Java eine Methode
+</p>
+<pre>  void fan(Runnable[] tasks)<br></pre>
+<p>
+die ein Feld <code>tasks</code> mit ausführbaren Code-Elementen
+erhält. Bei einem Aufruf
+von <code>fan()</code> wird jedes Element von <code>tasks</code>
+nebenläufig ausgeführt,
+und es wird erst dann zurückgekehrt, wenn alle Feldelemente ausgeführt
+worden sind.
+</p>
+<h2>Aufgabe 2 (8 P)</h2>
+<h3>Teil A</h3>
+<p>
+Gegeben sei die folgende Implementierung einer Warteschlange basierend
+auf einer
+einfach verketteten Liste:
+</p>
+<pre><font size="-1">
+class Queue {
+    private class QueueElement {
+        volatile Object value;
+        volatile QueueElement next=null;
+
+        QueueElement(Object val) {
+            this.value = val;
+        }
+    }
+
+    // Verweis auf das letzte Element der Liste
+    // ist dieses null, dann ist die Schlange leer.
+    volatile private QueueElement last = null;
+
+    public void add(Object obj) {
+        QueueElement nw = new QueueElement(obj);
+        if (last == null) {
+            nw.next = nw;
+        } else {
+            nw.next = last.next;
+            last.next = nw;
+        }
+        last = nw;
+    }
+
+    public Object remove() {
+        if (last == null) {
+            return null;
+        } else if (last.next == last) {
+            Object save = last.value;
+            last = null;
+            return save;
+        } else {
+            Object val = last.next.value;
+            last.next = last.next.next;
+            return val;
+        }
+    }
+}
+</font>
+</pre>
+<p>
+Kann diese Implementierung sicher nebenläufig benutzt werden? Begründen
+Sie Ihre Antwort.
+Geben Sie bei negativer Antwort entsprechende Zeitschnitte an und
+modifizieren Sie die
+Implementierung derart, dass sie sicher in einem nebenläufigen Kontext
+benutzbar ist!
+</p>
+<h3>Teil B</h3>
+<p>
+Betrachten Sie nun die folgende Implementierung einer speziellen Menge:
+</p>
+<pre><font size="-1">
+class ColorSet {
+    // zulässige Farben
+    final static int RED = 0;
+    final static int GREEN = 1;
+    final static int BLUE = 2;
+
+    private final boolean[3] myColors = new boolean[3];
+
+    // auf eine Überprüfung der Parameter wird hier
+    // sträflicherweise verzichtet
+
+    public void add(int col) {
+        myColors[col] = true;
+    }
+
+    public void remove(int col) {
+        myColors[col] = false;
+    }
+
+    public boolean contains(int col) {
+        return myColors[col];
+    }
+</font>
+</pre>
+<p>
+Aufgrund der sehr einfachen und knappen Implementierung der Methoden
+erscheint eine
+Ausschlusssynchronisation auf den ersten Blick unnötig. Wie Sie aus der
+Vorlesung wissen, ist es allerdings möglich, dass unterschiedliche
+Prozesse,
+die ein Objekt der Klasse <code>ColorSet</code> benutzen, auf
+unterschiedliche
+Kopien der Elemente von <code>myColors</code> zugreifen.
+</p>
+<p>
+Begründen Sie, warum die Deklaration von <code>myColors</code> als <code>volatile</code>
+diese Problematik <i>nicht</i> löst! Beschreiben Sie, welche
+überraschenden und
+i. allg. unerwünschten Effekte bei einer nebenläufigen Benutzung von
+Objekten dieser
+Klasse auftreten können.
+</p>
+<br>
+</body>
+</html>
