@@ -1,6 +1,6 @@
 package alpiv.turmuhr;
 
-import java.util.GregorianCalendar;
+import java.util.*;
 
 public class ClockDriver
 extends Thread
@@ -13,7 +13,7 @@ extends Thread
 
 	private Turmuhr uhr;
 	private int takt;
-	private final int AUFLÃ–SUNG;
+	private final int AUFLÖSUNG;
 
 	private int lastBell = -1;
 
@@ -26,8 +26,8 @@ extends Thread
 		this.uhr = uhr;
 		this.takt = takt;
 
-		// Einstellen der zeitlichen Auflï¿½sung:
-		AUFLÃ–SUNG = 1000 / takt;
+		// Einstellen der zeitlichen Aufl?sung:
+		AUFLÖSUNG = 1000 / takt;
 
 		updateClock();
 	}
@@ -42,9 +42,11 @@ extends Thread
 		{
 			updateClock();
 
+			new Vector<String>();
+
 			try
 			{
-				Thread.sleep(AUFLÃ–SUNG);
+				Thread.sleep(AUFLÖSUNG);
 			}
 			catch (InterruptedException e)
 			{
@@ -55,7 +57,7 @@ extends Thread
 	}
 
 	/**
-	 * Setzt die neuen Zeitwerte und startet ggf. neue Threads zum Lï¿½uten der Glocken
+	 * Setzt die neuen Zeitwerte und startet ggf. neue Threads zum L?uten der Glocken
 	 */
 	private void updateClock()
 	{
@@ -65,7 +67,7 @@ extends Thread
 
 		uhr.setTime(hour, minute, second);
 
-		// muï¿½ geklingelt werden?
+		// mu? geklingelt werden?
 		if ((minute == 0 || minute == 15 || minute == 30 || minute == 45) && lastBell != minute)
 		{
 			switch (minute)
@@ -89,6 +91,6 @@ extends Thread
 		}
 
 		// Zeit fortschreiten:
-		now.add(GregorianCalendar.MILLISECOND, takt * AUFLÃ–SUNG);
+		now.add(GregorianCalendar.MILLISECOND, takt * AUFLÖSUNG);
 	}
 }

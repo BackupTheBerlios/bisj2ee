@@ -64,3 +64,4 @@ public class BlockSupport
 		current = null;
 		notify();
 	}
+}

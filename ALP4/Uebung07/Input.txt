@@ -1,0 +1,15 @@
+        loadi       3       
+        store       ctr       
+        loadi       2       
+        store       val       
+        jump        opt
+loop:   load        val
+opt:    mult        val       
+        store       val       
+        load        ctr       
+        decr        1       
+        store       ctr       
+        branchnz    loop       
+        return      val
+ctr:    nop
+val:    nop
