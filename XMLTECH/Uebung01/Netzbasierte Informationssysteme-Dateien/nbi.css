@@ -1,0 +1,38 @@
+BODY {
+	BACKGROUND: #ffffcc; FONT-FAMILY: helvetica, arial, sans-serif
+}
+A {
+	FONT-WEIGHT: bold; TEXT-DECORATION: underline
+}
+A:link {
+	COLOR: #000099; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #111199; TEXT-DECORATION: none
+}
+A:hover {
+	BACKGROUND: #eeeecc; COLOR: #000099
+}
+INPUT:unknown {
+	BACKGROUND-COLOR: #ffffcc
+}
+
+@media Print    
+{
+A:link {
+	COLOR: blue; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: blue; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: blue; TEXT-DECORATION: none
+}
+A:active {
+	COLOR: blue; TEXT-DECORATION: none
+}
+A:unknown {
+	COLOR: blue; TEXT-DECORATION: none
+}
+
+}
