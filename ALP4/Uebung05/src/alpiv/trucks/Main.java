@@ -17,11 +17,18 @@ public class Main
 	}
 
 	/**
-	 * The main method for the demonstration run.
-	 * The first parameter must be the name of a supported road map scenario.
+	 * Es wird das entsprendende Szenarion geladen, die übergebene Anzahl von Autos erzeugt und je in
+	 * einem eigenen Thread gesteuert. Wählt man Zufallspausen, dann ist die Pausenlänge nach jedem
+	 * Fahrschritt jedes Autos stets zufällig zwischen 0 und 500 ms gewählt. Dies führt dazu, daß sich alle
+	 * Autos mit variablem Tempo bewegen, was sie Asynchronität erhöht (Verklemmungen werden häufiger,
+	 * Szenario realistischer);
+	 * Ansonsten ist die Pause bei allen Fahrschritten aller Autos jeweils 500 ms. Dadurch bewegen sich die
+	 * Autos viel regelmäßiger und es ensteht häufiger ein Rhythmus, was Verklemmungen seltener macht,
+	 * das Szenario ist jedoch weniger realistisch.
+	 *
+	 * @param args Szenarioname Truckanzahl [0|1] für konstante oder Zufallspausen beim Fahren
 	 */
 	public static void main(String[] args)
-	// todo comment this
 	{
 		// parse command line arguments
 		if (args.length < 3)
@@ -55,6 +62,7 @@ public class Main
 						while (!myCar.arrived())
 						{
 							myCar.drive();
+							roads.roadChanged();
 
 							try
 							{
@@ -84,4 +92,3 @@ public class Main
 		}
 	}
 }
-

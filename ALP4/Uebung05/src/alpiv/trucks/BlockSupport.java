@@ -1,24 +1,29 @@
 package alpiv.trucks;
 
-
-/** implement your synchronization mechanisms here!
- */
-
 /**
  * Erlaubt das Belegen eines Objekts durch einen Thread.
  * Es kann zu jeder Zeit nur ein Thread das Objekt belegen.
+ * Die Implementierung entspricht der Semaphore vom letzten Übungsblatt, ergänzt um einen Pointer, der den
+ * aktuellen Thread speichert.
  */
 public class BlockSupport
-// todo comment this
 {
+
+	//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
+	//  |                 Instanzvariablen                  |   \\
+	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
 	private volatile Thread current = null;
 	private int threadCapacity = 1;
 
+	//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
+	//  |                     Methoden                      |   \\
+	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
+
 	/**
 	 * Liefert den Thread, der gerade das Objekt belegt hat, oder null.
 	 * Achtung, dies sollte nur zu Diagnosezwecken verwendet werden!
-	 *
+	 * 
 	 * @return den belegenden Thread oder null
 	 */
 	public synchronized Thread blocking()
@@ -59,4 +64,3 @@ public class BlockSupport
 		current = null;
 		notify();
 	}
-}

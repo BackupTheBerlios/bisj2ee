@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="all" name="Trucks">
+
+	<target name="init">
+		<property name="basedir" value="${dirs.base}"/>
+		<property name="classdir" value="${basedir}/classes/"/>
+		<property name="jardir" value="${basedir}/jars/"/>
+		<property name="javadir" value="${basedir}/src/"/>
+		<property name="apidir" value="${basedir}/doc"/>
+		<property name="app-jar" value="${jardir}/trucks.jar"/>
+		<property name="dist-jar" value="${basedir}/distribution.jar"/>
+		<property name="resourcesdir" value="${basedir}/resources/"/>
+
+		<tstamp/>
+	</target>
+
+	<target depends="init" name="java">
+		<javac destdir="${classdir}"
+			srcdir="${javadir}"
+			debug="on"
+			verbose="off"
+			/>
+	</target>
+
+
+	<target depends="init" name="clean">
+		<echo message="remove all class files in ${classdir}"/>
+		<delete>
+			<fileset dir="${classdir}">
+				<include name="**/*.class"/>
+			</fileset>
+			<fileset dir="${jardir}">
+				<include name="*.jar"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target depends="clean" name="veryclean">
+		<echo message="remove generated API"/>
+		<delete>
+			<fileset dir="${apidir}">
+				<include name="**/*"/>
+			</fileset>
+		</delete>
+		<echo message="remove backup files from ${basedir}"/>
+		<delete>
+			<fileset dir="${basedir}">
+				<include name="**/*~"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target depends="init" name="api">
+		<echo message="building API using JavaDoc "/>
+		<mkdir dir="${apidir}"/>
+		<javadoc destdir="${apidir}"
+			packagenames="**.*"
+			sourcepath="${javadir}"/>
+	</target>
+
+	<target depends="java" name="build-jar">
+		<jar jarfile="${app-jar}"
+			manifest="${javadir}/alpiv/trucks/MANIFEST.MF"
+			>
+			<fileset dir="${classdir}">
+				<include name="alpiv/**/*.class"/>
+				<exclude name="**/*Muster.class"/>
+			</fileset>
+			<fileset dir="${javadir}">
+				<include name="alpiv/**/*.java"/>
+				<exclude name="**/*Muster.java"/>
+			</fileset>
+			<fileset dir="${resourcesdir}">
+				<include name="**/*"/>
+			</fileset>
+		</jar>
+	</target>
+
+	<target depends="build-jar,api" name="build-dist">
+		<jar jarfile="${dist-jar}"
+			>
+			<fileset dir="${basedir}">
+				<include name="classes/alpiv/**/*.class"/>
+				<include name="src/alpiv/**/*.java"/>
+				<include name="src/**/MANIFEST.MF"/>
+				<include name="resources/**/*"/>
+				<include name="build.xml"/>
+				<include name="jars/*"/>
+				<exclude name="**/*Muster*"/>
+				<include name="doc/**/*"/>
+			</fileset>
+		</jar>
+	</target>
+
+	<!--  should be started directly from the shell
+	<target name="start" depends="build-jar">
+	    <java fork="true"
+	          jar="${app-jar}"
+	    >
+	        <arg line=" "/>
+	    </java>
+	</target>
+	 -->
+
+
+	<target depends="build-jar,api" name="all">
+	</target>
+
+</project>

@@ -227,7 +227,6 @@ extends BlockSupport
 	 * @param traffic the truck to place on this road, or null to clear it
 	 */
 	public synchronized void setTraffic(Truck traffic)
-	// todo comment this
 	{
 		if (this.traffic == null)
 		{
@@ -238,7 +237,10 @@ extends BlockSupport
 			if (traffic == null)
 			{
 				assert blocking() == Thread.currentThread();
+				this.traffic = null;
+				observer.roadChanged();
 				unblock();
+				return;
 			}
 			else
 			{
