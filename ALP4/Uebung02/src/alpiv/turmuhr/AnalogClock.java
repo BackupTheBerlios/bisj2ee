@@ -29,151 +29,152 @@
 package alpiv.turmuhr;
 
 import java.awt.*;
-import java.util.*;
+import java.util.Date;
 
-public class AnalogClock extends Object
-{   
-   private Dimension size;
-   //private FontMetrics fm;
+public class AnalogClock
+extends Object
+{
+	private Dimension size;
+	//private FontMetrics fm;
 
-   private Point start;
-   private Point cen;
-   private int rad;
-   private int diam;
+	private Point start;
+	private Point cen;
+	private int rad;
+	private int diam;
 
-   private Point[] cn;
-   private String[] ns;
+	private Point[] cn;
+	private String[] ns;
 
-   private int sr;
-   private int mr;
-   private int hr;
+	private int sr;
+	private int mr;
+	private int hr;
 
-   private double sa = Math.PI / 2;
-   private double sda = Math.PI / 30;
-   private double mda = sda / 60;
-   private double hda = mda / 12;
+	private double sa = Math.PI / 2;
+	private double sda = Math.PI / 30;
+	private double mda = sda / 60;
+	private double hda = mda / 12;
 
-   private Color ccolor;
-   private Color ncolor;
-   private Color shcolor;
-   private Color mhcolor;
-   private Color hhcolor;
-   private Color bgcolor;
+	private Color ccolor;
+	private Color ncolor;
+	private Color shcolor;
+	private Color mhcolor;
+	private Color hhcolor;
+	private Color bgcolor;
 
-   private Date myDate = new Date();
-   
-   private FontMetrics myLastFontMetrics = null;
+	private Date myDate = new Date();
 
-   public AnalogClock(Rectangle rect) //, FontMetrics fm)
-   {      
-      //this.fm = fm;
+	private FontMetrics myLastFontMetrics = null;
 
-      ccolor = Color.lightGray;
-      ncolor = Color.black;
-      shcolor = Color.red;
-      mhcolor = Color.blue;
-      hhcolor = Color.green;
-      bgcolor = Color.white;
+	public AnalogClock(Rectangle rect) //, FontMetrics fm)
+	{
+		//this.fm = fm;
 
-      size = new Dimension(rect.width, rect.height);
-      diam = Math.min(rect.width, rect.height);
-      rad = diam / 2;
-      start = new Point(rect.x, rect.y);
-      cen = new Point(start.x + rad, start.y + rad);
+		ccolor = Color.lightGray;
+		ncolor = Color.black;
+		shcolor = Color.red;
+		mhcolor = Color.blue;
+		hhcolor = Color.green;
+		bgcolor = Color.white;
 
-      sr = rad;
-      mr = (int) (.9 * rad);
-      hr = (int) (.7 * rad);      
-   }
+		size = new Dimension(rect.width, rect.height);
+		diam = Math.min(rect.width, rect.height);
+		rad = diam / 2;
+		start = new Point(rect.x, rect.y);
+		cen = new Point(start.x + rad, start.y + rad);
 
-   public void setDate(Date date)
-   {
-        myDate = date;
-   }
+		sr = rad;
+		mr = (int) (.9 * rad);
+		hr = (int) (.7 * rad);
+	}
 
-   public void draw(Graphics g)
-   {
-      if ((myLastFontMetrics == null)||
-          (! myLastFontMetrics.equals(g.getFontMetrics())))
-      {
-        myLastFontMetrics = g.getFontMetrics();
-        setClockNumbers((int) (( 80 * rad) / 100), myLastFontMetrics);
-      }
-       
-      int s = myDate.getSeconds();
-      int m = myDate.getMinutes();
-      int h = myDate.getHours() % 12;
+	public void setDate(Date date)
+	{
+		myDate = date;
+	}
 
-      int ms = m * 60;
-      int hs = h * 60 * 60;
+	public void draw(Graphics g)
+	{
+		if ((myLastFontMetrics == null) ||
+		    (!myLastFontMetrics.equals(g.getFontMetrics())))
+		{
+			myLastFontMetrics = g.getFontMetrics();
+			setClockNumbers((int) ((80 * rad) / 100), myLastFontMetrics);
+		}
 
-      // Clear the background.
+		int s = myDate.getSeconds();
+		int m = myDate.getMinutes();
+		int h = myDate.getHours() % 12;
 
-      g.setColor(bgcolor);
-      g.fillRect(start.x, start.y, size.width, size.height);
+		int ms = m * 60;
+		int hs = h * 60 * 60;
 
-      // Draw the clock circle.
+		// Clear the background.
 
-      g.setColor(ccolor);
-      g.fillOval(start.x, start.y, diam, diam);
+		g.setColor(bgcolor);
+		g.fillRect(start.x, start.y, size.width, size.height);
 
-      // Draw the clock numbers.
+		// Draw the clock circle.
 
-      g.setColor(ncolor);
-      g.drawOval(start.x, start.y, diam, diam);
+		g.setColor(ccolor);
+		g.fillOval(start.x, start.y, diam, diam);
 
-      for (int i = 0; i < cn.length; i++)
-      {
-         g.drawString(ns[i], cn[i].x, cn[i].y);
-      }
+		// Draw the clock numbers.
 
-      // Draw the second hand.
+		g.setColor(ncolor);
+		g.drawOval(start.x, start.y, diam, diam);
 
-      g.setColor(shcolor);
-      int sx = (int) ((Math.cos((s * sda) - sa) * sr) + cen.x);
-      int sy = (int) ((Math.sin((s * sda) - sa) * sr) + cen.y);
-      g.drawLine(cen.x, cen.y, sx, sy);
+		for (int i = 0; i < cn.length; i++)
+		{
+			g.drawString(ns[i], cn[i].x, cn[i].y);
+		}
 
-      // Draw the minute hand.
+		// Draw the second hand.
 
-      g.setColor(mhcolor);
-      int mx = (int) ((Math.cos(((ms + s) * mda) - sa) * mr) + cen.x);
-      int my = (int) ((Math.sin(((ms + s) * mda) - sa) * mr) + cen.y);
-      g.drawLine(cen.x, cen.y - 1, mx, my);
-      g.drawLine(cen.x - 1, cen.y, mx, my);
+		g.setColor(shcolor);
+		int sx = (int) ((Math.cos((s * sda) - sa) * sr) + cen.x);
+		int sy = (int) ((Math.sin((s * sda) - sa) * sr) + cen.y);
+		g.drawLine(cen.x, cen.y, sx, sy);
 
-      // Draw the hour hand.
+		// Draw the minute hand.
 
-      g.setColor(hhcolor);
-      int hx = (int) ((Math.cos(((hs + ms + s) * hda) - sa) * hr) + cen.x);
-      int hy = (int) ((Math.sin(((hs + ms + s) * hda) - sa) * hr) + cen.y);
-      g.drawLine(cen.x, cen.y - 1, hx, hy);
-      g.drawLine(cen.x - 1, cen.y, hx, hy);
-   }
+		g.setColor(mhcolor);
+		int mx = (int) ((Math.cos(((ms + s) * mda) - sa) * mr) + cen.x);
+		int my = (int) ((Math.sin(((ms + s) * mda) - sa) * mr) + cen.y);
+		g.drawLine(cen.x, cen.y - 1, mx, my);
+		g.drawLine(cen.x - 1, cen.y, mx, my);
 
-   private void setClockNumbers(int r, FontMetrics fm)
-   {
-      cn = new Point[12];
-      ns = new String[12];
-      double nda = Math.PI / 6;
+		// Draw the hour hand.
 
-      ns[0] = "12";
+		g.setColor(hhcolor);
+		int hx = (int) ((Math.cos(((hs + ms + s) * hda) - sa) * hr) + cen.x);
+		int hy = (int) ((Math.sin(((hs + ms + s) * hda) - sa) * hr) + cen.y);
+		g.drawLine(cen.x, cen.y - 1, hx, hy);
+		g.drawLine(cen.x - 1, cen.y, hx, hy);
+	}
 
-      for (int i = 1; i < cn.length; i++)
-      {
-         ns[i] = Integer.toString(i);
-      }
+	private void setClockNumbers(int r, FontMetrics fm)
+	{
+		cn = new Point[12];
+		ns = new String[12];
+		double nda = Math.PI / 6;
 
-      int a = fm.getMaxAscent();
-      int h = (fm.getMaxAscent() + fm.getMaxDescent()) / 2;
+		ns[0] = "12";
 
-      for (int i = 0; i < cn.length; i++)
-      {
-         int nx = (int) ((Math.cos((i * nda) - sa) * r) + cen.x);
-         int ny = (int) ((Math.sin((i * nda) - sa) * r) + cen.y);
+		for (int i = 1; i < cn.length; i++)
+		{
+			ns[i] = Integer.toString(i);
+		}
 
-         int w = fm.stringWidth(ns[i]) / 2;
-         cn[i] = new Point(nx - w, ny + a - h);
-      }
-   }
+		int a = fm.getMaxAscent();
+		int h = (fm.getMaxAscent() + fm.getMaxDescent()) / 2;
+
+		for (int i = 0; i < cn.length; i++)
+		{
+			int nx = (int) ((Math.cos((i * nda) - sa) * r) + cen.x);
+			int ny = (int) ((Math.sin((i * nda) - sa) * r) + cen.y);
+
+			int w = fm.stringWidth(ns[i]) / 2;
+			cn[i] = new Point(nx - w, ny + a - h);
+		}
+	}
 }

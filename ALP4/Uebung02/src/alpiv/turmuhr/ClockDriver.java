@@ -27,7 +27,7 @@ extends Thread
 		this.takt = takt;
 
 		// Einstellen der zeitlichen Auflösung:
-		AUFLÖSUNG = 1000/takt;
+		AUFLÖSUNG = 1000 / takt;
 
 		updateClock();
 	}
