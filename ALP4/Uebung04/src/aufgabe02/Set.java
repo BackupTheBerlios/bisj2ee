@@ -1,10 +1,10 @@
 package aufgabe02;
 
-interface Set
+interface Set <$Value>
 {
-	void add(Object value);
+	void add($Value value);
 
-	void remove(Object value);
+	void remove($Value value);
 
-	Iterator iterator();
+	Iterator<$Value> iterator();
 }

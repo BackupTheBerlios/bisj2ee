@@ -1,6 +1,5 @@
 package aufgabe03;
 
-import java.util.*;
 
 /**
  * Implementiert eine Menge vom Basistyp $ValueType. Die Elemente werden in einem Array abgelegt. Der Index wird aus
@@ -17,8 +16,8 @@ import java.util.*;
  * Uugriff synchronisiert werden kann (ein Arrayfeld direkt kann nicht geschützt werden), da nur ein Thread den lock
  * auf das Objekt gleichzeitig haben kann.
  */
-public class ThreadSaveSet
-implements Set
+public class ThreadSaveSet <$Value>
+implements Set<$Value>
 {
 	//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
 	//  |                 Instanzvariablen                  |   \\
@@ -55,13 +54,13 @@ implements Set
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
 	/**
-	 * Der zu suchende Wert wird an eine Hilfsfunktion ({@link #contains(Object, int, int)} übergeben.
+	 * Der zu suchende Wert wird an eine Hilfsfunktion ({@link #contains($Value, int, int)} übergeben.
 	 * Der Startindex ist der Hashcode des Objekts modulo der Setgröße. Der Initerationszähler wird mit 0 gestartet.
 	 *
 	 * @param value der zu suchende Wert
 	 * @return ob der Wert vorhanden ist.
 	 */
-	public boolean contains(Object value)
+	public boolean contains($Value value)
 	{
 		return value != null && contains(value, value.hashCode() % values.length, 0);
 	}
@@ -78,7 +77,7 @@ implements Set
 	 * @param iteration der wievielte Versuch?
 	 * @return Wert vorhanden?
 	 */
-	private boolean contains(Object value, int index, int iteration)
+	private boolean contains($Value value, int index, int iteration)
 	{
 		if (iteration == values.length) return false;
 
@@ -105,7 +104,7 @@ implements Set
 	 * @param value der hinzuzufügende Wert
 	 * @throws Overflow falls das Set keinen Platz mehr hat.
 	 */
-	public void add(Object value)
+	public void add($Value value)
 	throws Overflow
 	{
 		if (value == null) throw new IllegalArgumentException("value must not be null");
@@ -148,91 +147,5 @@ implements Set
 		}
 
 		add(value, (index + 1) % values.length, iteration + 1);
-	}
-
-	//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
-	//  |                       Tests                       |   \\
-	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
-
-	public static void main(String[] args)
-	{
-		final ThreadSaveSet testSet = new ThreadSaveSet(100);
-
-		ArrayList testThreads = new ArrayList();
-
-		for (int i = 1; i <= 101; i++)
-		{
-			final int k = i;
-
-			testThreads.add(new Thread(new Runnable()
-			{
-				public void run()
-				{
-					try
-					{
-						testSet.add(new Integer(k));
-					}
-					catch (Overflow overflow)
-					{
-						System.out.println("Overflow beim Einfügen von " + k);
-					}
-				}
-			}));
-		}
-
-		for (Iterator iterator = testThreads.iterator(); iterator.hasNext();)
-		{
-			Thread thread = (Thread) iterator.next();
-			thread.start();
-		}
-
-		for (Iterator iterator = testThreads.iterator(); iterator.hasNext();)
-		{
-			Thread thread = (Thread) iterator.next();
-
-			try
-			{
-				thread.join();
-			}
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
-		}
-
-		testThreads = new ArrayList();
-
-		for (int i = 1; i <= 101; i++)
-		{
-			final int k = i;
-
-			testThreads.add(new Thread(new Runnable()
-			{
-				public void run()
-				{
-					System.out.println(testSet.contains(new Integer(k)) ? k + " gefunden" : k + " nicht gefunden");
-				}
-			}));
-		}
-
-		for (Iterator iterator = testThreads.iterator(); iterator.hasNext();)
-		{
-			Thread thread = (Thread) iterator.next();
-			thread.start();
-		}
-
-		for (Iterator iterator = testThreads.iterator(); iterator.hasNext();)
-		{
-			Thread thread = (Thread) iterator.next();
-
-			try
-			{
-				thread.join();
-			}
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
-		}
 	}
 }

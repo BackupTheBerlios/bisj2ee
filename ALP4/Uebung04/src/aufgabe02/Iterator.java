@@ -2,9 +2,9 @@ package aufgabe02;
 
 import java.util.NoSuchElementException;
 
-interface Iterator
+interface Iterator <$Value>
 {
-	Object next()
+	$Value next()
 	throws NoSuchElementException;
 
 	boolean hasNext();

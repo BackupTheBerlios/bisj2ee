@@ -3,14 +3,14 @@ package aufgabe02;
 import java.util.NoSuchElementException;
 
 /**
- * Implementation einer Threadsicheren einfach verketteten Liste.
+ * Implementation einer threadsicheren einfach verketteten Liste mit generischen Elementtyp ($Value).
  * <p/>
- * Einzutragene Werte werden in Knoten verpackt. Jeder Knoten hat Semaphoren - Funktionalität und einen Zeiger auf
- * ihren Nachfolger. In der Schlange wird ein Zeiger auf das erste und letzte Element gehalten. Zu Beginn werden beide
- * Zeiger mit dem Startknoten (enthält den Wert null) initialisiert.
+ * Einzutragene Werte werden in Knoten verpackt. Jeder Knoten hat Semaphorenfunktionalität und einen Zeiger auf seinen
+ * jeweiligen Nachfolger. In der Schlange wird ein Zeiger auf das erste und letzte Element gehalten.
+ * Zu Beginn werden beide Zeiger mit einem Dummyknoten (enthält den Wert null) initialisiert.
  */
-public class ThreadSaveLinkedList
-implements Set
+public class ThreadSaveLinkedList <$Value>
+implements Set<$Value>
 {
 	//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
 	//  |                 Instanzvariablen                  |   \\
@@ -26,13 +26,15 @@ implements Set
 	/**
 	 * Prinzip Einfügen:
 	 * <p/>
-	 * Eingefügt wird direkt am Ende der Schlange. Dazu wird zunächst der letzte Knoten gelockt, um ein paralleles
-	 * Löschen auszuschließen. Da sich der Zeiger last während des Einfügens ändert, muß das parallele Einfügen extra
-	 * auschgeschlossen werden. Die geschieht, in dem man die ganze Aktion auf this synchronisiert. Das Einfügen selber
-	 * wird durch das Einfügen des neuen Knotens ans Ende und das anchließende aktualisieren des last-Pointers
-	 * realisiert.
+	 * Eingefügt wird immer direkt am Ende der Schlange. Dazu wird zunächst der Zugriff auf den letzten Knoten gelockt,
+	 * um ein paralleles Löschen auszuschließen. Da sich der Zeiger "last" während des Einfügens ändert, muß das
+	 * parallele Einfügen extra ausgeschlossen werden. Dies geschieht, indem man die ganze Aktion auf this
+	 * synchronisiert.
+	 * <p/>
+	 * Das Einfügen selber wird durch das Anhängen des neuen Knotens ans Ende und das anschließende aktualisieren
+	 * des "last"-Pointers realisiert.
 	 */
-	public void add(Object value)
+	public void add($Value value)
 	{
 		if (value == null) return;
 
@@ -89,7 +91,7 @@ implements Set
 	 * werden und nicht die ganze Schlange. Das maximiert den Grad der Nebenläufigkeit. Theoretisch können so die Hälfte
 	 * aller Elemente gleichzeitig entfernt werden.
 	 */
-	public void remove(Object value)
+	public void remove($Value value)
 	{
 		// Sonderfälle null wird gesucht oder Schlage ist leer:
 		if (value == null || firstNode.next == null) return;
@@ -118,7 +120,6 @@ implements Set
 					lastNode = currentNode;
 				}
 
-
 				currentNode.RELEASE();
 				return;
 			}
@@ -140,7 +141,7 @@ implements Set
 	//  |                     Producers                     |   \\
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
-	public Iterator iterator()
+	public Iterator<$Value> iterator()
 	{
 		return new MyIterator();
 	}
@@ -161,13 +162,13 @@ implements Set
 		//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
 		private volatile ListElement next;
-		private final Object value;
+		private final $Value value;
 
 		//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
 		//  |                   Konstruktoren                   |   \\
 		//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
-		private ListElement(Object value)
+		private ListElement($Value value)
 		{
 			this.value = value;
 		}
@@ -180,7 +181,7 @@ implements Set
 	 * Startelement ist der zweite Knoten der Schlange (1. ist Dummy).
 	 */
 	private class MyIterator
-	implements Iterator
+	implements Iterator<$Value>
 	{
 		//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
 		//  |                 Instanzvariablen                  |   \\
@@ -198,12 +199,12 @@ implements Set
 		 * @return das nächste Element in der Schlange
 		 * @throws NoSuchElementException wenn Schlange leer ist
 		 */
-		public Object next()
+		public $Value next()
 		throws NoSuchElementException
 		{
 			if (!hasNext()) throw new NoSuchElementException();
 
-			Object value = pointer.value;
+			$Value value = pointer.value;
 
 			pointer = pointer.next;
 			return value;
