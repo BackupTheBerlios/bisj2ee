@@ -1,5 +1,7 @@
 package aufgabe02;
 
+import java.util.NoSuchElementException;
+
 public class ThreadSaveLinkedList
 implements Set
 {
@@ -9,13 +11,19 @@ implements Set
 	{
 		ListElement neu = new ListElement(obj);
 
-		if (root == null) root = neu;
+		synchronized (this)
+		{
+			if (root == null) root = neu;
+		}
 
 		ListElement index = root;
 
 		while (index.next != null)
 		{
-			index = index.next;
+			synchronized (index)
+			{
+				index = index.next;
+			}
 		}
 
 		index.next = neu;
@@ -25,30 +33,41 @@ implements Set
 	{
 		if (root == null) return;
 
-		if (root.value.equals(obj))
+		synchronized (this)
 		{
-			root = root.next;
-			return;
+			if (root.value.equals(obj))
+			{
+				root = root.next;
+				return;
+			}
 		}
 
 		ListElement index = root;
 
 		while (index.next != null)
 		{
-			if (index.next.value.equals(obj))
+
+			synchronized (index.next)
 			{
-				index.next = index.next.next;
-				return;
+				if (index.next.value.equals(obj))
+				{
+					index.next = index.next.next;
+					return;
+				}
 			}
 
-			index = index.next;
+			synchronized (index)
+			{
+				index = index.next;
+			}
 		}
 
 	}
 
 	public Iterator iterator()
 	{
-		return null;
+		return new MyIterator();
+
 	}
 
 	private class ListElement
@@ -60,6 +79,29 @@ implements Set
 		{
 			this.value = value;
 		}
+	}
+
+	private class MyIterator
+	implements Iterator
+	{
+		private ListElement index = root;
+
+		public Object next()
+		throws NoSuchElementException
+		{
+			if (index == null) throw new NoSuchElementException();
+
+			Object value = index.value;
+			index = index.next;
+
+			return value;
+		}
+
+		public boolean hasNext()
+		{
+			return !(index == null || index.next == null);
+		}
+
 	}
 
 }
