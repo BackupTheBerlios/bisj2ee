@@ -149,6 +149,10 @@ implements Set
 	//  |                   Inner Classes                   |   \\
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
+	/**
+	 * Implementation eines Knotens der Liste. Erbst Semaphorenfunktionalität aus {@link Semaphore}.
+	 * Enthält ein Feld für den zu übergebenen Wert und einen Zeiger auf den Nachfolgerknoten.
+	 */
 	private class ListElement
 	extends Semaphore
 	{
@@ -157,7 +161,7 @@ implements Set
 		//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
 		private volatile ListElement next;
-		private volatile Object value;
+		private final Object value;
 
 		//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
 		//  |                   Konstruktoren                   |   \\
@@ -171,6 +175,10 @@ implements Set
 
 	//    --------|=|-----------|=||=|-----------|=|--------    \\
 
+	/**
+	 * Implementation eines Iterators, der durch die Schlange iteriert.
+	 * Startelement ist der zweite Knoten der Schlange (1. ist Dummy).
+	 */
 	private class MyIterator
 	implements Iterator
 	{
@@ -178,184 +186,39 @@ implements Set
 		//  |                 Instanzvariablen                  |   \\
 		//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
-		private ListElement index = firstNode.next;
+		private ListElement pointer = firstNode.next;
 
 		//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
 		//  |                     Scanners                      |   \\
 		//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
+		/**
+		 * Gibt den Wert des aktuellen Knotens zurück und verschiebt den pointer auf dessen Nachfolger
+		 *
+		 * @return das nächste Element in der Schlange
+		 * @throws NoSuchElementException wenn Schlange leer ist
+		 */
 		public Object next()
 		throws NoSuchElementException
 		{
 			if (!hasNext()) throw new NoSuchElementException();
 
-			Object value = index.value;
+			Object value = pointer.value;
 
-			index = index.next;
+			pointer = pointer.next;
 			return value;
 		}
 
 		//    --------|=|-----------|=||=|-----------|=|--------    \\
 
+		/**
+		 * Solange der pointer noch nicht null ist, kann auch noch bein Wert abgerufen werden.
+		 *
+		 * @return ob noch ein Wert abgerufen werden kann
+		 */
 		public boolean hasNext()
 		{
-			return index != null;
+			return pointer != null;
 		}
-	}
-
-	//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
-	//  |                       Test                        |   \\
-	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
-
-	public static void main(String[] args)
-	{
-		final ThreadSaveLinkedList list = new ThreadSaveLinkedList();
-
-		final Thread[] threads = new Thread[100];
-
-		for (int i = 0; i < threads.length; i++)
-		{
-			final int k = i;
-			threads[i] = new Thread(new Runnable()
-			{
-				public void run()
-				{
-
-					list.add(new Integer(k));
-
-				}
-
-			});
-
-		}
-
-		for (int i = 0; i < threads.length; i++)
-		{
-			threads[i].start();
-
-		}
-
-		for (int i = 0; i < threads.length; i++)
-		{
-			try
-			{
-				threads[i].join();
-			}
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
-
-		}
-
-		Iterator it = list.iterator();
-
-		int count = 0;
-		while (it.hasNext())
-		{
-			count++;
-			System.out.print("" + it.next() + ", ");
-		}
-
-		System.out.println("\nLänge: " + count);
-
-		for (int i = threads.length - 1; i >= 0; i--)
-		{
-			final int k = i;
-			threads[i] = new Thread(new Runnable()
-			{
-				public void run()
-				{
-					list.remove(new Integer(k));
-
-				}
-
-			});
-
-		}
-
-		for (int i = threads.length / 2; i >= 0; i--)
-		{
-			threads[i].start();
-		}
-
-		for (int i = 0; i <= threads.length / 2; i++)
-		{
-			try
-			{
-				threads[i].join();
-			}
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
-
-		}
-
-		it = list.iterator();
-
-		count = 0;
-		while (it.hasNext())
-		{
-			count++;
-			System.out.print("" + it.next() + ", ");
-		}
-
-		System.out.println("\nLänge: " + count);
-
-
-		threads[0] = new Thread(new Runnable()
-		{
-			public void run()
-			{
-				list.remove(new Integer(154));
-			}
-
-		});
-
-		threads[1] = new Thread(new Runnable()
-		{
-			public void run()
-			{
-				list.remove(new Integer(99));
-			}
-
-		});
-
-		threads[2] = new Thread(new Runnable()
-		{
-			public void run()
-			{
-				list.remove(new Integer(98));
-			}
-
-		});
-
-		threads[0].start();
-		threads[1].start();
-		threads[2].start();
-
-		try
-		{
-			threads[0].join();
-			threads[1].join();
-			threads[2].join();
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
-
-		it = list.iterator();
-
-		count = 0;
-		while (it.hasNext())
-		{
-			count++;
-			System.out.print("" + it.next() + ", ");
-		}
-
-		System.out.println("\nLänge: " + count);
-
 	}
 }
