@@ -11,7 +11,7 @@ public class StartClock
 		// (in einer Sekunde Realzeit werden 50 Sekunden simuliert)
 		ClockDriver clockDriver = new ClockDriver(turmuhr, 50);
 
-		// Startet den Treiber-Thread:
+		// Startet den  Treiber-Thread:
 		clockDriver.start();
 	}
 }
