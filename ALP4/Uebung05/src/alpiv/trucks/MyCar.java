@@ -41,7 +41,7 @@ extends Beetle
 			{
 				try
 				{
-					Thread.sleep(1000);
+					Thread.sleep(750);
 				}
 				catch (InterruptedException e)
 				{
