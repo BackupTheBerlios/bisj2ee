@@ -17,6 +17,16 @@ class ThreadSaveQueue
 	// ist dieses null, dann ist die Schlange leer.
 	volatile private QueueElement last = null;
 
+	/**
+	 * @param obj das hinzuzufügende Oject
+	 *            <p/>
+	 *            Die Methode erzeugt zunächst ein neues Schalngenelement mit dem einzufügenden Objekt.
+	 *            Dies kann noch parallel ausgeführt werden.
+	 *            Anschließend wird das Element eingetragen, dieser Vorgang kann nur geschützt durchgeführt werden, um die
+	 *            genannten Fehler zu vermeiden. Synchronisiert wird dabei auf this (warum auch nicht?)
+	 *            <p/>
+	 *            Das Einfügen selbst funktioniert genau so wie bei der unsynchronisierten Queue (die leider gar nicht kommentiert wurde!)
+	 */
 	public void add(Object obj)
 	{   // Erzeugen des einzufügenden Knotens kann parallel ausgeführt werden!
 		QueueElement nw = new QueueElement(obj);
@@ -39,6 +49,12 @@ class ThreadSaveQueue
 		}
 	}
 
+	/**
+	 * Fall die Schlange leer ist, wird null zurückgegeben (parralelle Ausführung möglich, da nur lesender Zugriff
+	 * auf last).
+	 * Das anschließende Austragen der zu entfernenden Knotens wird ebenfalls, durch Synchronisation auf this, geschützt ausgeführt.
+	 * Am Austragemechanismus selbst wurde nicht verändert im Vergleich zur unkommentierten Originalschlange.
+	 */
 	public Object remove()
 	{
 		// Nur lesender Zugriff, kann auch bei gleichzeitigem add
@@ -48,6 +64,7 @@ class ThreadSaveQueue
 			return null;
 		}
 
+		// geschützter Block:
 		synchronized (this)
 		{
 			if (last.next == last)
