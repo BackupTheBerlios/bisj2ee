@@ -11,9 +11,9 @@ class MaxComputation
 
 	public static void compute(int[] field)
 	{
-		for (int i = 0; i < field.length; i++)
+		for ( int i = 0; i < field.length; i++ )
 		{
-			if (field[i] > myMax)
+			if ( field[i] > myMax )
 			{
 				/*try
 				{

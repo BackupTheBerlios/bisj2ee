@@ -21,13 +21,13 @@ class ThreadSaveMaxComputation
 	 */
 	public static void compute(int[] field)
 	{
-		if (field == null) return;
+		if ( field == null ) return;
 
-		for (int i = 0; i < field.length; i++)
+		for ( int i = 0; i < field.length; i++ )
 		{
-			synchronized (ThreadSaveMaxComputation.class)
+			synchronized ( ThreadSaveMaxComputation.class )
 			{
-				if (field[i] > myMax)
+				if ( field[i] > myMax )
 				{
 					myMax = field[i];
 				}

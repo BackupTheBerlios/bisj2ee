@@ -14,13 +14,13 @@ public class Semaphore
 
 	public synchronized void OCCUPY()
 	{
-		if (--threadCapacity < 0)
+		if ( --threadCapacity < 0 )
 		{
 			try
 			{
 				wait();
 			}
-			catch (InterruptedException e)
+			catch ( InterruptedException e )
 			{
 			}
 		}
