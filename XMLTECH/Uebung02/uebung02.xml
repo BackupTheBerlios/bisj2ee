@@ -111,27 +111,13 @@
 				<brief-description>An information retrieval system for images and text based on Semantic Web technologies for pathology focusing on lungdiseases.</brief-description>
 				<partner>Humboldt-Universit㲠zu Berlin</partner>
 				<partner>Universit㲠Potsdam</partner>
+				<description/>
 				<description>
 					<english-version href="http://www.inf.fu-berlin.de/inst/ag-nbi/research/swpatho/swpathoEng.html"/>
 					<abstract>Entwicklung, Implementierung und Evaluierung eines auf Semantic Web Technologien basierenden Bild- und Informationsretrievalsystems für die Digitale Pathologie am Beispiel von Lungenkrankheiten</abstract>
 					<text>Das Projekt entwickelt ein prototypisches System für Verarbeitung und Retrieval von Bildbeschreibungen und Befundberichten in der Pathologie, speziell für Lungenerkrankungen. Im Gegensatz zu heutigen Datenbanken soll die Information durchgehend semantisch annotiert und mit Ontologien verknüpft sein, was eine Recherche nach Inhalten gestattet. Das in den Bild- und Textdaten enthaltene Expertenwissen lässt sich damit anderen Anwendungsszenarien zugänglich und wiederverwendbar machen. Es kann zur Qualitätssicherung, zur Unterstützung von Diagnostik und Differentialdiagnose, zur statistischen Auswertung, zu Präsentationen und in der Lehre genutzt werden.
 Bei der Erstellung von Befundberichten wird semantische Information durch computerlinguistische Analyse automatisch erfasst und in ein semantisches Netz eingefügt, das auf einem Pathologiespezifischen Modell basiert. Das System stellt diese Information dann für die unterschiedlichen Zwecke zur Verfügung. Eine Integrationskomponente versucht darüber hinaus, Informationen aus externen Wissensquellen einzubinden. Technologisch basiert das geplante System auf den Standards des Semantic Web wie XML, RDF und RuleML und anerkannten medizinischen Modellen und Standards (UMLS, HL7, SCORM).</text>
 					<initiators>
-						<person>
-							<first>Robert</first>
-							<last>Tolksdorf</last>
-							<title>Prof. Dr.-Ing.</title>
-							<phone>03083875223</phone>
-							<role>Professor für Praktische Informatik</role>
-							<address>
-								<name>Freie Universität Berlin Institut für Informatik - AG Netzbasierte Informationssysteme</name>
-								<street>Takustrasse 9</street>
-								<zip>14195</zip>
-								<city>Berlin</city>
-								<country>Deutschland</country>
-							</address>
-							<email>tolk@inf.fu-berlin.de</email>
-						</person>
 						<person>
 							<first>Thomas</first>
 							<last>Schrader</last>
@@ -162,7 +148,57 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 							</address>
 							<email>thomas.schrader@charite.de</email>
 						</person>
+						<personproxy>person_01</personproxy>
 					</initiators>
+					<contact>
+						<personproxy>person_05</personproxy>
+					</contact>
+					<workpackages>
+						<package>
+							<shortid>AP1</shortid>
+							<shortdescription>Entwurf und Entwicklung einer Beschreibungskomponente zur Erfassung und Repräsentation von Text- und Bildinformationen</shortdescription>
+							<href>http://www.inf.fu-berlin.de/inst/ag-nbi/research/swpatho/ap1_150304.pdf</href>
+						</package>
+						<package>
+							<shortid>AP2</shortid>
+							<shortdescription>Entwurf, Implementierung und Evaluation der Fachwissenskomponente</shortdescription>
+						</package>
+						<package>
+							<shortid>AP3</shortid>
+							<shortdescription>Entwurf und Implementierung einer Transformationskomponente zur Analyse und semantischen Repräsentation bestehender Befundberichte</shortdescription>
+						</package>
+						<package>
+							<shortid>AP4</shortid>
+							<shortdescription>Entwurf, Implementierung und Evaluation von Anwendungskomponenten</shortdescription>
+						</package>
+						<package>
+							<shortid>AP5</shortid>
+							<shortdescription>Entwurf und Implementierung von Integrationskomponenten</shortdescription>
+						</package>
+						<package>
+							<shortid>AP6</shortid>
+							<shortdescription>Systemvalidierung in der Anwendung</shortdescription>
+						</package>
+						<package>
+							<shortid>AP7</shortid>
+							<shortdescription>Projekt-, Qualitätsmanagement und Aussendarstellung</shortdescription>
+						</package>
+					</workpackages>
+					<publications>
+						<publication href="http://www.inf.fu-berlin.de/inst/ag-nbi/research/swpatho/icwe04.pdf">
+							<title>Engineering a Semantic Web for Pathology (ICWE'04 Conference)</title>
+							<authors>
+								<personproxy>person_01</personproxy>
+								<personproxy>person_05</personproxy>
+							</authors>
+						</publication>
+						<publication href="http://www.inf.fu-berlin.de/inst/ag-nbi/research/swpatho/TagungDeutscheGesellschaftPathologieRostock.doc">
+							<title>Tagung Deutsche Gesellschaft für Pathologie Rostock 2004</title>
+							<authors>
+								<personproxy>person_01</personproxy>
+							</authors>
+						</publication>
+					</publications>
 				</description>
 			</project>
 			<project id="project_02">
@@ -236,15 +272,16 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 		</projects>
 	</research>
 	<people>
-		<person>
+		<person id="person_01">
 			<first>Robert</first>
 			<last>Tolksdorf</last>
 			<title>Prof. Dr.-Ing.</title>
 			<directdial>23</directdial>
 			<role>Head of group</role>
 			<homepage>http://www.robert-tolksdorf.de</homepage>
+			<email>tolk@inf.fu-berlin.de</email>
 		</person>
-		<person>
+		<person id="person_02">
 			<first>Klaus</first>
 			<last>Schild</last>
 			<title>Dr.</title>
@@ -252,14 +289,14 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 			<role>Research Assistant</role>
 			<homepage>http://www.inf.fu-berlin.de/%7Eschild/</homepage>
 		</person>
-		<person>
+		<person id="person_03">
 			<first>Ursula</first>
 			<last>Schild</last>
 			<directdial>21</directdial>
 			<role>Secretary</role>
 			<homepage>http://www.inf.fu-berlin.de/~schild</homepage>
 		</person>
-		<person>
+		<person id="person_04">
 			<first>Jamal</first>
 			<last>Abu-Hasan</last>
 			<directdial>27</directdial>
@@ -267,15 +304,16 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 				<pid>project_08</pid>
 			</assigned-projects>
 		</person>
-		<person>
+		<person id="person_05">
 			<first>Elena</first>
 			<last>Paslaru</last>
 			<directdial>24</directdial>
 			<assigned-projects>
 				<pid>project_01</pid>
 			</assigned-projects>
+			<email>paslaru@inf.fu-berlin.de</email>
 		</person>
-		<person>
+		<person id="person_06">
 			<first>Malgorzata</first>
 			<last>Mochol</last>
 			<directdial>26</directdial>
@@ -283,7 +321,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 				<pid>project_02</pid>
 			</assigned-projects>
 		</person>
-		<person>
+		<person id="person_07">
 			<first>Ekaterina</first>
 			<last>Langer</last>
 			<directdial>34</directdial>
@@ -291,14 +329,14 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 				<pid>project_06</pid>
 			</assigned-projects>
 		</person>
-		<person>
+		<person id="person_08">
 			<first>Lutz</first>
 			<last>Suhrbier</last>
 			<assigned-projects>
 				<pid>project_07</pid>
 			</assigned-projects>
 		</person>
-		<person>
+		<person id="person_09">
 			<first>Lyndon</first>
 			<middle>B.</middle>
 			<last>Nixon</last>
@@ -306,14 +344,14 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 				<pid>project_03</pid>
 			</assigned-projects>
 		</person>
-		<person>
+		<person id="person_10">
 			<first>Franziska</first>
 			<last>Liebsch</last>
 			<assigned-projects>
 				<pid>project_10</pid>
 			</assigned-projects>
 		</person>
-		<person>
+		<person id="person_11">
 			<first>Duc</first>
 			<middle>Minh</middle>
 			<last>Nguyen</last>
@@ -321,23 +359,23 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 				<pid>project_10</pid>
 			</assigned-projects>
 		</person>
-		<person>
+		<person id="person_12">
 			<first>Sebastian</first>
 			<last>Tietz</last>
 			<assigned-projects>
 				<pid>project_01</pid>
 			</assigned-projects>
 		</person>
-		<person>
+		<person id="person_13">
 			<first>Anja</first>
 			<last>Jentzsch</last>
+			<last/>
 			<assigned-projects>
 				<pid>project_02</pid>
 			</assigned-projects>
 		</person>
-		<person>
+		<person id="person_14">
 			<first/>
-			<last/>
 			<directdial>33</directdial>
 			<role>Forschungstutoren</role>
 			<assigned-projects>
