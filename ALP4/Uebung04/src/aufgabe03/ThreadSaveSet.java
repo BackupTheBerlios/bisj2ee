@@ -23,7 +23,7 @@ implements Set<$Value>
 	//  |                 Instanzvariablen                  |   \\
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
-	private final Object[] values;
+	private final $Value[] values;
 	private final Integer[] locks;
 
 	//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
@@ -40,7 +40,7 @@ implements Set<$Value>
 		if (size < 0)
 			throw new IllegalArgumentException("size must not be negative");
 
-		values = new Object[size];
+		values = ($Value[]) new Object[size];
 		locks = new Integer[size];
 
 		for (int i = 0; i < locks.length; i++)
@@ -81,7 +81,7 @@ implements Set<$Value>
 	{
 		if (iteration == values.length) return false;
 
-		final Object compare;
+		final $Value compare;
 
 		synchronized (locks[index])
 		{
@@ -98,7 +98,7 @@ implements Set<$Value>
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
 	/**
-	 * Der hinzuzufügende Wert (darf nicht null sein) wird an eine Hilfsfunktion ({@link #add(Object, int, int)}
+	 * Der hinzuzufügende Wert (darf nicht null sein) wird an eine Hilfsfunktion ({@link #add($Value, int, int)}
 	 * übergeben. Das Iterieren des Arrays funktioniert nach dem gleichen Prinzip wie das Suchen.
 	 *
 	 * @param value der hinzuzufügende Wert
@@ -125,14 +125,14 @@ implements Set<$Value>
 	 * @param iteration der wievielte Versuch?
 	 * @throws Overflow falls das Set keinen Platz mehr hat.
 	 */
-	private void add(Object value, int index, int iteration)
+	private void add($Value value, int index, int iteration)
 	throws Overflow
 	{
 		if (iteration == values.length) throw new Overflow();
 
 		synchronized (locks[index])
 		{
-			final Object compare = values[index];
+			final $Value compare = values[index];
 
 			if (compare == value)
 			{
