@@ -2,8 +2,15 @@ package aufgabe02;
 
 import java.util.NoSuchElementException;
 
-public class ThreadSaveLinkedList <$Value>
-implements Set<$Value>
+/**
+ * Implementation einer Threadsicheren einfach verketteten Liste.
+ * <p/>
+ * Einzutragene Werte werden in Knoten verpackt. Jeder Knoten hat Semaphoren - Funktionalität und einen Zeiger auf
+ * ihren Nachfolger. In der Schlange wird ein Zeiger auf das erste und letzte Element gehalten. Zu Beginn werden beide
+ * Zeiger mit dem Startknoten (enthält den Wert null) initialisiert.
+ */
+public class ThreadSaveLinkedList
+implements Set
 {
 	//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
 	//  |                 Instanzvariablen                  |   \\
@@ -16,11 +23,20 @@ implements Set<$Value>
 	//  |                     Modifiers                     |   \\
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
-	public void add($Value value)
+	/**
+	 * Prinzip Einfügen:
+	 * <p/>
+	 * Eingefügt wird direkt am Ende der Schlange. Dazu wird zunächst der letzte Knoten gelockt, um ein paralleles
+	 * Löschen auszuschließen. Da sich der Zeiger last während des Einfügens ändert, muß das parallele Einfügen extra
+	 * auschgeschlossen werden. Die geschieht, in dem man die ganze Aktion auf this synchronisiert. Das Einfügen selber
+	 * wird durch das Einfügen des neuen Knotens ans Ende und das anchließende aktualisieren des last-Pointers
+	 * realisiert.
+	 */
+	public void add(Object value)
 	{
 		if (value == null) return;
-		ListElement newNode = new ListElement(value);
 
+		ListElement newNode = new ListElement(value);
 		ListElement insertNode;
 
 		// Synchronisationsarbeit:
@@ -28,7 +44,7 @@ implements Set<$Value>
 		{
 			insertNode = lastNode;
 
-			insertNode.OCCUPY();
+			insertNode.ACQUIRE();
 			{
 				lastNode = lastNode.next = newNode;
 			}
@@ -38,37 +54,79 @@ implements Set<$Value>
 
 	//    --------|=|-----------|=||=|-----------|=|--------    \\
 
-	public void remove($Value value)
+	/**
+	 * Prinzip Löschen:
+	 * <p/>
+	 * Um den wechselseitigen Ausschluß zu minimieren und den Grad an Parallelität zu maximieren wurde folgendes
+	 * Prinzip verwendet:
+	 * <p/>
+	 * Das Löschen beginnt immer am Anfang der Schlange. Dafür werden die ersten beiden Knoten zunächst gelockt.
+	 * Es wird immer im zweiten der gelockten Knoten gesucht, ob der zu finden Wert vorliegt.
+	 * <p/>
+	 * Falls nicht, geht man so vor, um in der Schlange eine Position weiterzugehen (Rahmen symbolisieren die
+	 * erhaltenenen Locks):
+	 * <p/>
+	 * <p/>
+	 * .                        ???                            ???
+	 * ?????    ?????    ?????  ???   ?????    ?????    ?????  ???  ?????    ?????    ?????
+	 * ? A ?????? B ?????? C ?  ???   ? A ?????? B ?????? C ?  ???  ? A ?????? B ?????? C ?
+	 * ?????    ?????    ?????  ???   ?????    ?????    ?????  ???  ?????    ?????    ?????
+	 * .                        ???                            ???
+	 * <p/>
+	 * Dies tut man solange, bis man den gesuchten Wert im zweiten gelockten Knoten gefunden hat. Dann wird der
+	 * next-Pointer des ersten Knotens auf dessen übernächsten Knoten geändert. Dadurch wird der Knoten, der den zu
+	 * entfernenden Wert enthält aus der Liste ausgekoppelt und durch den garbage collector entsorgt.
+	 * <p/>
+	 * .      ???????????????
+	 * .      ?             ?
+	 * ?????  ?  ?????    ?????
+	 * ? A ????  ? B ?????? C ?
+	 * ?????     ?????    ?????
+	 * <p/>
+	 * Anschließend werden die Sperren freigegeben.
+	 * <p/>
+	 * Der Vorteil bei diesem Verfahren ist, das pro parallelem Remove-Aufruf immer nur zwei bis drei Knoten blockiert
+	 * werden und nicht die ganze Schlange. Das maximiert den Grad der Nebenläufigkeit. Theoretisch können so die Hälfte
+	 * aller Elemente gleichzeitig entfernt werden.
+	 */
+	public void remove(Object value)
 	{
+		// Sonderfälle null wird gesucht oder Schlage ist leer:
 		if (value == null || firstNode.next == null) return;
+
+
 		ListElement currentNode, nextNode;
 
-		firstNode.OCCUPY();
-		firstNode.next.OCCUPY();
+		// Die ersten beiden Knoten werden gelockt.
+		firstNode.ACQUIRE();
+		firstNode.next.ACQUIRE();
 
 		currentNode = firstNode;
 		nextNode = currentNode.next;
 
 		while (nextNode != null)
 		{
+			// Element gefunden?
 			if (value.equals(nextNode.value))
 			{
-				//pause();
-
 				currentNode.next = nextNode.next;
 
+				// Sonderfall: Löschen des letzten Knotens:
 				if (nextNode == lastNode)
 				{
+					// Zeiger muß umgesetzt werden:
 					lastNode = currentNode;
 				}
+
 
 				currentNode.RELEASE();
 				return;
 			}
 
+			// Index- und Lockverschiebung:
 			nextNode = nextNode.next;
 
-			if (nextNode != null) nextNode.OCCUPY();
+			if (nextNode != null) nextNode.ACQUIRE();
 			currentNode.RELEASE();
 
 			currentNode = currentNode.next;
@@ -82,7 +140,7 @@ implements Set<$Value>
 	//  |                     Producers                     |   \\
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
-	public Iterator<$Value> iterator()
+	public Iterator iterator()
 	{
 		return new MyIterator();
 	}
@@ -99,13 +157,13 @@ implements Set<$Value>
 		//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
 		private volatile ListElement next;
-		private volatile $Value value;
+		private volatile Object value;
 
 		//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
 		//  |                   Konstruktoren                   |   \\
 		//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
-		private ListElement($Value value)
+		private ListElement(Object value)
 		{
 			this.value = value;
 		}
@@ -114,7 +172,7 @@ implements Set<$Value>
 	//    --------|=|-----------|=||=|-----------|=|--------    \\
 
 	private class MyIterator
-	implements Iterator<$Value>
+	implements Iterator
 	{
 		//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
 		//  |                 Instanzvariablen                  |   \\
@@ -126,12 +184,12 @@ implements Set<$Value>
 		//  |                     Scanners                      |   \\
 		//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
-		public $Value next()
+		public Object next()
 		throws NoSuchElementException
 		{
 			if (!hasNext()) throw new NoSuchElementException();
 
-			$Value value = index.value;
+			Object value = index.value;
 
 			index = index.next;
 			return value;
