@@ -20,14 +20,13 @@ Uebung02.xsd" name="Netzbasierte Informationssysteme / Networked Informationsyst
 			</name>
 			<email>schaepe@inf.fu-berlin.de</email>
 		</person>
-		<person>
+		<person href="http://www.secosic.net">
 			<ID>author_03</ID>
 			<name>
 				<first>Sebastian</first>
 				<last>Koske</last>
 			</name>
 			<email>koske@inf.fu-berlin.de</email>
-			<homepage>http://www.secosic.net</homepage>
 		</person>
 	</authors>
 	<news>
@@ -255,7 +254,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 		</results>
 	</research>
 	<people fomerMembersURL="http://www.inf.fu-berlin.de/inst/ag-nbi/ExNBI.html">
-		<member xsi:type="Member">
+		<member xsi:type="Member" href="http://www.robert-tolksdorf.de">
 			<ID>member_01</ID>
 			<name>
 				<title>Prof.</title>
@@ -264,28 +263,25 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 				<last>Tolksdorf</last>
 			</name>
 			<email>tolk@inf.fu-berlin.de</email>
-			<homepage>http://www.robert-tolksdorf.de</homepage>
 			<role>Head of group</role>
 			<directdial>23</directdial>
 		</member>
-		<member xsi:type="Member">
+		<member xsi:type="Member" href="http://www.inf.fu-berlin.de/~schild">
 			<ID>member_02</ID>
 			<name>
 				<title>Dr.</title>
 				<first>Klaus</first>
 				<last>Schild</last>
 			</name>
-			<homepage>http://www.inf.fu-berlin.de/~schild/</homepage>
 			<role>Research Assistant</role>
 			<directdial>28</directdial>
 		</member>
-		<member xsi:type="Member">
+		<member xsi:type="Member" href="http://www.inf.fu-berlin.de/~schild">
 			<ID>member_03</ID>
 			<name>
 				<first>Ursula</first>
 				<last>Schild</last>
 			</name>
-			<homepage>http://www.inf.fu-berlin.de/~schild</homepage>
 			<role>Secretary</role>
 			<directdial>21</directdial>
 		</member>

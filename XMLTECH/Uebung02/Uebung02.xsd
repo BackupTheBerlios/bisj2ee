@@ -4,7 +4,7 @@
 	<xs:element name="workgroup">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="authors" type="PersonList"/>
+				<xs:element ref="authors"/>
 				<xs:element name="news">
 					<xs:complexType>
 						<xs:sequence>
@@ -47,6 +47,7 @@
 											</xs:complexType>
 										</xs:element>
 										<xs:choice>
+											<xs:element name="href" type="xs:anyURI"/>
 											<xs:element name="course" minOccurs="0" maxOccurs="unbounded">
 												<xs:complexType>
 													<xs:simpleContent>
@@ -66,7 +67,6 @@
 													</xs:simpleContent>
 												</xs:complexType>
 											</xs:element>
-											<xs:element name="href" type="xs:anyURI"/>
 										</xs:choice>
 									</xs:sequence>
 								</xs:complexType>
@@ -149,7 +149,7 @@
 																						<xs:complexType>
 																							<xs:sequence>
 																								<xs:element name="title" type="xs:string"/>
-																								<xs:element name="authors" type="PersonList"/>
+																								<xs:element ref="authors"/>
 																							</xs:sequence>
 																							<xs:attribute name="href" type="xs:anyURI" use="optional"/>
 																						</xs:complexType>
@@ -291,6 +291,7 @@
 			<xs:attribute name="name" type="xs:string" use="required"/>
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="authors" type="PersonList"/>
 	<xs:element name="personREF" type="xs:IDREF"/>
 	<xs:complexType name="Address">
 		<xs:sequence>
@@ -318,17 +319,17 @@
 		<xs:sequence>
 			<xs:element name="ID" type="xs:ID"/>
 			<xs:element name="name" type="Name"/>
-			<xs:element name="address" type="Address" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="address" type="Address" minOccurs="0"/>
 			<xs:element name="phone" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="email" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="homepage" type="xs:anyURI" minOccurs="0"/>
 		</xs:sequence>
+		<xs:attribute name="href" type="xs:anyURI" use="optional"/>
 	</xs:complexType>
 	<xs:complexType name="Initiator">
 		<xs:complexContent>
 			<xs:extension base="Person">
 				<xs:sequence>
-					<xs:element name="role" type="xs:string" minOccurs="0"/>
+					<xs:element name="role" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
