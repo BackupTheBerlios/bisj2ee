@@ -30,8 +30,6 @@ public class BlockSupport
 	 * Belegt das Objekt.
 	 * Ist das Objekt bereits belegt, kehrt diese Methode erst zurück,
 	 * wenn es wieder freigegeben wird.
-	 *
-	 * @throws InterruptedException ein wartender Thread wurde unterbrochen
 	 */
 	public synchronized void block()
 	{
@@ -58,6 +56,7 @@ public class BlockSupport
 	public synchronized void unblock()
 	{
 		threadCapacity++;
+		current = null;
 		notify();
 	}
 }

@@ -19,7 +19,9 @@ public class Main
 	 * The first parameter must be the name of a supported road map scenario.
 	 */
 	public static void main(String[] args)
+	// todo comment this
 	{
+
 		final Random rnd = new Random();
 		int trucks = 100;
 
