@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>ALP IV: Übung 9</title>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=ISO-8859-15">
+  <meta name="GENERATOR" content="Quanta Plus">
+</head>
+<body>
+<h1>Übungsblatt 9</h1>
+<h3><small>Abgabe: Donnerstag 24.06.2004 bis 15 Uhr im Fach</small></h3>
+<big><big><span style="font-weight: bold;"></span></big></big>
+<h2>Aufgabe 1 (4 P.)</h2>
+<p>
+Implementieren Sie in Java ein boolesches Semaphor. Benutzen Sie
+hierfür den folgenden Klassenrumpf:
+</p>
+<pre>class BooleanSemaphore {<br>    ...<br>    void P() {...}<br>    void V() {...}<br>}<br></pre>
+<p>
+Implementieren Sie nun unter Einsatz Ihrer booleschen Semaphoren ein
+allgemeines Semaphor. Benutzen Sie hierfür <span
+ style="font-weight: bold;">keine </span>zusätzlichen
+Synchronisationsmechanismen von Java. Orientieren Sie sich an dem
+folgenden Klassenrumpf:
+</p>
+<pre>class ExtendedSemaphore {<br>    ...<br>    ExtendedSemaphore(int init) {...}<br>    void P(int n) {...}<br>    void V(int n) {...}<br>}<br></pre>
+<h2>Aufgabe 2 (4 P.)</h2>
+<p>
+Implementieren Sie nun verallgemeinerte P()- und V()-Operationen, mit
+denen es möglich ist, mehrere Semaphoren auf einmal zu manipulieren.
+Diese neuen P() und V() Operationen sollen atomar sein und so
+Mehrobjektsperren ermöglichen. Die Ausführung von <i>V(semas,n)</i>
+erhöht den internen Zähler aller Elemente von <i>semas</i> um <i>n</i>.
+Die Ausführung von <i>P(semas,n)</i> erniedrigt den internen Zähler
+von allen Elementen von <i>semas</i> um den Wert <i>n</i>. Falls bei
+einem der Elemente der interne Zähler kleiner als <i>n</i> ist,
+blockiert die Ausführung von <i>P()</i> solange, bis alle internen
+Zähler groß genug sind.
+</p>
+<p>
+Benutzen Sie dabei Generic-Java und erweitern Sie den folgenden
+Klassenrumpf, ohne dabei neue öffentliche Methoden einzuführen.
+Benutzen Sie Iteratoren, um auf die Elemente von Mengen zuzugreifen.
+</p>
+<pre>public class MultiSemaphore {<br>    ...<br>    // erzeugt ein neues Semaphor, dessen interner Zähler den Wert von<br>    // "init" hat<br>    public MultiSemaphore(int init) { ... }<br><br>    static public void P(Set&lt;MultiSemaphore&gt; semas, int n) {...}<br>    static public void V(Set&lt;MultiSemaphore&gt; semas, int n) {...}<br>}<br></pre>
+</body>
+</html>
