@@ -41,24 +41,68 @@ public class Main
 
 		// create and place truck
 		Road startR = roads.getStart(rnd.nextInt(roads.getStarts()));
-		Beetle beetle = new Beetle(startR, Road.NORTH);
+		final Beetle beetle = new Beetle(startR, Road.NORTH);
+		startR = roads.getStart(rnd.nextInt(roads.getStarts()));
+		final Beetle beetle2 = new Beetle(startR, Road.NORTH);
 
 		// drive the beetle
-		for (;
-		     !beetle.arrived();
-		     beetle.drive())
+		final RoadMap roads1 = roads;
+		Thread t1 = new Thread(new Runnable()
 		{
-			// force an update
-			roads.roadChanged();
+			public void run()
+			{
+				for (;
+				     !beetle.arrived(); beetle.drive())
+				{
+					// force an update
+					roads1.roadChanged();
 
-			try
-			{
-				Thread.sleep(500);
+					try
+					{
+						Thread.sleep(500);
+					}
+					catch (InterruptedException ex)
+					{
+						ex.printStackTrace();
+					}
+				}
 			}
-			catch (InterruptedException ex)
+		});
+
+
+		Thread t2 = new Thread(new Runnable()
+		{
+			public void run()
 			{
-				ex.printStackTrace();
+				for (;
+				     !beetle2.arrived(); beetle2.drive())
+				{
+					// force an update
+					roads1.roadChanged();
+
+					try
+					{
+						Thread.sleep(500);
+					}
+					catch (InterruptedException ex)
+					{
+						ex.printStackTrace();
+					}
+				}
 			}
+		});
+
+		t1.start();
+		t2.start();
+
+		try
+		{
+			t1.join();
+			t2.join();
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
 		}
 		System.out.println("The truck arrived!");
 	}

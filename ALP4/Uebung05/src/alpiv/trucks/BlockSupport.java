@@ -11,15 +11,18 @@ package alpiv.trucks;
 public class BlockSupport
 {
 
+	private volatile Thread current = null;
+	private int threadCapacity = 1;
+
 	/**
 	 * Liefert den Thread, der gerade das Objekt belegt hat, oder null.
 	 * Achtung, dies sollte nur zu Diagnosezwecken verwendet werden!
 	 *
 	 * @return den belegenden Thread oder null
 	 */
-	public Thread blocking()
+	public synchronized Thread blocking()
 	{
-		return null;
+		return current;
 	}
 
 	/**
@@ -29,9 +32,15 @@ public class BlockSupport
 	 *
 	 * @throws InterruptedException ein wartender Thread wurde unterbrochen
 	 */
-	public void block()
+	public synchronized void block()
 	throws InterruptedException
 	{
+		if (--threadCapacity < 0)
+		{
+			wait();
+		}
+
+		current = Thread.currentThread();
 	}
 
 	/**
@@ -41,5 +50,7 @@ public class BlockSupport
 	 */
 	public synchronized void unblock()
 	{
+		threadCapacity++;
+		notify();
 	}
 }

@@ -14,10 +14,11 @@ class ThreadSaveMaxComputation
 	}
 
 	/**
-	 * Im Vergleich zur Originalmethode wurde ein kritsicher Abschnitt eingefügt, der auf dem Klassenobjekt synchronisiert ist.
-	 * Der Abschnitt umschließt den Vergleich zusammen mit dem evtl. Schreiben des neuen Wertes und verhindert so, daß ein Fehler
-	 * wie er im beiliegenden Zeitschnitt angegeben ist, vorkommen kann. (Kurz: Falls ein neues Maximum gefunden wurde, wird es
-	 * auch sofort abgespeichert.)
+	 * Im Vergleich zur Originalmethode wurde ein kritsicher Abschnitt eingefügt, der auf dem Klassenobjekt
+	 * synchronisiert ist.
+	 * Der Abschnitt umschließt den Vergleich zusammen mit dem evtl. Schreiben des neuen Wertes und verhindert so,
+	 * daß ein Fehler wie er im beiliegenden Zeitschnitt angegeben ist, vorkommen kann. (Kurz: Falls ein neues Maximum
+	 * gefunden wurde, wird es auch sofort abgespeichert.)
 	 */
 	public static void compute(int[] field)
 	{

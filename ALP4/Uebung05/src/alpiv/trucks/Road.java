@@ -228,10 +228,21 @@ extends BlockSupport
 	 */
 	public void setTraffic(Truck traffic)
 	{
-		if (traffic != null && this.traffic != null)
-			throw new RuntimeException("TRUCK CRASH!");
-		this.traffic = traffic;
-		this.observer.roadChanged();
+		try
+		{
+			if (traffic != null) block(); // my
+			if (traffic != null && this.traffic != null)
+				throw new RuntimeException("TRUCK CRASH!");
+			this.traffic = traffic;
+			this.observer.roadChanged();
+			if (traffic == null) unblock(); // my
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+
+
 	}
 
 	/**

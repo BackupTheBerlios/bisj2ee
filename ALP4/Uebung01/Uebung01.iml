@@ -4,11 +4,19 @@
   <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/classes" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
-    </content>
+    <content url="file://$MODULE_DIR$" />
+    <content url="file://D:/Studium/Algorithmen und Programmierung 4/ALP4/Uebung05/resources" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://D:/Studium/Algorithmen und Programmierung 4/ALP4/Uebung05/resources" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntryProperties />
   </component>
 </module>
