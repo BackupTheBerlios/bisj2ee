@@ -1,24 +1,25 @@
 package aufgabe03;
 
-public class ThreadSaveSet
-implements Set
+
+public class ThreadSaveSet <$ValueType>
+implements Set<$ValueType>
 {
-	private final Object[] values;
+	private final $ValueType[] values;
 	private final Integer[] locks;
 
 	public ThreadSaveSet(int size)
 	{
-		values = new Object[size];
+		values = ($ValueType[]) new Object[size];
 
 		locks = new Integer[size];
 
 		for (int i = 0; i < locks.length; i++)
 		{
-			locks[i] = new Integer(i);
+			locks[i] = i;
 		}
 	}
 
-	public void add(Object obj)
+	public void add($ValueType obj)
 	throws Overflow
 	{
 		int index = obj.hashCode() % values.length;
@@ -27,7 +28,7 @@ implements Set
 
 	}
 
-	private void add(Object obj, int index, int iteration)
+	private void add($ValueType obj, int index, int iteration)
 	throws Overflow
 	{
 		if (iteration == values.length) throw new Overflow();
@@ -41,7 +42,7 @@ implements Set
 		}
 	}
 
-	public boolean contains(Object obj)
+	public boolean contains($ValueType obj)
 	{
 		return contains(obj, obj.hashCode() % values.length, 0);
 	}

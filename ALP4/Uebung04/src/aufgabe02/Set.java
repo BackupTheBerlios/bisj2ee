@@ -1,10 +1,10 @@
 package aufgabe02;
 
-interface Set
+interface Set <ValueType>
 {
-	void add(Object obj);
+	void add(ValueType value);
 
-	void remove(Object obj);
+	void remove(ValueType value);
 
-	Iterator iterator();
+	Iterator<ValueType> iterator();
 }

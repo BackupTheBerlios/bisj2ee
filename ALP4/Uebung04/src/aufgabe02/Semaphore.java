@@ -12,21 +12,21 @@ public class Semaphore
 	//  |                     Methoden                      |   \\
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
-	public synchronized void OCCUPY()
+	public final synchronized void OCCUPY()
 	{
-		if ( --threadCapacity < 0 )
+		if (--threadCapacity < 0)
 		{
 			try
 			{
 				wait();
 			}
-			catch ( InterruptedException e )
+			catch (InterruptedException e)
 			{
 			}
 		}
 	}
 
-	public synchronized void RELEASE()
+	public final synchronized void RELEASE()
 	{
 		threadCapacity++;
 		notify();

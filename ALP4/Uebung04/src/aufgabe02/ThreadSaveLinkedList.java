@@ -2,8 +2,8 @@ package aufgabe02;
 
 import java.util.NoSuchElementException;
 
-public class ThreadSaveLinkedList
-implements Set
+public class ThreadSaveLinkedList <$Value>
+implements Set<$Value>
 {
 	//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
 	//  |                 Instanzvariablen                  |   \\
@@ -16,66 +16,73 @@ implements Set
 	//  |                     Modifiers                     |   \\
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
-	public void add(Object value)
+	public void add($Value value)
 	{
 		if (value == null) return;
-
 		ListElement newNode = new ListElement(value);
 
+		ListElement insertNode;
+
+		// Synchronisationsarbeit:
 		synchronized (this)
 		{
-			lastNode = lastNode.next = newNode;
+			insertNode = lastNode;
+
+			insertNode.OCCUPY();
+			{
+				lastNode = lastNode.next = newNode;
+			}
+			insertNode.RELEASE();
 		}
 	}
 
-	public void remove(Object value)
+	//    --------|=|-----------|=||=|-----------|=|--------    \\
+
+	public void remove($Value value)
 	{
-		if (value == null) return;
+		if (value == null || firstNode.next == null) return;
+		ListElement currentNode, nextNode;
 
 		firstNode.OCCUPY();
+		firstNode.next.OCCUPY();
 
-		ListElement index = firstNode;
-		ListElement nextNode = index.next;
+		currentNode = firstNode;
+		nextNode = currentNode.next;
 
 		while (nextNode != null)
 		{
 			if (value.equals(nextNode.value))
 			{
-				synchronized (this)
-				{
-					if (nextNode == lastNode)
-					{
-						index.next = null;
-						lastNode = index;
+				//pause();
 
-						index.RELEASE();
-						return;
-					}
+				currentNode.next = nextNode.next;
+
+				if (nextNode == lastNode)
+				{
+					lastNode = currentNode;
 				}
 
-				index.next = nextNode.next;
-
-				index.RELEASE();
+				currentNode.RELEASE();
 				return;
 			}
 
 			nextNode = nextNode.next;
 
 			if (nextNode != null) nextNode.OCCUPY();
-			index.RELEASE();
+			currentNode.RELEASE();
 
-			index = index.next;
+			currentNode = currentNode.next;
 		}
 
 		// Element was not found:
-		index.RELEASE();
+		currentNode.RELEASE();
 	}
 
 	//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
 	//  |                     Producers                     |   \\
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
-	public Iterator iterator()
+	public Iterator<$Value> iterator()
 	{
 		return new MyIterator();
 	}
@@ -87,17 +94,27 @@ implements Set
 	private class ListElement
 	extends Semaphore
 	{
-		private volatile ListElement next;
-		private volatile Object value;
+		//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
+		//  |                 Instanzvariablen                  |   \\
+		//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
-		private ListElement(Object value)
+		private volatile ListElement next;
+		private volatile $Value value;
+
+		//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
+		//  |                   Konstruktoren                   |   \\
+		//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
+
+		private ListElement($Value value)
 		{
 			this.value = value;
 		}
 	}
 
+	//    --------|=|-----------|=||=|-----------|=|--------    \\
+
 	private class MyIterator
-	implements Iterator
+	implements Iterator<$Value>
 	{
 		//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
 		//  |                 Instanzvariablen                  |   \\
@@ -109,16 +126,18 @@ implements Set
 		//  |                     Scanners                      |   \\
 		//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
-		public Object next()
+		public $Value next()
 		throws NoSuchElementException
 		{
 			if (!hasNext()) throw new NoSuchElementException();
 
-			Object value = index.value;
+			$Value value = index.value;
 
 			index = index.next;
 			return value;
 		}
+
+		//    --------|=|-----------|=||=|-----------|=|--------    \\
 
 		public boolean hasNext()
 		{
@@ -281,6 +300,4 @@ implements Set
 		System.out.println("\nLänge: " + count);
 
 	}
-
-
 }

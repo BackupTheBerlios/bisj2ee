@@ -1,10 +1,10 @@
 package aufgabe03;
 
-public interface Set
+public interface Set <$ValueType>
 {
-	void add(Object obj)
+	void add($ValueType obj)
 	throws Overflow;
 
-	boolean contains(Object obj);
+	boolean contains($ValueType obj);
 }
 
