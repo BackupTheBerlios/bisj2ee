@@ -5,9 +5,9 @@ import java.util.NoSuchElementException;
 /**
  * Implementation einer threadsicheren einfach verketteten Liste mit generischen Elementtyp ($Value).
  * <p/>
- * Einzutragene Werte werden in Knoten verpackt. Jeder Knoten hat Semaphorenfunktionalit�t und einen Zeiger auf seinen
+ * Einzutragene Werte werden in Knoten verpackt. Jeder Knoten hat Semaphorenfunktionalität und einen Zeiger auf seinen
  * jeweiligen Nachfolger. In der Schlange wird ein Zeiger auf das erste und letzte Element gehalten.
- * Zu Beginn werden beide Zeiger mit einem Dummyknoten (enth�lt den Wert null) initialisiert.
+ * Zu Beginn werden beide Zeiger mit einem Dummyknoten (enthält den Wert null) initialisiert.
  */
 public class ThreadSaveLinkedList <$Value>
 implements Set<$Value>
@@ -24,14 +24,14 @@ implements Set<$Value>
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
 	/**
-	 * Prinzip Einf�gen:
+	 * Prinzip Einfügen:
 	 * <p/>
-	 * Eingef�gt wird immer direkt am Ende der Schlange. Dazu wird zun�chst der Zugriff auf den letzten Knoten gelockt,
-	 * um ein paralleles L�schen auszuschlie�en. Da sich der Zeiger "last" w�hrend des Einf�gens �ndert, mu� das
-	 * parallele Einf�gen extra ausgeschlossen werden. Dies geschieht, indem man die ganze Aktion auf this
+	 * Eingefügt wird immer direkt am Ende der Schlange. Dazu wird zunächst der Zugriff auf den letzten Knoten gelockt,
+	 * um ein paralleles Löschen auszuschließen. Da sich der Zeiger "last" während des Einfügens ändert, muß das
+	 * parallele Einfügen extra ausgeschlossen werden. Dies geschieht, indem man die ganze Aktion auf this
 	 * synchronisiert.
 	 * <p/>
-	 * Das Einf�gen selber wird durch das Anh�ngen des neuen Knotens ans Ende und das anschlie�ende aktualisieren
+	 * Das Einfügen selber wird durch das Anhängen des neuen Knotens ans Ende und das anschließende aktualisieren
 	 * des "last"-Pointers realisiert.
 	 */
 	public void add($Value value)
@@ -57,45 +57,45 @@ implements Set<$Value>
 	//    --------|=|-----------|=||=|-----------|=|--------    \\
 
 	/**
-	 * Prinzip L�schen:
+	 * Prinzip Löschen:
 	 * <p/>
-	 * Um den wechselseitigen Ausschlu� zu minimieren und den Grad an Parallelit�t zu maximieren, wurde folgendes
+	 * Um den wechselseitigen Ausschluß zu minimieren und den Grad an Parallelität zu maximieren, wurde folgendes
 	 * Prinzip verwendet:
 	 * <p/>
-	 * Das L�schen beginnt immer am Anfang der Schlange. Daf�r werden die ersten beiden Knoten zun�chst f�r alle
+	 * Das Löschen beginnt immer am Anfang der Schlange. Dafür werden die ersten beiden Knoten zunächst für alle
 	 * anderen geperrt Threads gesperrt. Es wird immer im zweiten der geperrten Knoten gesucht, ob der zu finden Wert
 	 * vorliegt.
 	 * <p/>
 	 * Falls nicht, geht man so vor, um in der Schlange eine Position weiterzugehen (Doppelrahmen symbolisieren die
-	 * f�r andere Threads geperrten Knoten):
+	 * für andere Threads geperrten Knoten):
 	 * <p/>
 	 * <p/>
-	 * .                        ???                            ???
-	 * ?????    ?????    ?????  ???   ?????    ?????    ?????  ???  ?????    ?????    ?????
-	 * ? A ?????? B ?????? C ?  ???   ? A ?????? B ?????? C ?  ???  ? A ?????? B ?????? C ?
-	 * ?????    ?????    ?????  ???   ?????    ?????    ?????  ???  ?????    ?????    ?????
-	 * .                        ???                            ???
+	 * .                        ┌─┐                            ┌─┐
+	 * ╔═══╗    ╔═══╗    ┌───┐  │░│   ╔═══╗    ╔═══╗    ╔═══╗  │░│  ┌───┐    ╔═══╗    ╔═══╗
+	 * ║ A ╟───►║ B ╟───►│ C │  │░│   ║ A ╟───►║ B ╟───►║ C ║  │░│  │ A ├───►║ B ╟───►║ C ║
+	 * ╚═══╝    ╚═══╝    └───┘  │░│   ╚═══╝    ╚═══╝    ╚═══╝  │░│  └───┘    ╚═══╝    ╚═══╝
+	 * .                        └─┘                            └─┘
 	 * <p/>
 	 * Dies tut man solange, bis man den gesuchten Wert im zweiten geperrten Knoten gefunden hat. Dann wird der
-	 * "next"-Pointer des ersten Knotens auf dessen Nachnachfolgerknoten ge�ndert. Dadurch wird der Knoten, der den zu
-	 * entfernenden Wert enth�lt, aus der Liste ausgekoppelt und fr�her oder sp�ter durch den garbage collector
+	 * "next"-Pointer des ersten Knotens auf dessen Nachnachfolgerknoten geändert. Dadurch wird der Knoten, der den zu
+	 * entfernenden Wert enthält, aus der Liste ausgekoppelt und früher oder später durch den garbage collector
 	 * entsorgt.
 	 * <p/>
-	 * .      ???????????????
-	 * .      ?             ?
-	 * ?????  ?  ?????    ?????
-	 * ? A ????  ? B ?????? C ?
-	 * ?????     ?????    ?????
+	 * .      ┌─────────────┐
+	 * .      │             ▼
+	 * ╔═══╗  │  ╔═══╗    ┌───┐
+	 * ║ A ╟──┘  ║ B ╟───►│ C │
+	 * ╚═══╝     ╚═══╝    └───┘
 	 * <p/>
-	 * Anschlie�end werden die evtl. noch vorhandenen Sperren wieder aufgehoben.
+	 * Anschließend werden die evtl. noch vorhandenen Sperren wieder aufgehoben.
 	 * <p/>
-	 * Der Vorteil bei diesem Verfahren ist, da� bei jedem parallelem Remove-Aufruf immer nur zwei bis drei Knoten
-	 * blockiert werden m�ssen und nicht die ganze Schlange. Das maximiert den Grad der Nebenl�ufigkeit.
-	 * Theoretisch k�nnen so die H�lfte aller Elemente gleichzeitig entfernt werden.
+	 * Der Vorteil bei diesem Verfahren ist, daß bei jedem parallelem Remove-Aufruf immer nur zwei bis drei Knoten
+	 * blockiert werden müssen und nicht die ganze Schlange. Das maximiert den Grad der Nebenläufigkeit.
+	 * Theoretisch können so die Hälfte aller Elemente gleichzeitig entfernt werden.
 	 */
 	public void remove($Value value)
 	{
-		// Sonderf�lle null wird gesucht oder Schlage ist leer:
+		// Sonderfälle null wird gesucht oder Schlage ist leer:
 		if (value == null || firstNode.next == null) return;
 
 
@@ -115,10 +115,10 @@ implements Set<$Value>
 			{
 				currentNode.next = nextNode.next;
 
-				// Sonderfall: L�schen des letzten Knotens:
+				// Sonderfall: Löschen des letzten Knotens:
 				if (nextNode == lastNode)
 				{
-					// Zeiger mu� umgesetzt werden:
+					// Zeiger muß umgesetzt werden:
 					lastNode = currentNode;
 				}
 
@@ -153,8 +153,8 @@ implements Set<$Value>
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
 	/**
-	 * Implementation eines Knotens der Liste. Erbt Semaphorenfunktionalit�t aus {@link Semaphore}.
-	 * Enth�lt ein Feld f�r den zu speichernden Wert und einen Zeiger auf den Nachfolgerknoten.
+	 * Implementation eines Knotens der Liste. Erbt Semaphorenfunktionalität aus {@link Semaphore}.
+	 * Enthält ein Feld für den zu speichernden Wert und einen Zeiger auf den Nachfolgerknoten.
 	 */
 	private class ListElement
 	extends Semaphore
@@ -196,9 +196,9 @@ implements Set<$Value>
 		//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
 		/**
-		 * Gibt den Wert des aktuellen Knotens zur�ck und verschiebt den pointer auf dessen Nachfolger
+		 * Gibt den Wert des aktuellen Knotens zurück und verschiebt den pointer auf dessen Nachfolger
 		 *
-		 * @return das n�chste Element in der Schlange
+		 * @return das nächste Element in der Schlange
 		 * @throws NoSuchElementException wenn Schlange leer ist
 		 */
 		public $Value next()
