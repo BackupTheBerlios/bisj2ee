@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>ALP IV SS03 - &Uuml;bungsblatt 2</title>
+</head>
+<body bgcolor="#ffffff">
+<h1>&Uuml;bungsblatt 2</h1>
+<p>
+Abgabe: 06.05.2004&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bis 10 Uhr in
+unseren Tutorenf&auml;chern (1.OG vor dem Sekreteriat)<br>
+</p>
+<h2>Aufgabe 1 (8 P)</h2>
+<p>
+Die &ouml;rtliche Kirchturmuhr mit Glockenwerk soll durch eine
+modernere,
+Java-programmierte Uhr ersetzt werden. Nat&uuml;rlich soll die neue Uhr
+den Anwohnern die gewohnte Funktionalit&auml;t bieten. Da der Kirchturm
+f&uuml;r Testzwecke nicht zur Verf&uuml;gung steht, soll zun&auml;chst
+ein
+Prototyp mit Java erstellt werden. Der Hersteller liefert hierf&uuml;r
+ein
+Entwicklungspaket mit einer multimedialen Repr&auml;sentation der
+Turmuhr
+(s. zus&auml;tzliche Materialien auf der Website).
+</p>
+<p>Die Schnittstelle f&uuml;r die Uhr sieht wie folgt aus:</p>
+<pre>package alpiv.turmuhr;<br>interface Turmuhr<br>{<br>    void setTime(int hours, int mins, int secs);<br>    void highBell();<br>    void lowBell();<br>}<br></pre>
+<p>
+Ein Exemplar einer Uhr wird erzeugt mittels:
+<code> alpiv.turmuhr.TurmuhrFactory.createTurmuhr()</code>
+</p>
+<p>
+Sie sollen nun unter Einsatz von Java-Threads eine Steuerung f&uuml;r
+diese Turmuhr
+entwickeln mit den folgenden Eigenschaften:
+</p>
+<ul>
+  <li> Die Anzeige der Uhr wird im Sekundentakt korrekt
+weitergeschaltet.
+Zum Testen kann der Takt k&uuml;nstlich beschleunigt werden. Die
+Standardeinstellung ist
+1 ms Realzeit f&uuml;r eine simulierte Sekunde. Zus&auml;tzlich kann
+der Sekundenzeiger auch
+in einem Takt mehr als 1 Sekunde &uuml;berspringen. Die f&uuml;r die
+Abgabe geforderte Einstellung
+ist ein Sprung von 10 Sekunden. <br>
+Das Weiterschalten der Uhr darf auf keinen
+Fall von anderen Aktivit&auml;ten der Uhr beeintr&auml;chtigt werden! </li>
+  <li>Zus&auml;tzlich soll das Glockenwerk die Uhrzeit angeben.
+Das Glockenwerk hat zwei Glocken, wobei die hohe Glocke die
+Viertelstunden
+und die tiefe Glocke die vollen Stunden schl&auml;gt. In der
+Entwicklungsumgebung werden hierf&uuml;r
+die Methoden <code>highBell()</code> und <code>lowBell()</code>
+eingesetzt.
+Die hohe Glocke
+schl&auml;gt einmal bei 15 Minuten, zweimal bei 30 Minuten, dreimal bei
+45 Minuten, und viermal zur vollen Stunde. Zur vollen Stunde soll nach
+den
+Schl&auml;gen der hohen Glocke die tiefe Glocke die Uhrzeit schlagen,
+einmal
+um ein Uhr, zweimal um zwei Uhr und so fort bis zw&ouml;lfmal am Mittag
+bzw. um Mitternacht. </li>
+  <li>Es ist bei dem Anschlagen der Glocken darauf zu achten, dass der
+Klang der vorher
+angeschlagenen Glocke verhallt ist (also die Klangausgabe beendet ist),
+bevor die
+n&auml;chste Glocke angeschlagen wird. </li>
+  <li>&Uuml;ber die Standardeingabe kann die Uhr direkt auf beliebige
+Zeiten eingestellt werden. </li>
+  <li>Bei der Implementierung ist <b
+ style="text-decoration: underline;">kein</b><span
+ style="text-decoration: underline;"> aktives Warten</span> einzusetzen!</li>
+</ul>
+F&uuml;r die L&ouml;sung dieser Aufgabe braucht ihr: <a
+ href="distribution.jar">distribution.jar</a><br>
+<p>
+<i>Abgabe:</i> Entwurf- und Programm-Dokumentation sowie relevante
+kommentierte
+Code-Fragmente auf Papier, sowie die vollen Quelldateien mit
+ausf&uuml;hrbarem
+Code als startbares JAR-Archiv per E-Mail. Sollten die Quelldateien
+(.java) nicht im JAR-Archiv enthalten sein, bitte diese zus&auml;tzlich
+gezippt per Email schicken.<br>
+Achtung: Die Packages beibehalten!<br>
+</p>
+<h2>Aufgabe 2 (4 P)</h2>
+<p>
+Wenn zwei Prozesse asynchron gemeinsame Variablen ver&auml;ndern,
+kann das zu unerw&uuml;nschten und damit inkorrekten Ergebnissen
+f&uuml;hren. Abschnitte, die auf in dieser Hinsicht kritische
+gemeinsame Variablen zugreifen, werden daher <i>kritische
+Abschnitte</i> genannt. Ein solches fehlerhaftes Verhalten l&auml;sst
+sich verhindern, indem man gew&auml;hrleistet, dass kritische
+Abschnitte
+in <i>gegenseitigem Ausschluss</i> ausgef&uuml;hrt werden. Dies
+bedeutet,
+dass sicherzustellen ist, dass sich immer h&ouml;chstens ein Prozess
+in einem kritischen Abschnitt befinden kann.
+</p>
+<p>
+Sobald sich also ein Prozess A in einem kritischen Abschnitt befindet,
+m&uuml;ssen alle anderen Prozesse, die ebenfalls einen kritischen
+Abschnitt betreten wollen, warten, bis A seinen Abschnitt
+verl&auml;sst.
+Im folgenden werden zwei Ans&auml;tze zur Gew&auml;hrleistung des
+gegenseitigen
+Ausschluss vorgestellt, die <i>aktives Warten</i> ("busy waiting")
+einsetzen.
+<span style="font-style: italic;">Aktives Warten</span> wird hier nur
+zu Lernzwecken eingesetzt, ist aber in der realen Praxis ein sehr
+schlechter Programmierstil und ineffizient!<br>
+&Uuml;berpr&uuml;fen Sie f&uuml;r jeden Ansatz, ob dieser korrekt ist!
+<br>
+Korrektheit
+ist hier als Gew&auml;hrleistung des gegenseitigen Ausschlusses und
+Lebendigkeit definiert. Geben Sie bei
+inkorrekten Ans&auml;tzen fehlerhafte Beispiele unter
+Einsatz von Zeitschnitten an.
+</p>
+<p>
+<code></code></p>
+<table>
+  <tbody>
+    <tr>
+      <td celspan="2"> <b>Ansatz A:</b> (2 P)<br>
+static volatile boolean crit = false; <br>
+&nbsp; </td>
+    </tr>
+    <tr>
+      <td>// Prozess 1 <br>
+      <b>while</b>(true) { <br>
+&nbsp;<b>while</b> (crit); <br>
+&nbsp;crit = true; <br>
+&nbsp;do_critical_work(); <br>
+&nbsp;crit = false; <br>
+} <br>
+      </td>
+      <td>&nbsp; &nbsp; &nbsp; &nbsp; </td>
+      <td>// Prozess 2 <br>
+      <b>while</b>(true) { <br>
+&nbsp;<b>while</b> (crit); <br>
+&nbsp;crit = true; <br>
+&nbsp;do_critical_work(); <br>
+&nbsp;crit = false; <br>
+} <br>
+      </td>
+    </tr>
+    <tr>
+      <td celspan="2"> <br>
+      <b>Ansatz B:</b> (2 P)<br>
+static volatile boolean crit1 = false; <br>
+static volatile boolean crit2 = false; <br>
+&nbsp; </td>
+    </tr>
+    <tr>
+      <td>// Prozess 1 <br>
+      <b>while</b>(true) { <br>
+&nbsp;crit1 = true; <br>
+&nbsp;<b>while</b> (crit2); <br>
+&nbsp;do_critical_work(); <br>
+&nbsp;crit1 = false; <br>
+} </td>
+      <td>&nbsp; &nbsp; &nbsp; &nbsp; </td>
+      <td>// Prozess 2 <br>
+      <b>while</b>(true) { <br>
+&nbsp;crit2 = true; <br>
+&nbsp;<b>while</b> (crit1); <br>
+&nbsp;do_critical_work(); <br>
+&nbsp;crit2 = false; <br>
+} </td>
+    </tr>
+    <tr>
+      <td celspan="2"><br>
+      </td>
+    </tr>
+    <tr>
+      <td><br>
+      </td>
+      <td>&nbsp; &nbsp; &nbsp; &nbsp; </td>
+      <td><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+</body>
+</html>
