@@ -1,34 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by kossi (NONE) -->
+<?xml-stylesheet type="text/xsl" href="D:\Studium\XML-Technologien\XMLTECH\Uebung03\Uebung03.xslt"?>
 <workgroup xmlns="http://www.my-webbase.de/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.my-webbase.de/xml
 Uebung03.xsd" name="Netzbasierte Informationssysteme / Networked Informationsystems">
-	<authors>
-		<person href="http://moeter.net">
-			<ID>author_01</ID>
-			<name>
-				<first>Rafael</first>
-				<middle>Ben</middle>
-				<last>Grote</last>
-			</name>
-			<email>grote@inf.fu-berlin.de</email>
-		</person>
-		<person href="http://www.my-webbase.de">
-			<ID>author_02</ID>
-			<name>
-				<first>Sebastian</first>
-				<last>Schaepe</last>
-			</name>
-			<email>schaepe@inf.fu-berlin.de</email>
-		</person>
-		<person href="http://www.secosic.net">
-			<ID>author_03</ID>
-			<name>
-				<first>Sebastian</first>
-				<last>Koske</last>
-			</name>
-			<email>koske@inf.fu-berlin.de</email>
-		</person>
-	</authors>
 	<news>
 		<notice type="Projektstart" keyref="project_06">
 			<date>2004-02-08</date>
@@ -398,7 +372,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 				<first>Forschungstutoren</first>
 				<last/>
 			</name>
-        		<directdial>33</directdial>
+			<directdial>33</directdial>
 			<assigned-projects>
 				<projectREF>project_08</projectREF>
 				<projectREF>project_10</projectREF>
@@ -435,4 +409,31 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 		<logo alt="FU Berlin">fulogo_92x60.gif</logo>
 		<accessroute href="http://reiseauskunft.bahn.de/bin/query.exe..."/>
 	</info>
+	<authors>
+		<person href="http://moeter.net">
+			<ID>author_01</ID>
+			<name>
+				<first>Rafael</first>
+				<middle>Ben</middle>
+				<last>Grote</last>
+			</name>
+			<email>grote@inf.fu-berlin.de</email>
+		</person>
+		<person href="http://www.my-webbase.de">
+			<ID>author_02</ID>
+			<name>
+				<first>Sebastian</first>
+				<last>Schaepe</last>
+			</name>
+			<email>schaepe@inf.fu-berlin.de</email>
+		</person>
+		<person href="http://www.secosic.net">
+			<ID>author_03</ID>
+			<name>
+				<first>Sebastian</first>
+				<last>Koske</last>
+			</name>
+			<email>koske@inf.fu-berlin.de</email>
+		</person>
+	</authors>
 </workgroup>
