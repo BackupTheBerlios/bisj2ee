@@ -308,7 +308,7 @@
 		<xs:choice>
 			<xs:element name="REF"/>
 			<xs:sequence>
-				<xs:element name="id" type="xs:ID"/>
+				<xs:element name="ID" type="xs:ID"/>
 				<xs:element name="name" type="Name"/>
 				<xs:element name="address" type="Address" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element name="email" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>

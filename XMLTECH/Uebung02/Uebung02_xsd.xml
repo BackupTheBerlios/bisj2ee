@@ -4,7 +4,7 @@
 Uebung02.xsd" name="Netzbasierte Informationssysteme / Networked Informationsystems">
 	<authors>
 		<author>
-			<id>person_01</id>
+			<ID>person_01</ID>
 			<name>
 				<first>Rafael</first>
 				<middle>Ben</middle>
@@ -13,7 +13,7 @@ Uebung02.xsd" name="Netzbasierte Informationssysteme / Networked Informationsyst
 			<email>grote@inf.fu-berlin.de</email>
 		</author>
 		<author>
-			<id>person_02</id>
+			<ID>person_02</ID>
 			<name>
 				<first>Sebastian</first>
 				<last>Schaepe</last>
@@ -21,7 +21,7 @@ Uebung02.xsd" name="Netzbasierte Informationssysteme / Networked Informationsyst
 			<email>schaepe@inf.fu-berlin.de</email>
 		</author>
 		<author>
-			<id>person_03</id>
+			<ID>person_03</ID>
 			<name>
 				<first>Sebastian</first>
 				<last>Koske</last>
@@ -83,7 +83,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 					</abstract>
 					<initiators>
 						<initiator xsi:type="Initiator">
-							<id>initiator_01</id>
+							<ID>initiator_01</ID>
 							<name>
 								<title>Dr. med.</title>
 								<title>Dipl.med.Inf.(FH)</title>
@@ -102,7 +102,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 							<role>UICC-TPCC Administrator, Pathologe</role>
 						</initiator>
 						<initiator xsi:type="Initiator">
-							<id>initiator_02</id>
+							<ID>initiator_02</ID>
 							<name>
 								<title>Prof.</title>
 								<title>Dr.</title>
@@ -231,7 +231,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 	</research>
 	<people fomerMembersURL="http://www.inf.fu-berlin.de/inst/ag-nbi/ExNBI.html">
 		<member xsi:type="Member">
-			<id>member_01</id>
+			<ID>member_01</ID>
 			<name>
 				<title>Prof.</title>
 				<title>Dr. ing.</title>
@@ -244,7 +244,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 			<directdial>23</directdial>
 		</member>
 		<member xsi:type="Member">
-			<id>member_02</id>
+			<ID>member_02</ID>
 			<name>
 				<title>Dr.</title>
 				<first>Klaus</first>
@@ -255,7 +255,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 			<directdial>28</directdial>
 		</member>
 		<member xsi:type="Member">
-			<id>member_03</id>
+			<ID>member_03</ID>
 			<name>
 				<first>Ursula</first>
 				<last>Schild</last>
@@ -265,7 +265,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 			<directdial>21</directdial>
 		</member>
 		<member xsi:type="Member">
-			<id>member_04</id>
+			<ID>member_04</ID>
 			<name>
 				<first>Jamal</first>
 				<last>Abu-Hasan</last>
@@ -276,7 +276,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 			</assigned-projects>
 		</member>
 		<member xsi:type="Member">
-			<id>member_05</id>
+			<ID>member_05</ID>
 			<name>
 				<first>Elena</first>
 				<last>Paslaru</last>
@@ -288,7 +288,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 			</assigned-projects>
 		</member>
 		<member xsi:type="Member">
-			<id>member_06</id>
+			<ID>member_06</ID>
 			<name>
 				<first>Malgorzata</first>
 				<last>Mochol</last>
@@ -299,7 +299,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 			</assigned-projects>
 		</member>
 		<member xsi:type="Member">
-			<id>member_07</id>
+			<ID>member_07</ID>
 			<name>
 				<first>Ekaterina</first>
 				<last>Langer</last>
@@ -310,7 +310,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 			</assigned-projects>
 		</member>
 		<member xsi:type="Member">
-			<id>member_08</id>
+			<ID>member_08</ID>
 			<name>
 				<first>Lutz</first>
 				<last>Suhrbier</last>
@@ -320,7 +320,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 			</assigned-projects>
 		</member>
 		<member xsi:type="Member">
-			<id>member_09</id>
+			<ID>member_09</ID>
 			<name>
 				<first>Lyndon</first>
 				<middle>B.</middle>
@@ -331,7 +331,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 			</assigned-projects>
 		</member>
 		<member xsi:type="Member">
-			<id>member_10</id>
+			<ID>member_10</ID>
 			<name>
 				<first>Franziska</first>
 				<last>Liebsch</last>
@@ -341,7 +341,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 			</assigned-projects>
 		</member>
 		<member xsi:type="Member">
-			<id>member_11</id>
+			<ID>member_11</ID>
 			<name>
 				<first>Duc</first>
 				<middle>Minh</middle>
@@ -352,7 +352,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 			</assigned-projects>
 		</member>
 		<member xsi:type="Member">
-			<id>member_12</id>
+			<ID>member_12</ID>
 			<name>
 				<first>Sebastian</first>
 				<last>Tietz</last>
@@ -362,7 +362,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 			</assigned-projects>
 		</member>
 		<member xsi:type="Member">
-			<id>member_13</id>
+			<ID>member_13</ID>
 			<name>
 				<first>Anja</first>
 				<last>Jentzsch</last>
@@ -372,7 +372,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 			</assigned-projects>
 		</member>
 		<member xsi:type="Member">
-			<id>member_14</id>
+			<ID>member_14</ID>
 			<name>
 				<first>Forschungs</first>
 				<last>tutoren</last>
