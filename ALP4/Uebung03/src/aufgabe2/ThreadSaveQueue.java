@@ -18,7 +18,7 @@ class ThreadSaveQueue
 	volatile private QueueElement last = null;
 
 	public void add(Object obj)
-	{   // Erzeugen des einzufügenden Knotens kann parralel ausgeführt werden!
+	{   // Erzeugen des einzufügenden Knotens kann parallel ausgeführt werden!
 		QueueElement nw = new QueueElement(obj);
 
 		// Eintragen muß unteilbar sein:
