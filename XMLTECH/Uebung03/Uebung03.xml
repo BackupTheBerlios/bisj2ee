@@ -276,7 +276,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 			<role>Research Assistant</role>
 			<directdial>28</directdial>
 		</member>
-		<member xsi:type="Member" href="http://www.inf.fu-berlin.de/~schild">
+		<member xsi:type="Member">
 			<ID>member_03</ID>
 			<name>
 				<first>Ursula</first>
@@ -395,11 +395,10 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 		<member xsi:type="Member">
 			<ID>member_14</ID>
 			<name>
-				<first/>
+				<first>Forschungstutoren</first>
 				<last/>
 			</name>
-			<role>Forschungstutoren</role>
-			<directdial>33</directdial>
+        		<directdial>33</directdial>
 			<assigned-projects>
 				<projectREF>project_08</projectREF>
 				<projectREF>project_10</projectREF>
