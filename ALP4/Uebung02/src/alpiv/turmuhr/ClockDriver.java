@@ -68,11 +68,10 @@ extends Thread
 		// muß geklingelt werden?
 		if ((minute == 0 || minute == 15 || minute == 30 || minute == 45) && lastBell != minute)
 		{
-			if (hour == 0) hour = 12;
-
 			switch (minute)
 			{
 				case 0:
+					if (hour == 0) hour = 12;
 					new RingBellsThread(hour, 4, uhr).start();
 					break;
 				case 15:
