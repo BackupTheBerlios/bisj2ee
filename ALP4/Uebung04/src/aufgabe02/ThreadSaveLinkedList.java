@@ -5,8 +5,9 @@ import java.util.NoSuchElementException;
 /**
  * Implementation einer threadsicheren einfach verketteten Liste mit generischen Elementtyp ($Value).
  * <p/>
- * Einzutragene Werte werden in Knoten verpackt. Jeder Knoten hat Semaphorenfunktionalität und einen Zeiger auf seinen
- * jeweiligen Nachfolger. In der Schlange wird ein Zeiger auf das erste und letzte Element gehalten.
+ * Einzutragene Werte werden in Knoten verpackt. Jeder Knoten hat Semaphorenfunktionalität und einen Zeiger
+ * auf seinen jeweiligen Nachfolger. In der Schlange wird ein Zeiger auf das erste und letzte Element
+ * gehalten.
  * Zu Beginn werden beide Zeiger mit einem Dummyknoten (enthält den Wert null) initialisiert.
  */
 public class ThreadSaveLinkedList <$Value>
@@ -26,13 +27,13 @@ implements Set<$Value>
 	/**
 	 * Prinzip Einfügen:
 	 * <p/>
-	 * Eingefügt wird immer direkt am Ende der Schlange. Dazu wird zunächst der Zugriff auf den letzten Knoten gelockt,
-	 * um ein paralleles Löschen auszuschließen. Da sich der Zeiger "last" während des Einfügens ändert, muß das
-	 * parallele Einfügen extra ausgeschlossen werden. Dies geschieht, indem man die ganze Aktion auf this
-	 * synchronisiert.
+	 * Eingefügt wird immer direkt am Ende der Schlange. Dazu wird zunächst der Zugriff auf den letzten
+	 * Knoten gelockt, um ein paralleles Löschen auszuschließen. Da sich der Zeiger "last" während des
+	 * Einfügens ändert, muß das parallele Einfügen extra ausgeschlossen werden. Dies geschieht, indem man
+	 * die ganze Aktion auf this synchronisiert.
 	 * <p/>
-	 * Das Einfügen selber wird durch das Anhängen des neuen Knotens ans Ende und das anschließende aktualisieren
-	 * des "last"-Pointers realisiert.
+	 * Das Einfügen selber wird durch das Anhängen des neuen Knotens ans Ende und das anschließende
+	 * aktualisieren des "last"-Pointers realisiert.
 	 */
 	public void add($Value value)
 	{
@@ -59,15 +60,15 @@ implements Set<$Value>
 	/**
 	 * Prinzip Löschen:
 	 * <p/>
-	 * Um den wechselseitigen Ausschluß zu minimieren und den Grad an Parallelität zu maximieren, wurde folgendes
-	 * Prinzip verwendet:
+	 * Um den wechselseitigen Ausschluß zu minimieren und den Grad an Parallelität zu maximieren, wurde
+	 * folgendes Prinzip verwendet:
 	 * <p/>
-	 * Das Löschen beginnt immer am Anfang der Schlange. Dafür werden die ersten beiden Knoten zunächst für alle
-	 * anderen geperrt Threads gesperrt. Es wird immer im zweiten der geperrten Knoten gesucht, ob der zu finden Wert
-	 * vorliegt.
+	 * Das Löschen beginnt immer am Anfang der Schlange. Dafür werden die ersten beiden Knoten zunächst für
+	 * alle anderen geperrt Threads gesperrt. Es wird immer im zweiten der geperrten Knoten gesucht, ob der
+	 * zu finden Wert vorliegt.
 	 * <p/>
-	 * Falls nicht, geht man so vor, um in der Schlange eine Position weiterzugehen (Doppelrahmen symbolisieren die
-	 * für andere Threads geperrten Knoten):
+	 * Falls nicht, geht man so vor, um in der Schlange eine Position weiterzugehen (Doppelrahmen
+	 * symbolisieren die für andere Threads geperrten Knoten):
 	 * <p/>
 	 * <p/>
 	 * .                        ┌─┐                            ┌─┐
@@ -76,10 +77,10 @@ implements Set<$Value>
 	 * ╚═══╝    ╚═══╝    └───┘  │░│   ╚═══╝    ╚═══╝    ╚═══╝  │░│  └───┘    ╚═══╝    ╚═══╝
 	 * .                        └─┘                            └─┘
 	 * <p/>
-	 * Dies tut man solange, bis man den gesuchten Wert im zweiten geperrten Knoten gefunden hat. Dann wird der
-	 * "next"-Pointer des ersten Knotens auf dessen Nachnachfolgerknoten geändert. Dadurch wird der Knoten, der den zu
-	 * entfernenden Wert enthält, aus der Liste ausgekoppelt und früher oder später durch den garbage collector
-	 * entsorgt.
+	 * Dies tut man solange, bis man den gesuchten Wert im zweiten geperrten Knoten gefunden hat. Dann wird
+	 * der "next"-Pointer des ersten Knotens auf dessen Nachnachfolgerknoten geändert. Dadurch wird der
+	 * Knoten, der den zu entfernenden Wert enthält, aus der Liste ausgekoppelt und früher oder später durch
+	 * den garbage collector entsorgt.
 	 * <p/>
 	 * .      ┌─────────────┐
 	 * .      │             ▼
@@ -89,9 +90,9 @@ implements Set<$Value>
 	 * <p/>
 	 * Anschließend werden die evtl. noch vorhandenen Sperren wieder aufgehoben.
 	 * <p/>
-	 * Der Vorteil bei diesem Verfahren ist, daß bei jedem parallelem Remove-Aufruf immer nur zwei bis drei Knoten
-	 * blockiert werden müssen und nicht die ganze Schlange. Das maximiert den Grad der Nebenläufigkeit.
-	 * Theoretisch können so die Hälfte aller Elemente gleichzeitig entfernt werden.
+	 * Der Vorteil bei diesem Verfahren ist, daß bei jedem parallelem Remove-Aufruf immer nur zwei bis drei
+	 * Knoten blockiert werden müssen und nicht die ganze Schlange. Das maximiert den Grad der
+	 * Nebenläufigkeit. Theoretisch können so die Hälfte aller Elemente gleichzeitig entfernt werden.
 	 */
 	public void remove($Value value)
 	{

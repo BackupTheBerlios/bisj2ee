@@ -13,7 +13,7 @@ extends Thread
 
 	private Turmuhr uhr;
 	private int takt;
-	private final int AUFLÖSUNG;
+	private final int AUFLÃ–SUNG;
 
 	private int lastBell = -1;
 
@@ -26,8 +26,8 @@ extends Thread
 		this.uhr = uhr;
 		this.takt = takt;
 
-		// Einstellen der zeitlichen Auflösung:
-		AUFLÖSUNG = 1000 / takt;
+		// Einstellen der zeitlichen Auflï¿½sung:
+		AUFLÃ–SUNG = 1000 / takt;
 
 		updateClock();
 	}
@@ -44,7 +44,7 @@ extends Thread
 
 			try
 			{
-				Thread.sleep(AUFLÖSUNG);
+				Thread.sleep(AUFLÃ–SUNG);
 			}
 			catch (InterruptedException e)
 			{
@@ -55,7 +55,7 @@ extends Thread
 	}
 
 	/**
-	 * Setzt die neuen Zeitwerte und startet ggf. neue Threads zum Läuten der Glocken
+	 * Setzt die neuen Zeitwerte und startet ggf. neue Threads zum Lï¿½uten der Glocken
 	 */
 	private void updateClock()
 	{
@@ -65,7 +65,7 @@ extends Thread
 
 		uhr.setTime(hour, minute, second);
 
-		// muß geklingelt werden?
+		// muï¿½ geklingelt werden?
 		if ((minute == 0 || minute == 15 || minute == 30 || minute == 45) && lastBell != minute)
 		{
 			switch (minute)
@@ -89,6 +89,6 @@ extends Thread
 		}
 
 		// Zeit fortschreiten:
-		now.add(GregorianCalendar.MILLISECOND, takt * AUFLÖSUNG);
+		now.add(GregorianCalendar.MILLISECOND, takt * AUFLÃ–SUNG);
 	}
 }

@@ -6,7 +6,7 @@ class ThreadSaveMaxComputation
 	private static int myMax = Integer.MIN_VALUE;
 
 	/**
-	 * Hier muﬂ nichts ge‰ndert werden, da es sich um einen nur lesenden Zugriff auf einem int handelt;
+	 * Hier mu√ü nichts ge√§ndert werden, da es sich um einen nur lesenden Zugriff auf einem int handelt;
 	 */
 	public static int getMax()
 	{
@@ -14,11 +14,11 @@ class ThreadSaveMaxComputation
 	}
 
 	/**
-	 * Im Vergleich zur Originalmethode wurde ein kritsicher Abschnitt eingef¸gt, der auf dem Klassenobjekt
+	 * Im Vergleich zur Originalmethode wurde ein kritsicher Abschnitt eingef√ºgt, der auf dem Klassenobjekt
 	 * synchronisiert ist.
-	 * Der Abschnitt umschlieﬂt den Vergleich zusammen mit dem evtl. Schreiben des neuen Wertes und verhindert so,
-	 * daﬂ ein Fehler wie er im beiliegenden Zeitschnitt angegeben ist, vorkommen kann. (Kurz: Falls ein neues Maximum
-	 * gefunden wurde, wird es auch sofort abgespeichert.)
+	 * Der Abschnitt umschlie√üt den Vergleich zusammen mit dem evtl. Schreiben des neuen Wertes und
+	 * verhindert so, da√ü ein Fehler wie er im beiliegenden Zeitschnitt angegeben ist, vorkommen kann.
+	 * (Kurz: Falls ein neues Maximum gefunden wurde, wird es auch sofort abgespeichert.)
 	 */
 	public static void compute(int[] field)
 	{

@@ -3,17 +3,17 @@ package aufgabe03;
 
 /**
  * Implementiert eine Menge vom Basistyp $ValueType. Die Elemente werden in einem Array abgelegt. Der Index wird aus
- * dem hashCode des einzutragenen Wertes errechnet (hashcode modulo größe des Sets). Ist das errechnete Feld schon
+ * dem hashCode des einzutragenen Wertes errechnet (hashcode modulo grÃ¶ÃŸe des Sets). Ist das errechnete Feld schon
  * belegt, wird der Index inkrementiert solange, bis ein freies Feld gefunden wird, oder das ganze Feld durchlaufen
  * wurde (Overflow).
  * <p/>
- * Nach dem gleichen Verfahren wird ein Element gesucht. Wurde das ganze Feld durchsucht oder stößt man auf ein leeres
+ * Nach dem gleichen Verfahren wird ein Element gesucht. Wurde das ganze Feld durchsucht oder stÃ¶ÃŸt man auf ein leeres
  * Feld, ist das Element nicht vorhanden.
  * <p/>
  * Synchronisiert wird das Schreiben und Schreiben eines Feld des Arrays, um mehrfaches Schreiben und
- * überlappendes Lesen / Schreiben zu vermeiden.
- * In einem zweiten Array gleicher Größe wird dafür für jeden ArrayIndex ein Integer-Objekt gehalten, über das der
- * Uugriff synchronisiert werden kann (ein Arrayfeld direkt kann nicht geschützt werden), da nur ein Thread den lock
+ * Ãœberlappendes Lesen / Schreiben zu vermeiden.
+ * In einem zweiten Array gleicher GrÃ¶ÃŸe wird dafÃ¼r fÃ¼r jeden ArrayIndex ein Integer-Objekt gehalten, Ã¼ber das der
+ * Uugriff synchronisiert werden kann (ein Arrayfeld direkt kann nicht geschï¿½tzt werden), da nur ein Thread den lock
  * auf das Objekt gleichzeitig haben kann.
  */
 public class ThreadSaveSet <$Value>
@@ -31,9 +31,9 @@ implements Set<$Value>
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
 	/**
-	 * Initialisiert das Array für die Werte und die Lock-Objekte. Füllt das Array mit den Lock-Objekten.
+	 * Initialisiert das Array fÃ¼r die Werte und die Lock-Objekte. FÃ¼llt das Array mit den Lock-Objekten.
 	 *
-	 * @param size die Größe des sets.
+	 * @param size die GrÃ¶ÃŸe des sets.
 	 */
 	public ThreadSaveSet(int size)
 	{
@@ -54,8 +54,8 @@ implements Set<$Value>
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
 	/**
-	 * Der zu suchende Wert wird an eine Hilfsfunktion ({@link #contains($Value, int, int)} übergeben.
-	 * Der Startindex ist der Hashcode des Objekts modulo der Setgröße. Der Initerationszähler wird mit 0 gestartet.
+	 * Der zu suchende Wert wird an eine Hilfsfunktion ({@link #contains($Value, int, int)} Ã¼bergeben.
+	 * Der Startindex ist der Hashcode des Objekts modulo der SetgrÃ¶ÃŸe. Der IniterationszÃ¤hler wird mit 0 gestartet.
 	 *
 	 * @param value der zu suchende Wert
 	 * @return ob der Wert vorhanden ist.
@@ -66,10 +66,10 @@ implements Set<$Value>
 	}
 
 	/**
-	 * Falls das Array komplett durchlaufen wurde oder das der zu untersuchenden Stelle null vorliegt, enthält das Set
+	 * Falls das Array komplett durchlaufen wurde oder das der zu untersuchenden Stelle null vorliegt, enthÃ¤lt das Set
 	 * den zu suchenden Wert nicht.
-	 * Falls an der Stelle der Wert gefunden wurde, wird true zurückgegeben, ansonsten wird die Methode rekursiv
-	 * aufgerufen mit den inkrementierten Feldindex und Iterationszähler. Der Lesezugriff wird über das jeweils
+	 * Falls an der Stelle der Wert gefunden wurde, wird true zurÃ¼ckgegeben, ansonsten wird die Methode rekursiv
+	 * aufgerufen mit den inkrementierten Feldindex und IterationszÃ¤hler. Der Lesezugriff wird Ã¼ber das jeweils
 	 * passende Lockobjekt synchronisiert.
 	 *
 	 * @param value     der zu suchende Wert
@@ -98,10 +98,10 @@ implements Set<$Value>
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
 	/**
-	 * Der hinzuzufügende Wert (darf nicht null sein) wird an eine Hilfsfunktion ({@link #add($Value, int, int)}
-	 * übergeben. Das Iterieren des Arrays funktioniert nach dem gleichen Prinzip wie das Suchen.
+	 * Der hinzuzufÃ¼gende Wert (darf nicht null sein) wird an eine Hilfsfunktion ({@link #add($Value, int, int)}
+	 * Ã¼bergeben. Das Iterieren des Arrays funktioniert nach dem gleichen Prinzip wie das Suchen.
 	 *
-	 * @param value der hinzuzufügende Wert
+	 * @param value der hinzuzufÃ¼gende Wert
 	 * @throws Overflow falls das Set keinen Platz mehr hat.
 	 */
 	public void add($Value value)
@@ -113,14 +113,14 @@ implements Set<$Value>
 	}
 
 	/**
-	 * Falls das FEld komplett durchlaufen wurde, wird ein Overflow ausgelöst. Falls man an der aktuellen Stelle das
+	 * Falls das FEld komplett durchlaufen wurde, wird ein Overflow ausgelÃ¶st. Falls man an der aktuellen Stelle das
 	 * Objekt bereits eingetragen ist, wird die Methode beendet (keine Doppleintragungen im Set). Falls ein anderes
-	 * Objekt gefunden wird, erfolgt der rekursive Aufruf mit den inkrementierten Feldindex und Iterationszähler.
+	 * Objekt gefunden wird, erfolgt der rekursive Aufruf mit den inkrementierten Feldindex und IterationszÃ¤hler.
 	 * Falls an der Stelle null vorliegt, wird der einzutragende Wert an die aktuelle Stelle geschrieben.
 	 * <p/>
-	 * Auch der Schreibzugriff wird über das paasende Lockobjekt synchronisiert.
+	 * Auch der Schreibzugriff wird Ã¼ber das paasende Lockobjekt synchronisiert.
 	 *
-	 * @param value     der hinzuzufügende Wert
+	 * @param value     der hinzuzufÃ¼gende Wert
 	 * @param index     aktueller Feldlindex
 	 * @param iteration der wievielte Versuch?
 	 * @throws Overflow falls das Set keinen Platz mehr hat.

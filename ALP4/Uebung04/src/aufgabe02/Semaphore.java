@@ -2,13 +2,13 @@ package aufgabe02;
 
 
 /**
- * Implementation einer handels¸blichen bin‰ren Semaphore.
+ * Implementation einer handels√ºblichen bin√§ren Semaphore.
  * <p/>
  * Prinzip: Beliebig viele Threads rufen ACQUIRE auf, um den lock auf die Semaphore zu bekommen.
  * Bis auf einen werden alle Threads in den Wartezustand verlegt bis RELEASE aufgerufen wird.
- * Ein Thread wird wieder geweckt und l‰uft weiter. Wird RELEASE aufgerufen, wird der n‰chste geweckt usw.
+ * Ein Thread wird wieder geweckt und l√§uft weiter. Wird RELEASE aufgerufen, wird der n√§chste geweckt usw.
  * <p/>
- * Daducrh wird ein wechselseitiger anonymer Ausschluﬂ garantiert.
+ * Daducrh wird ein wechselseitiger anonymer Ausschlu√ü garantiert.
  */
 public class Semaphore
 {
@@ -23,7 +23,7 @@ public class Semaphore
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
 	/**
-	 * Threadz‰hler wird dekrementiert. Ist der Z‰hler unter null, wird der aktuelle Thread sofort in den Wartezustand
+	 * Threadz√§hler wird dekrementiert. Ist der Z√§hler unter null, wird der aktuelle Thread sofort in den Wartezustand
 	 * versetzt.
 	 */
 	public final synchronized void ACQUIRE()
@@ -41,7 +41,7 @@ public class Semaphore
 	}
 
 	/**
-	 * Z‰hler wird inkrementiert, Notify wird aufgerufen.
+	 * Z√§hler wird inkrementiert, Notify wird aufgerufen.
 	 */
 	public final synchronized void RELEASE()
 	{

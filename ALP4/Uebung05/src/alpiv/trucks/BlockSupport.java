@@ -27,7 +27,7 @@ public class BlockSupport
 
 	/**
 	 * Belegt das Objekt.
-	 * Ist das Objekt bereits belegt, kehrt diese Methode erst zurück,
+	 * Ist das Objekt bereits belegt, kehrt diese Methode erst zurÃ¼ck,
 	 * wenn es wieder freigegeben wird.
 	 *
 	 * @throws InterruptedException ein wartender Thread wurde unterbrochen
@@ -46,7 +46,7 @@ public class BlockSupport
 	/**
 	 * Gibt das Objekt wieder frei.
 	 * Warten andere Threads auf die Freigabe, so wird nichtdeterministisch
-	 * einer davon ausgewählt und belegt als nächster das Objekt.
+	 * einer davon ausgewÃ¤hlt und belegt als nÃ¤chster das Objekt.
 	 */
 	public synchronized void unblock()
 	{

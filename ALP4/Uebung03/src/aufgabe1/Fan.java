@@ -3,13 +3,13 @@ package aufgabe1;
 public class Fan
 {
 	/**
-	 * @param tasks die auszuführenden tasks
+	 * @param tasks die auszufÃ¼hrenden tasks
 	 *              <p/>
-	 *              Die Methode legt zunächst ein Array mit je einem Thread für je einen Task an.
-	 *              Anschließend werden alle Threads nacheinander gestartet.
-	 *              Um die komplette Ausführung aller Threads vor Abgabe der Kontrollflusses an den Aufrufer
-	 *              sicherzustellen, wird auf die ordnungsgemäße Beendigung aller Threads per join() gewartet.
-	 *              Sollte ein Thread nicht ordnungsgemäß beendet werden, wird die Fehlermeldung ausgegeben.
+	 *              Die Methode legt zunï¿½chst ein Array mit je einem Thread fï¿½r je einen Task an.
+	 *              Anschlieï¿½end werden alle Threads nacheinander gestartet.
+	 *              Um die komplette Ausfï¿½hrung aller Threads vor Abgabe der Kontrollflusses an den Aufrufer
+	 *              sicherzustellen, wird auf die ordnungsgemï¿½ï¿½e Beendigung aller Threads per join() gewartet.
+	 *              Sollte ein Thread nicht ordnungsgemï¿½ï¿½ beendet werden, wird die Fehlermeldung ausgegeben.
 	 */
 	public void fan(Runnable[] tasks)
 	{
@@ -36,7 +36,7 @@ public class Fan
 			}
 			catch (InterruptedException e)
 			{
-				System.err.println("Ein Thread konnte nicht ordnungsgemäß beendet werden.");
+				System.err.println("Ein Thread konnte nicht ordnungsgemï¿½ï¿½ beendet werden.");
 				e.printStackTrace();
 			}
 		}

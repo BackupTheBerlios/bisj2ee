@@ -18,20 +18,20 @@ class ThreadSaveQueue
 	volatile private QueueElement last = null;
 
 	/**
-	 * @param obj das hinzuzufügende Oject
+	 * @param obj das hinzuzufÃ¼gende Oject
 	 *            <p/>
-	 *            Die Methode erzeugt zunächst ein neues Schalngenelement mit dem einzufügenden Objekt.
-	 *            Dies kann noch parallel ausgeführt werden.
-	 *            Anschließend wird das Element eingetragen, dieser Vorgang kann nur geschützt durchgeführt werden, um die
+	 *            Die Methode erzeugt zunÃ¤chst ein neues Schalngenelement mit dem einzufÃ¼genden Objekt.
+	 *            Dies kann noch parallel ausgefÃ¼hrt werden.
+	 *            AnschlieÃŸend wird das Element eingetragen, dieser Vorgang kann nur geschÃ¼tzt durchgefÃ¼hrt werden, um die
 	 *            genannten Fehler zu vermeiden. Synchronisiert wird dabei auf this (warum auch nicht?)
 	 *            <p/>
-	 *            Das Einfügen selbst funktioniert genau so wie bei der unsynchronisierten Queue (die leider gar nicht kommentiert wurde!)
+	 *            Das EinfÃ¼gen selbst funktioniert genau so wie bei der unsynchronisierten Queue (die leider gar nicht kommentiert wurde!)
 	 */
 	public void add(Object obj)
-	{   // Erzeugen des einzufügenden Knotens kann parallel ausgeführt werden!
+	{   // Erzeugen des einzufÃ¼genden Knotens kann parallel ausgefÃ¼hrt werden!
 		QueueElement nw = new QueueElement(obj);
 
-		// Eintragen muß unteilbar sein:
+		// Eintragen muÃŸ unteilbar sein:
 		synchronized (this)
 		{
 			if (last == null)
@@ -50,21 +50,21 @@ class ThreadSaveQueue
 	}
 
 	/**
-	 * Fall die Schlange leer ist, wird null zurückgegeben (parralelle Ausführung möglich, da nur lesender Zugriff
+	 * Fall die Schlange leer ist, wird null zurÃ¼ckgegeben (parralelle Ausfï¿½hrung mï¿½glich, da nur lesender Zugriff
 	 * auf last).
-	 * Das anschließende Austragen der zu entfernenden Knotens wird ebenfalls, durch Synchronisation auf this, geschützt ausgeführt.
-	 * Am Austragemechanismus selbst wurde nicht verändert im Vergleich zur unkommentierten Originalschlange.
+	 * Das anschlieï¿½ende Austragen der zu entfernenden Knotens wird ebenfalls, durch Synchronisation auf this, geschï¿½tzt ausgefï¿½hrt.
+	 * Am Austragemechanismus selbst wurde nicht verï¿½ndert im Vergleich zur unkommentierten Originalschlange.
 	 */
 	public Object remove()
 	{
 		// Nur lesender Zugriff, kann auch bei gleichzeitigem add
-		// noch korrekt parellel ausgeführt werden.
+		// noch korrekt parellel ausgefï¿½hrt werden.
 		if (last == null)
 		{
 			return null;
 		}
 
-		// geschützter Block:
+		// geschï¿½tzter Block:
 		synchronized (this)
 		{
 			if (last.next == last)

@@ -26,7 +26,7 @@ extends Thread
 	//  |                     Methoden                      |   \\
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
-	// läutet highRings mal hoch und lowRings mal low
+	// rings highRings mal hoch und lowRings mal low
 	public void run()
 	{
 		int i = highRings;
