@@ -1,3 +1,4 @@
+package aufgabe2;
 
 class Queue
 {
@@ -19,15 +20,18 @@ class Queue
 	public void add(Object obj)
 	{
 		QueueElement nw = new QueueElement(obj);
+
 		if (last == null)
 		{
 			nw.next = nw;
 		}
+
 		else
 		{
 			nw.next = last.next;
 			last.next = nw;
 		}
+
 		last = nw;
 	}
 
@@ -37,12 +41,14 @@ class Queue
 		{
 			return null;
 		}
+
 		else if (last.next == last)
 		{
 			Object save = last.value;
 			last = null;
 			return save;
 		}
+
 		else
 		{
 			Object val = last.next.value;
