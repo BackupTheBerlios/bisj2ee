@@ -9,9 +9,9 @@ public class StartClock
 
 		// Erzeugt einen neuen Uhrentreiber, der die Turmuhr steuert:
 		// Pro Sekunde Realzeit werden 50 Sekunden simuliert
-		ClockDriver clockDriver = new ClockDriver(turmuhr,50);
+		ClockDriver clockDriver = new ClockDriver(turmuhr, 50);
 
-		// Startet den Treiber
+		// Startet den TreiberThread
 		clockDriver.start();
 	}
 }
