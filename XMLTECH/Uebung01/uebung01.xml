@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by Free License (none) -->
+<workgroup name="Netzbasierte Informationssysteme / Networked Informationsystems" xmlns="http://www.my-webbase.de/xml">
+	<authors>
+		<author>
+			<first>Rafael</first>
+			<last>Grote</last>
+			<email>grote@inf.fu-berlin.de</email>
+		</author>
+		<author>
+			<first>Sebastian</first>
+			<last>Koske</last>
+			<email>koske@inf.fu-berlin.de</email>
+		</author>
+		<author>
+			<first>Sebastian</first>
+			<last>Schaepe</last>
+			<email>schaepe@inf.fu-berlin.de</email>
+		</author>
+	</authors>
+	<news>
+		<notice type="Projektstart" keyref="project_06">
+			<date>
+				<year>2004</year>
+				<month>02</month>
+				<day>09</day>
+			</date>
+		</notice>
+		<notice type="Projektstart" keyref="project_03">
+			<date>
+				<year>2004</year>
+				<month>01</month>
+				<day>01</day>
+			</date>
+		</notice>
+		<notice type="Projektstart" keyref="project_11">
+			<date>
+				<year>2004</year>
+				<month>01</month>
+				<day>01</day>
+			</date>
+		</notice>
+		<notice type="Projektstart" keyref="project_01">
+			<date>
+				<year>2003</year>
+				<month>09</month>
+				<day>01</day>
+			</date>
+		</notice>
+		<notice type="Projektstart" keyref="project_02">
+			<date>
+				<year>2003</year>
+				<month>07</month>
+				<day>01</day>
+			</date>
+		</notice>
+		<notice type="Update" keyref="advice_01">
+			<date>
+				<year>2003</year>
+				<month>03</month>
+				<day>11</day>
+			</date>
+		</notice>
+	</news>
+	<teaching>
+		<courses xmlns:course="http://www.my-webbase.de/xml/courses">
+			<current term="SS 04">
+				<course href="http://www.inf.fu-berlin.de/inst/ag-nbi/lehre/04/V_ALPIV/">
+					<course:type>lecture</course:type>
+					<course:name>Algorithmen und Programmierung IV </course:name>
+				</course>
+				<course href="http://www.inf.fu-berlin.de/inst/ag-nbi/lehre/04/V_XML/">
+					<course:type>lecture</course:type>
+					<course:name>XML Technologien</course:name>
+				</course>
+				<course href="http://www.inf.fu-berlin.de/inst/ag-nbi/lehre/04/S_P2PNET/index.html">
+					<course:type>seminar</course:type>
+					<course:name>Peer-to-Peer-Netzwerke</course:name>
+				</course>
+				<course href="http://www.inf.fu-berlin.de/inst/ag-nbi/lehre/04/P_SW">
+					<course:type>practical</course:type>
+					<course:name>Semantic Web</course:name>
+				</course>
+			</current>
+			<previous term="WS 03" href="http://www.inf.fu-berlin.de/inst/ag-nbi/lehre/AlteLehre.html">Seit WS 2002/2003 fanden Lehrveranstaltungen bei NBI statt.</previous>
+		</courses>
+		<assignments href="http://www.inf.fu-berlin.de/inst/ag-nbi/lehre/diploma.html">
+			<description>Fortlaufend werden Diplom- und andere Arbeiten betreut. Sie können sich anhand der Liste möglicher Diplomarbeitsthemen orientieren.</description>
+			<advices>
+				<advice href="http://www.inf.fu-berlin.de/inst/ag-nbi/lehre/tipps/referatepapiere.pdf" id="advice_03">Referaten und Ausarbeitungen </advice>
+				<advice href="http://www.inf.fu-berlin.de/inst/ag-nbi/lehre/tipps/diplomarbeiten.pdf" id="advice_02">Diplomarbeiten </advice>
+				<advice href="http://www.inf.fu-berlin.de/inst/ag-nbi/lehre/seminare.html" id="advice_01">Ablauf und Leistungserbringung in Seminaren </advice>
+			</advices>
+		</assignments>
+	</teaching>
+	<research>
+		<tasks>
+			<task>The study and development of languages, models and systems that guide the coordination of activities in networked systems. These coordinations languages follow an uncoupled style of interaction in the fashion of the coordination language Linda and are targeted at networked and Internet-based environments.</task>
+			<task>The study, application and evaluation of XML-technologies for networkbased information systems, amongst others the study and application of Semantic Web technologies.</task>
+			<task>The use of novel models for the coordination of agent societies at a huge scale, especially those models based in Swarm Intelligence.</task>
+		</tasks>
+		<results>
+			<result href="http://nbi.inf.fu-berlin.de/research/workspaces">Workspaces, a Web-based workflow system </result>
+			<result href="http://nbi.inf.fu-berlin.de/research/xmlspaces">XMLSpaces, a distributed store for XML-documents </result>
+			<result href="http://nbi.inf.fu-berlin.de/research/dml">The Dependency Markup Language DML </result>
+			<result href="http://nbi.inf.fu-berlin.de/research/dself">The object-oriented distributed language dSelf which is based on the prototype and delegation principles.</result>
+		</results>
+		<projects topic="Semantic Web">
+			<project id="project_01">
+				<name>Semantic Web in der Pathologie</name>
+				<brief-description>An information retrieval system for images and text based on Semantic Web technologies for pathology focusing on lungdiseases.</brief-description>
+				<description href="http://www.inf.fu-berlin.de/inst/ag-nbi/research/swpatho/"/>
+				<partner>Humboldt-Universität zu Berlin</partner>
+				<partner>Universität Potsdam</partner>
+			</project>
+			<project id="project_02">
+				<name>Wissensnetze</name>
+				<brief-description>Studies  the impact of semantic technologies from the business and the technical viewpoint to make predictions about the influence of the new technologies on markets, enterprises and individuals.</brief-description>
+				<description href="http://www.inf.fu-berlin.de/inst/ag-nbi/research/wissensnetze"/>
+				<sponsor>Berlin Research Centre for the Internet Economy InterVal</sponsor>
+			</project>
+			<project id="project_03">
+				<name>KnowledgeWeb</name>
+				<brief-description>Network of Excellence. Realizing the Semantic Web</brief-description>
+				<description href="http://knowledgeweb.semanticweb.org/"/>
+				<sponsor>EU FP6</sponsor>
+			</project>
+			<project id="project_04">
+				<name>OntoWeb</name>
+				<brief-description>Ontology-based information exchange for knowledge management and electronic commerce.</brief-description>
+				<description href="http://www.ontoweb.org/"/>
+				<sponsor>European Union</sponsor>
+			</project>
+			<project id="project_05">
+				<name>Agentlink III</name>
+				<brief-description>Network of Excellence in Agent research.</brief-description>
+				<description href="http://www.agentlink.org/"/>
+				<sponsor>European Union</sponsor>
+			</project>
+		</projects>
+		<projects topic="XML Technologies">
+			<project id="project_06">
+				<name>XML Sicherheitsdienste für GBIF-D</name>
+				<brief-description>Providing XML security services and access controls for the German node of the Global Biodiversity Information Facility.</brief-description>
+				<description href="http://www.inf.fu-berlin.de/inst/ag-nbi/research/IBIS-D"/>
+				<partner href="http://www.bgbm.org/">Botanischer Garten und Botanisches Museum Berlin</partner>
+				<partner href="http://www.gbif.de/">German node of the Global Biodiversity Information Facility</partner>
+				<sponsor>BMBF</sponsor>
+			</project>
+			<project id="project_07">
+				<name>SYNTHESYS</name>
+				<brief-description>Develop authentication services for system access in DiGIR/ABCD, so that restricted data access can be granted to appropriate end-users.</brief-description>
+				<description href="http://www.synthesys.info/"/>
+				<partner href="http://www.bgbm.org/">Botanischer Garten und Botanisches Museum Berlin</partner>
+				<sponsor>European Union</sponsor>
+			</project>
+			<project id="project_08">
+				<name>XML Clearinghouse Berlin-Brandenburg</name>
+				<brief-description>Knowledge transfer on XML technology focused on the region Berlin-Brandenburg.</brief-description>
+				<description href="http://www.xml-clearinghouse.de/"/>
+				<partner>Humboldt Universität zu Berlin</partner>
+				<sponsor>BMBF</sponsor>
+			</project>
+			<project id="project_09">
+				<name>XML Lab</name>
+				<brief-description>An infrastructure for teaching XML technologies. (currently being extended from TU Berlin to FU Berlin)</brief-description>
+				<description href="http://www.inf.fu-berlin.de/inst/ag-nbi/research/xmllab/"/>
+				<sponsor>Microsoft Research Cambridge</sponsor>
+			</project>
+			<project id="project_10">
+				<name>XMLSpaces.net</name>
+				<brief-description>An implementation of XMLSpaces on the .net platform.</brief-description>
+				<description href="http://www.inf.fu-berlin.de/inst/ag-nbi/research/xmlspaces.net"/>
+				<sponsor>Microsoft Research Cambridge</sponsor>
+			</project>
+		</projects>
+		<projects topic="Swarming">
+			<project id="project_11">
+				<name>SwarmLinda</name>
+				<brief-description>A distributed coordination system based on principles of swarm intelligence.</brief-description>
+				<description href="http://nbi.inf.fu-berlin.de/research/swarmlinda"/>
+				<sponsor>DAAD/NSF</sponsor>
+			</project>
+		</projects>
+	</research>
+	<people>
+		<person>
+			<first>Robert</first>
+			<last>Tolksdorf</last>
+			<title>Prof. Dr.-Ing.</title>
+			<directdial>23</directdial>
+			<role>Head of group</role>
+			<homepage>http://www.robert-tolksdorf.de</homepage>
+		</person>
+		<person>
+			<first>Klaus</first>
+			<last>Schild</last>
+			<title>Dr.</title>
+			<directdial>28</directdial>
+			<role>Research Assistant</role>
+			<homepage>http://www.inf.fu-berlin.de/%7Eschild/</homepage>
+		</person>
+		<person>
+			<first>Ursula</first>
+			<last>Schild</last>
+			<directdial>21</directdial>
+			<role>Secretary</role>
+			<homepage>http://www.inf.fu-berlin.de/~schild</homepage>
+		</person>
+		<person>
+			<first>Jamal</first>
+			<last>Abu-Hasan</last>
+			<directdial>27</directdial>
+			<assigned-projects>
+				<pid>project_08</pid>
+			</assigned-projects>
+		</person>
+		<person>
+			<first>Elena</first>
+			<last>Paslaru</last>
+			<directdial>24</directdial>
+			<assigned-projects>
+				<pid>project_01</pid>
+			</assigned-projects>
+		</person>
+		<person>
+			<first>Malgorzata</first>
+			<last>Mochol</last>
+			<directdial>26</directdial>
+			<assigned-projects>
+				<pid>project_02</pid>
+			</assigned-projects>
+		</person>
+		<person>
+			<first>Ekaterina</first>
+			<last>Langer</last>
+			<directdial>34</directdial>
+			<assigned-projects>
+				<pid>project_06</pid>
+			</assigned-projects>
+		</person>
+		<person>
+			<first>Lutz</first>
+			<last>Suhrbier</last>
+			<assigned-projects>
+				<pid>project_07</pid>
+			</assigned-projects>
+		</person>
+		<person>
+			<first>Lyndon</first>
+			<middle>B.</middle>
+			<last>Nixon</last>
+			<assigned-projects>
+				<pid>project_03</pid>
+			</assigned-projects>
+		</person>
+		<person>
+			<first>Franziska</first>
+			<last>Liebsch</last>
+			<assigned-projects>
+				<pid>project_10</pid>
+			</assigned-projects>
+		</person>
+		<person>
+			<first>Duc</first>
+			<middle>Minh</middle>
+			<last>Nguyen</last>
+			<assigned-projects>
+				<pid>project_10</pid>
+			</assigned-projects>
+		</person>
+		<person>
+			<first>Sebastian</first>
+			<last>Tietz</last>
+			<assigned-projects>
+				<pid>project_01</pid>
+			</assigned-projects>
+		</person>
+		<person>
+			<first>Anja</first>
+			<last>Jentzsch</last>
+			<assigned-projects>
+				<pid>project_02</pid>
+			</assigned-projects>
+		</person>
+		<person>
+			<first/>
+			<last/>
+			<directdial>33</directdial>
+			<role>Forschungstutoren</role>
+			<assigned-projects>
+				<pid>project_08</pid>
+				<pid>project_10</pid>
+			</assigned-projects>
+		</person>
+		<former>http://www.inf.fu-berlin.de/inst/ag-nbi/ExNBI.html</former>
+	</people>
+	<info>
+		<university href="http://www.fu-berlin.de">Freie Universität Berlin</university>
+		<department href="http://www.math.fu-berlin.de/">Fachbereich Mathematik und Informatik</department>
+		<institute href="http://www.inf.fu-berlin.de/">Institut für Informatik</institute>
+		<address>
+			<name>Institut für Informatik - AG Netzbasierte Informationssysteme</name>
+			<street>Takustrasse 9</street>
+			<zip>14195</zip>
+			<city>Berlin</city>
+			<country>Deutschland</country>
+		</address>
+		<phone>
+			<prefix>+4930838752</prefix>
+			<default-directdial>21</default-directdial>
+		</phone>
+		<fax-directdial>20</fax-directdial>
+		<public-office>
+			<street>Fabeckstrasse 15</street>
+			<location-image>http://www.inf.fu-berlin.de/inst/ag-nbi/T9F15.gif</location-image>
+			<open>Mo-Do 10-12 Uhr</open>
+		</public-office>
+		<logo alt="FU Berlin">fulogo_92x60.gif</logo>
+		<accessroute href="http://reiseauskunft.bahn.de/bin/query.exe..."/>
+	</info>
+</workgroup>
