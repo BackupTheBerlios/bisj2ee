@@ -9,14 +9,14 @@ extends Beetle
 	}
 
 	void drive()
+	// todo comment this: oder changed to prevent disappearing trucks
 	{
 		if (arrived()) return;
 
 		int steer;
 
 		// try straight ahead
-		if (myRoad.getExit(Road.nextDirection(myDirection, Road.AHEAD))
-		    != null)
+		if (myRoad.getExit(Road.nextDirection(myDirection, Road.AHEAD)) != null)
 		{
 			steer = Road.AHEAD;
 		}
@@ -27,15 +27,16 @@ extends Beetle
 			// cannot!)
 			steer = Road.RIGHT;
 		}
+
 		myDirection = Road.nextDirection(myDirection, steer);
 
 		// try to move
-		Road nextR = myRoad.getExit(myDirection);
-		if (nextR != null)
+		Road nextRoad = myRoad.getExit(myDirection);
+		if (nextRoad != null)
 		{
-			nextR.setTraffic(this);
+			nextRoad.setTraffic(this);
 			myRoad.setTraffic(null);
-			myRoad = nextR;
+			myRoad = nextRoad;
 
 			if (arrived())
 			{
@@ -47,10 +48,9 @@ extends Beetle
 				{
 					e.printStackTrace();
 				}
+
 				myRoad.setTraffic(null);
 			}
-
-			// todo comment this: oder changed to prevent disappearing trucks
 		}
 	}
 }

@@ -248,7 +248,6 @@ extends BlockSupport
 		}
 
 		this.traffic = traffic;
-
 		observer.roadChanged();
 	}
 

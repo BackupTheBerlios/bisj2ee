@@ -55,7 +55,6 @@ public class Main
 						while (!myCar.arrived())
 						{
 							myCar.drive();
-							roads.roadChanged();
 
 							try
 							{
