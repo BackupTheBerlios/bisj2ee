@@ -23,8 +23,8 @@ public class Semaphore
 	//  | = - = - = - = - = - \-||=||-/ - = - = - = - = - = |   \\
 
 	/**
-	 * Threadzähler wird dekrementiert. Ist der Zähler unter null, wird der aktuelle Thread sofort in den Wartezustand
-	 * versetzt.
+	 * Threadzähler wird dekrementiert. Ist der Zähler unter null, wird der aktuelle Thread sofort in den
+	 * Wartezustand versetzt.
 	 */
 	public final synchronized void ACQUIRE()
 	{

@@ -14,7 +14,7 @@ class ThreadSaveMaxComputation
 	}
 
 	/**
-	 * Im Vergleich zur Originalmethode wurde ein kritsicher Abschnitt eingefügt, der auf dem Klassenobjekt
+	 * Im Vergleich zur Originalmethode wurde ein kritischer Abschnitt eingefügt, der auf dem Klassenobjekt
 	 * synchronisiert ist.
 	 * Der Abschnitt umschließt den Vergleich zusammen mit dem evtl. Schreiben des neuen Wertes und
 	 * verhindert so, daß ein Fehler wie er im beiliegenden Zeitschnitt angegeben ist, vorkommen kann.

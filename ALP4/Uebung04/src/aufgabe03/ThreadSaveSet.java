@@ -13,8 +13,8 @@ package aufgabe03;
  * Synchronisiert wird das Schreiben und Schreiben eines Feld des Arrays, um mehrfaches Schreiben und
  * Überlappendes Lesen / Schreiben zu vermeiden.
  * In einem zweiten Array gleicher Größe wird dafür für jeden ArrayIndex ein Integer-Objekt gehalten, über
- * das der Zugriff synchronisiert werden kann (ein Arrayfeld direkt kann nicht gesch�tzt werden), da nur ein
- * Thread den lock auf das Objekt gleichzeitig haben kann.
+ * das der Zugriff synchronisiert werden kann (ein Arrayfeld direkt kann nicht gesch�tzt werden), da nur
+ * ein Thread den lock auf das Objekt gleichzeitig haben kann.
  */
 public class ThreadSaveSet <$Value>
 implements Set<$Value>
@@ -70,8 +70,8 @@ implements Set<$Value>
 	 * Falls das Array komplett durchlaufen wurde oder das der zu untersuchenden Stelle null vorliegt,
 	 * enthält das Set den zu suchenden Wert nicht.
 	 * Falls an der Stelle der Wert gefunden wurde, wird true zurückgegeben, ansonsten wird die Methode
-	 * rekursiv aufgerufen mit den inkrementierten Feldindex und Iterationszähler. Der Lesezugriff wird über
-	 * das jeweils passende Lockobjekt synchronisiert.
+	 * rekursiv aufgerufen mit den inkrementierten Feldindex und Iterationszähler. Der Lesezugriff wird
+	 * über das jeweils passende Lockobjekt synchronisiert.
 	 *
 	 * @param value     der zu suchende Wert
 	 * @param index     der aktuelle SuchIndex
@@ -116,7 +116,9 @@ implements Set<$Value>
 
 	/**
 	 * Falls das FEld komplett durchlaufen wurde, wird ein Overflow ausgelöst. Falls man an der aktuellen
-	 * Stelle das Objekt bereits eingetragen ist, wird die Methode beendet (keine Doppleintragungen im Set).
+	 * Stelle das Objekt bereits eingetragen ist, wird die Methode beendet (keine Doppleintragungen im
+	 * Set).
+	 * <p/>
 	 * Falls ein anderes Objekt gefunden wird, erfolgt der rekursive Aufruf mit den inkrementierten
 	 * Feldindex und Iterationszähler. Falls an der Stelle null vorliegt, wird der einzutragende Wert an
 	 * die aktuelle Stelle geschrieben.
