@@ -7,7 +7,7 @@ import java.util.Vector;
  * Reihenfolge abgelegt werden. Da die Eintrittsbedingungen für Release und Request in allen Unterklassen
  * gleich sind, werden sie bereits hier definiert und in den Unterklasssen verwendet.
  */
-public abstract class Resources
+public abstract class /*MONITOR*/ Resources
 {
 	//  | = - = - = - = - = - /-||=||-\ - = - = - = - = - = |   \\
 	//  |                 Instanzvariablen                  |   \\

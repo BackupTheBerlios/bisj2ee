@@ -1,5 +1,5 @@
 
-public class Resources_Signal_and_Wait
+public class /*MONITOR*/ Resources_Signal_and_Wait
 extends Resources
 {
 	/**

@@ -1,5 +1,5 @@
 
-public class Resources_Signal_and_Continue
+public class /*MONITOR*/ Resources_Signal_and_Continue
 extends Resources
 {
 

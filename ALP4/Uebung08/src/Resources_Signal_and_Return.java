@@ -1,11 +1,13 @@
 
-public class Resources_Signal_and_Return
+public class /*MONITOR*/ Resources_Signal_and_Return
 extends Resources
 {
 	/**
 	 * Wenn eine bestimmte Anzahl von Resourcen abgefordert wird, wird zunächst getestet, ob diese Anzahl
 	 * lieferbar ist. Falls ja, wird die Anzahl der lieferbaren Resourcen dekrementiert und der Monitor
-	 * verlassen. Falls nein, wird der aktuelle Thread in die Warteschlange und schlafen gelegt.
+	 * verlassen. Falls nein, wird der aktuelle Thread in die Warteschlange und schlafen gelegt. Nach dem
+	 * Aufwecken wird die Methode {@link #release(int)} aufrufen mit dem neutralen Wert 0 aufgerufen, um
+	 * den nächsten Thread evtl. aufzuwecken.
 	 *
 	 * @param num Die beantrangte Anzahl von Resourcen.
 	 */
@@ -23,27 +25,19 @@ extends Resources
 		requests.add(newRequest);
 
 		newRequest.event.WAIT();
+		release(0);
 	}
 
 	/**
 	 * Wenn eine bestimmte Anzahl von Resourcen freigegeben wird, wird zunächst die Anzahl der verfügbaren
-	 * Resourcen um eben diese Zahl erhöht. Anschließend werden alle ggf, vorhandenen Request der Reihe
+	 * Resourcen um eben diese Zahl erhöht. Anschließend werden alle ggf, vorhandenen Requests der Reihe
 	 * nach geweckt, solange die von ihnen angeforderte Resourcenzahl noch lieferbar ist.
 	 * <p/>
-	 * Da bei der Signal & Return Variante das Signal-Kommando das letzte der Methode ist (quasi nach
-	 * Signal immer implizit ein return steht), muß vor dem tätsächlichen Wecken zunächst festgestellt
-	 * werden, welche Threads geweckt werden können. Dazu geht man der Reihe nach durch und summiert die
-	 * beantragten Resourcen. Übersteigt die Summe die verfügbaren Resourcen oder gibt es keine wartenden
-	 * Threads mehr, weiß man, bis zu welchem Thread man wecken kann.
-	 * <p/>
-	 * Doch bevor man weckt, muß alles erledigt sein - nach dem Wecken gibt es ja keine Gelegenheit mehr
-	 * dazu. Also muß available um die soeben gezählte Summe noch dekeremtiert werden und dann können alle
-	 * Threads geweckt werden.
-	 * <p/>
-	 * Dafür scheidet eine iterative Lösung wegen dem impliziten return aus, aber eine rekusive Lösung ist
-	 * möglich. Dies leistet die Hilfsmethode {@link #recursiveRelease(int)}, welche den Thread an der
-	 * übergebenen Stelle weckt, vorher aber sich selbst rekursiv mit dem um 1 verminderten Argument
-	 * aufruft. Der Rekursionsanker ist logischerweise, wenn das Argument kleiner als 0 wird.
+	 * Da bei der Signal & Return Variante das Signal-Kommandomit dem Verlassen des Monitors verbunden ist,
+	 * wird das sukzessive Wecken der Thread durch ein Domino-Prinzip gelöst. Es wurd zunächst der erste
+	 * wartende Thread geweckt, welcher, sobald er den Monitor hat, selbst wieder release(0) aufruft und so
+	 * zum Weckenden des nächsten Threads wird, dieser erhält den Monitor und weckt selbst den nächsten
+	 * usw. solange noch Resourcen verfügbar sind.
 	 */
 	public final synchronized void release(int num)
 	{
@@ -51,30 +45,12 @@ extends Resources
 
 		available += num;
 
-		if (requests.size() == 0) return;
-
-		int i = 0;
-		int count = 0;
-
-		while (count <= available && i < requests.size())
+		if (requests.size() != 0 && requests.elementAt(0).claim <= available)
 		{
-			ResourceRequest request = requests.elementAt(i);
-			count += request.claim;
-			i++;
+			ResourceRequest request = nextRequest();
+
+			available -= request.claim;
+			request.event.SIGNAL();
 		}
-
-		available -= count;
-
-		recursiveRelease(i - 1);
-	}
-
-	private void recursiveRelease(int i)
-	{
-		if (i < 0) return;
-
-		recursiveRelease(i - 1);
-
-		requests.elementAt(i).event.SIGNAL();
-		return;
 	}
 }
