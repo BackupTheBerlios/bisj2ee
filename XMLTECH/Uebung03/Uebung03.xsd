@@ -70,7 +70,7 @@
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="assignments" minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="assignments" minOccurs="0">
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="description" type="xs:string"/>
@@ -295,13 +295,8 @@
 	<xs:element name="personREF" type="xs:IDREF"/>
 	<xs:complexType name="Address">
 		<xs:sequence>
-			<xs:choice>
-				<xs:sequence>
-					<xs:element name="name" type="xs:string"/>
-					<xs:element name="street" type="xs:string"/>
-				</xs:sequence>
-				<xs:element name="postbox"/>
-			</xs:choice>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="street" type="xs:string"/>
 			<xs:element name="zipcode" type="xs:string"/>
 			<xs:element name="city"/>
 			<xs:element name="country"/>

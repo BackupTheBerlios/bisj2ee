@@ -34,6 +34,12 @@ Uebung03.xsd" name="Netzbasierte Informationssysteme / Networked Informationsyst
 		<courses>
 			<term season="WS" year="2003"/>
 			<href>http://www.inf.fu-berlin.de/inst/ag-nbi/lehre/AlteLehre.html</href>
+		</courses><courses>
+			<term season="SS" year="2003"/>
+			<href>http://www.inf.fu-berlin.de/inst/ag-nbi/lehre/AlteLehre.html</href>
+		</courses><courses>
+			<term season="WS" year="2002"/>
+			<href>http://www.inf.fu-berlin.de/inst/ag-nbi/lehre/AlteLehre.html</href>
 		</courses>
 		<assignments href="http://www.inf.fu-berlin.de/inst/ag-nbi/lehre/diploma.html">
 			<description>Fortlaufend werden Diplom- und andere Arbeiten betreut. Sie können sich anhand der Liste macher Diplomarbeitsthemen orientieren.</description>
@@ -51,8 +57,8 @@ Uebung03.xsd" name="Netzbasierte Informationssysteme / Networked Informationsyst
 				<brief-description>An information retrieval system for images and text based on Semantic Web technologies for pathology focusing on lungdiseases.</brief-description>
 				<description>
 					<english-version>http://www.inf.fu-berlin.de/inst/ag-nbi/research/swpatho/swpathoEng.html</english-version>
-					<abstract>Entwicklung, Implementierung und Evaluierung eines auf Semantic Web Technologien basierenden Bild- und Informationsretrievalsystems für die Digitale Pathologie am Beispiel von Lungenkrankheiten. Das Projekt entwickelt ein prototypisches System für Verarbeitung und Retrieval von Bildbeschreibungen und Befundberichten in der Pathologie, speziell für Lungenerkrankungen. Im Gegensatz zu heutigen Datenbanken soll die Information durchgehend semantisch annotiert und mit Ontologien verknüpft sein, was eine Recherche nach Inhalten gestattet. Das in den Bild- und Textdaten enthaltene Expertenwissen lässt sich damit anderen Anwendungsszenarien zugänglich und wiederverwendbar machen. Es kann zur Qualitätssicherung, zur Unterstützung von Diagnostik und Differentialdiagnose, zur statistischen Auswertung, zu Präsentationen und in der Lehre genutzt werden.
-Bei der Erstellung von Befundberichten wird semantische Information durch computerlinguistische Analyse automatisch erfasst und in ein semantisches Netz eingefügt, das auf einem Pathologiespezifischen Modell basiert. Das System stellt diese Information dann für die unterschiedlichen Zwecke zur Verfügung. Eine Integrationskomponente versucht darüber hinaus, Informationen aus externen Wissensquellen einzubinden. Technologisch basiert das geplante System auf den Standards des Semantic Web wie XML, RDF und RuleML und anerkannten medizinischen Modellen und Standards (UMLS, HL7, SCORM).
+					<abstract>Entwicklung, Implementierung und Evaluierung eines auf Semantic Web Technologien basierenden Bild- und Informationsretrievalsystems fuer die Digitale Pathologie am Beispiel von Lungenkrankheiten. Das Projekt entwickelt ein prototypisches System fuer Verarbeitung und Retrieval von Bildbeschreibungen und Befundberichten in der Pathologie, speziell fuer Lungenerkrankungen. Im Gegensatz zu heutigen Datenbanken soll die Information durchgehend semantisch annotiert und mit Ontologien verknüpft sein, was eine Recherche nach Inhalten gestattet. Das in den Bild- und Textdaten enthaltene Expertenwissen lässt sich damit anderen Anwendungsszenarien zugänglich und wiederverwendbar machen. Es kann zur Qualitätssicherung, zur Unterstützung von Diagnostik und Differentialdiagnose, zur statistischen Auswertung, zu Präsentationen und in der Lehre genutzt werden.
+Bei der Erstellung von Befundberichten wird semantische Information durch computerlinguistische Analyse automatisch erfasst und in ein semantisches Netz eingefügt, das auf einem Pathologiespezifischen Modell basiert. Das System stellt diese Information dann fuer die unterschiedlichen Zwecke zur Verfügung. Eine Integrationskomponente versucht darüber hinaus, Informationen aus externen Wissensquellen einzubinden. Technologisch basiert das geplante System auf den Standards des Semantic Web wie XML, RDF und RuleML und anerkannten medizinischen Modellen und Standards (UMLS, HL7, SCORM).
 					</abstract>
 					<initiators>
 						<person xsi:type="Initiator">
@@ -64,7 +70,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 								<last>Schrader</last>
 							</name>
 							<address>
-								<name>Uni-Klinik Charité Institut für Pathologie</name>
+								<name>Uni-Klinik Charité Institut fuer Pathologie</name>
 								<street>Schumanstr. 20-21</street>
 								<zipcode>10117</zipcode>
 								<city>Berlin</city>
@@ -83,7 +89,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 								<last>Strede</last>
 							</name>
 							<address>
-								<name>Universität Potsdam Institut für Linguistik</name>
+								<name>Universität Potsdam Institut fuer Linguistik</name>
 								<street>Postf. 601553</street>
 								<zipcode>14415</zipcode>
 								<city>Potsdam</city>
@@ -91,7 +97,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 							</address>
 							<phone>03319772691</phone>
 							<email>thomas.schrader@charite.de</email>
-							<role>Professor für Angewandte Computerlinguistik</role>
+							<role>Professor fuer Angewandte Computerlinguistik</role>
 						</person>
 						<personREF>member_01</personREF>
 					</initiators>
@@ -116,7 +122,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 							</authors>
 						</publication>
 						<publication href="http://www.inf.fu-berlin.de/inst/ag-nbi/research/swpatho/TagungDeutscheGesellschaftPathologieRostock.doc">
-							<title>Tagung Deutsche Gesellschaft für Pathologie Rostock 2004</title>
+							<title>Tagung Deutsche Gesellschaft fuer Pathologie Rostock 2004</title>
 							<authors>
 								<personREF>member_01</personREF>
 							</authors>
@@ -380,11 +386,11 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 		</member>
 	</people>
 	<info>
-		<university href="http://www.fu-berlin.de">Freie Universität Berlin</university>
+		<university href="http://www.fu-berlin.de">Freie Universitaet Berlin</university>
 		<department href="http://www.math.fu-berlin.de/">Fachbereich Mathematik und Informatik</department>
-		<institute href="http://www.inf.fu-berlin.de/">Institut für Informatik</institute>
+		<institute href="http://www.inf.fu-berlin.de/">Institut fuer Informatik</institute>
 		<address>
-			<name>Institut für Informatik - AG Netzbasierte Informationssysteme</name>
+			<name>Institut fuer Informatik - AG Netzbasierte Informationssysteme</name>
 			<street>Takustrasse 9</street>
 			<zipcode>14195</zipcode>
 			<city>Berlin</city>
@@ -397,8 +403,8 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 		</telephone>
 		<public-office>
 			<address>
-				<name>Institut für Informatik - AG Netzbasierte Informationssysteme</name>
-				<street>Fabeckstraße 15</street>
+				<name>Institut fuer Informatik - AG Netzbasierte Informationssysteme</name>
+				<street>Fabeckstrasse 15</street>
 				<zipcode>14195</zipcode>
 				<city>Berlin</city>
 				<country>Germany</country>
@@ -406,7 +412,7 @@ Bei der Erstellung von Befundberichten wird semantische Information durch comput
 			<open>Mo-Do 10-12 Uhr</open>
 			<location-image>http://www.inf.fu-berlin.de/inst/ag-nbi/T9F15.gif</location-image>
 		</public-office>
-		<logo alt="FU Berlin">fulogo_92x60.gif</logo>
+		<logo alt="FU Berlin">http://www.inf.fu-berlin.de/inst/ag-nbi/fulogo_92x60.gif</logo>
 		<accessroute href="http://reiseauskunft.bahn.de/bin/query.exe..."/>
 	</info>
 	<authors>
