@@ -5,63 +5,54 @@ import java.util.NoSuchElementException;
 public class ThreadSaveLinkedList
 implements Set
 {
-	private ListElement root = null;
+	private final ListElement first = new ListElement(null);
+	private volatile ListElement last = first;
 
 	public void add(Object obj)
 	{
 		ListElement neu = new ListElement(obj);
 
-		synchronized (this)
+		synchronized (last)
 		{
-			if (root == null) root = neu;
+			last = last.next = neu;
 		}
-
-		ListElement index = root;
-
-		while (index.next != null)
-		{
-			synchronized (index)
-			{
-				index = index.next;
-			}
-		}
-
-		index.next = neu;
 	}
 
 	public void remove(Object obj)
 	{
-		if (root == null) return;
+		ListElement previous;
+		ListElement index;
 
-		synchronized (this)
+		synchronized (first)
 		{
-			if (root.value.equals(obj))
-			{
-				root = root.next;
-				return;
-			}
+			previous = first;
+			index = first.next;
 		}
 
-		ListElement index = root;
-
-		while (index.next != null)
+		while (index != null)
 		{
-
-			synchronized (index.next)
+			synchronized (previous)
 			{
-				if (index.next.value.equals(obj))
+				synchronized (index)
 				{
-					index.next = index.next.next;
-					return;
+					if (index.value.equals(obj))
+					{
+						previous.next = index.next;
+
+						if (index == last)
+							last = previous;
+
+						return;
+					}
+					else
+					{
+						previous = index;
+						index = index.next;
+
+					}
 				}
 			}
-
-			synchronized (index)
-			{
-				index = index.next;
-			}
 		}
-
 	}
 
 	public Iterator iterator()
@@ -72,8 +63,8 @@ implements Set
 
 	private class ListElement
 	{
-		private ListElement next;
-		private Object value;
+		private volatile ListElement next;
+		private volatile Object value;
 
 		private ListElement(Object value)
 		{
@@ -84,7 +75,7 @@ implements Set
 	private class MyIterator
 	implements Iterator
 	{
-		private ListElement index = root;
+		private ListElement index = first.next;
 
 		public Object next()
 		throws NoSuchElementException
@@ -99,7 +90,7 @@ implements Set
 
 		public boolean hasNext()
 		{
-			return !(index == null || index.next == null);
+			return index != null;
 		}
 
 	}
